@@ -1,0 +1,11 @@
+.section-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2.8rem 0 2.1rem;
+}
+.section-title__line {
+    flex: 2;
+    height: 0.1rem;
+    background: var(--title-gradient);
+}

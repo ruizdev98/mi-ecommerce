@@ -1,0 +1,95 @@
+.product-section__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border: 1px solid var(--gray-200);
+    position: relative;
+    padding: 0 0 1.4rem;
+}
+.product-section__discount-circle {
+    background-color: var(--color-primary);
+    width: 7rem;
+    height: 7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    position: absolute;
+    top: -1rem;
+    left: -0.7rem;
+    z-index: 2;
+}
+.product-section__discount-circle p {
+    font-size: 1.7rem;
+    color: var(--white);
+}
+.product-section__image-wrapper {
+    position: relative;
+    height: 25rem;
+    width: 100%;
+    padding: 0 3.5rem;
+    z-index: 1;
+}
+.product-section__out-of-stock {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: var(--color-secondary);
+    font-size: 1.1rem;
+    color: var(--white);
+    padding: 0.6rem 2.7rem;
+}
+.product-section__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.product-section__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0.7rem 1.5rem 1.4rem;
+    height: 15.5rem;
+}
+.product-section__header {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.product-section__brand {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    color: var(--gray-500);
+}
+.product-section__prices {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+.product-section__original, .product-section__discount {
+    font-size: 1.7rem;
+}
+.product-section__original {
+    color: var(--gray-500);
+}
+.product-section__original--strikethrough {
+  text-decoration: line-through;
+}
+.product-section__discount {
+    color: var(--color-primary);
+}
+.product-section__promo-note {
+    font-size: 1.3rem;
+}
+.product-section__add-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+.product-section__view-all {
+    display: flex;
+    justify-content: center;
+    padding: 2.1rem 0;
+}

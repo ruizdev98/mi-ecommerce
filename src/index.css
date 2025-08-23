@@ -1,0 +1,84 @@
+:root {
+  --font-base: "Open Sans", sans-serif;
+  --white: #ffffff;
+  --black: #000000;
+
+  /* Brand Colors */
+  --color-primary: #a9928c;
+  --color-secondary: #bf6a4b;
+
+  /* Accent Colors */
+  --color-accent: #aa5f29;
+  --color-primary-hover: #8f726b;
+  --boton-before-background: rgba(255,255,255,0.25);
+
+  /* Neutral / Gray Scale */
+  --gray-900: #403f3f;
+  --gray-800: #44474b;
+  --gray-700: #545454;
+  --gray-600: #666666;
+  --gray-500: #808080;
+  --gray-400: #869791;
+  --gray-300: #d6d6d6;
+  --gray-200: #dee2e6;
+
+  /* Backgrounds */
+  --background-footer:#fef9f7;
+  --background-light: #f9f9f9;
+  --background-dark: #1a1a1a;
+
+  --header-navbar: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(248, 217, 209, 0.35) 50%, rgba(255, 255, 255, 1) 100%);
+  --title-gradient: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(248, 217, 209, 1) 50%, rgba(255, 255, 255, 1) 100%);
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: var(--font-base);
+  font-size: 1.6rem;
+  margin: 0;
+}
+
+/** Globales **/
+.container {
+  width: min(90%, 120rem);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+h1, h2, h3, h4, h5, p {
+  margin: 0;
+}
+a {
+  text-decoration: none;
+}
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+h2 {
+  font-size: 3rem;
+  font-weight: 400;
+  color: var(--gray-700);
+}
+h3 {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--gray-900);
+}
+h4 {
+  font-size: 1.7rem;
+  font-weight: 400;
+  color: var(--color-primary);
+}
+h5 {
+  font-size: 1.7rem;
+  font-weight: 400;
+  padding-bottom: 1.3rem;
+}

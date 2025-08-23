@@ -1,0 +1,108 @@
+.footer {
+    background-color: var(--background-footer);
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.08); /* sombra hacia arriba */
+}
+.footer .container {
+    padding: 4.2rem 2.8rem;
+}
+.footer__container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+.footer__top, .footer__section {
+    padding: 0 1.5rem 2.8rem;
+}
+.footer__top {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.4rem;
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+}
+.footer__logo {
+    height: 5.5rem;
+}
+.footer__socials {
+    display: flex;
+    gap: 0.3rem;
+}
+.footer__social-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--color-primary);
+    border-radius: 50%;
+    width: 2.6rem;
+    height: 2.6rem;
+    color: var(--color-primary);
+}
+.footer__social-link:hover {
+    background-color: var(--color-primary);
+    color: var(--white);
+}
+.footer__social-icon {
+    height: 1.4rem;
+}
+.footer__section:nth-child(4) h5 {
+    padding-bottom: 0.7rem;
+}
+.footer__list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+.footer__link{
+    font-size: 1.1rem;
+    display: flex;
+    gap: 0.7rem;
+    align-items: center;
+    color: var(--black);
+}
+.footer__link:hover {
+    color: var(--color-secondary);
+    text-decoration: underline;
+}
+.footer__section:nth-child(4) h5,
+.footer__text,
+.footer__newsletter,
+.footer__bottom {
+    text-align: center;
+}
+.footer__icon {
+    color: var(--color-primary);
+}
+.footer__text {
+    font-size: 1.3rem;
+    line-height: 2.2rem;
+}
+.footer__newsletter {
+    display: flex;
+    padding-top: 1.4rem;
+}
+.footer__newsletter-input {
+    border-radius: 0.5rem 0 0 0.5rem;
+}
+.footer__newsletter-button {
+    border-radius: 0 0.5rem 0.5rem 0;
+}
+.footer__payment {
+    grid-column: 1/5;
+    grid-row: 2/3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+.footer__payment-icon {
+    height: 6rem;
+}
+.footer__bottom {
+    grid-column: 1/5;
+    grid-row: 3/4;
+    padding-top: 4rem;
+}
+.footer__copy {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
