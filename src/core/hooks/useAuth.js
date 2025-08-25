@@ -6,7 +6,8 @@ import {
   signOut, 
   onAuthStateChanged,
   signInWithPopup,
-  FacebookAuthProvider
+  FacebookAuthProvider,
+  GoogleAuthProvider
 } from 'firebase/auth'
 import { auth, db } from '@/core/firebase/firebaseConfig'
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore'
@@ -20,6 +21,7 @@ export const useAuth = () => {
   // Nuevos estados de carga específicos
   const [loginLoading, setLoginLoading] = useState(false);
   const [facebookLoading, setFacebookLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
   const [registerLoading, setRegisterLoading] = useState(false);
 
   // Detectar cambios de sesión
@@ -106,6 +108,36 @@ export const useAuth = () => {
     }
   };
 
+  // Login con Google
+  const loginWithGoogle = async () => {
+    setGoogleLoading(true);
+    setError(null);
+    try {
+      const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, provider);
+      const newUser = result.user;
+
+      // Guardar/actualizar en Firestore
+      await setDoc(doc(db, "users", newUser.uid), {
+        uid: newUser.uid,
+        email: newUser.email || "",
+        name: newUser.displayName || "",
+        photoURL: newUser.photoURL || "",
+        provider: "google",
+        createdAt: serverTimestamp(),
+      }, { merge: true });
+
+      setUser(newUser);
+      return newUser;
+    } catch (err) {
+      console.error("Error loginWithGoogle:", err);
+      setError(err.message);
+      throw err;
+    } finally {
+      setGoogleLoading(false);
+    }
+  };
+
   // Logout
   const logout = async () => {
     setLoading(true);
@@ -126,11 +158,13 @@ export const useAuth = () => {
     error, 
     register, 
     login, 
-    loginWithFacebook, 
+    loginWithFacebook,
+    loginWithGoogle,
     logout,
     // nuevos estados
     loginLoading,
     facebookLoading,
+    googleLoading,
     registerLoading
   }
 }

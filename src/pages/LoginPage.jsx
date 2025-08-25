@@ -8,11 +8,13 @@ import './LoginPage.css'
 
 export default function LoginPage() {
  
-  const { login, loginWithFacebook, error } = useAuthContext()
+  const { login, loginWithFacebook, loginWithGoogle, error } = useAuthContext()
+
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [loadingEmail, setLoadingEmail] = useState(false);
   const [loadingFacebook, setLoadingFacebook] = useState(false);
+  const [loadingGoogle, setLoadingGoogle] = useState(false);
 
   const navigate = useNavigate()
 
@@ -41,16 +43,30 @@ export default function LoginPage() {
   }
 
   const handleFacebookLogin = async () => {
-    setLoadingFacebook(true);
+    setLoadingFacebook(true)
     try {
-      const user = await loginWithFacebook();
-      console.log("Usuario logueado con Facebook:", user);
-      navigate("/");
+      const user = await loginWithFacebook()
+      console.log("Usuario logueado con Facebook:", user)
+      navigate("/")
     } catch (err) {
-      console.error("Error loginWithFacebook:", err);
-      alert("Error iniciando sesión con Facebook. Intenta nuevamente.");
+      console.error("Error loginWithFacebook:", err)
+      alert("Error iniciando sesión con Facebook. Intenta nuevamente.")
     } finally {
       setLoadingFacebook(false);
+    }
+  }
+
+  const handleGoogleLogin = async () => {
+    setLoadingGoogle(true)
+    try {
+      const user = await loginWithGoogle()
+      console.log("Usuario logueado con Google:", user)
+      navigate("/")
+    } catch (err) {
+      console.error("Error loginWithGoogle:", err)
+      alert("Error iniciando sesión con Google. Intenta nuevamente.")
+    } finally {
+      setLoadingFacebook(false)
     }
   }
 
@@ -102,12 +118,12 @@ export default function LoginPage() {
           />
           <SocialButton 
             socialType="google" 
-            onClick={() => console.log("Google login")}
-            loading={false}
+            onClick={handleGoogleLogin}
+            loading={loadingGoogle}
           />
           <SocialButton 
             socialType="apple" 
-            onClick={() => console.log("Apple login")}
+            onClick={() => console.log("Apple login no disponible en este proyecto")}
             loading={false}
           />
         </div>
