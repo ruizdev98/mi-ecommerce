@@ -23,4 +23,29 @@
     margin-top: 4rem;
     padding: 1.3rem 1.2rem;
 }
-
+.auth__separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 1.5rem 0;
+}
+.auth__separator::before,
+.auth__separator::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #ccc; /* color de la línea */
+}
+.auth__separator::before {
+  margin-right: 0.75rem;
+}
+.auth__separator::after {
+  margin-left: 0.75rem;
+}
+.auth__separator span {
+  color: var(--gray-600);
+}
+.social-buttons {
+  display: flex;
+  gap: 4rem;
+  justify-content: center;
+}

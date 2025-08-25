@@ -3,9 +3,14 @@
     align-items: center;
     justify-content: center;
     padding: 2.8rem 0 2.1rem;
+    position: relative;
+    text-align: center;
 }
-.section-title__line {
-    flex: 2;
+.section-title::before,
+.section-title::after {
+    content: '';
+    flex: 1;
     height: 0.1rem;
     background: var(--title-gradient);
+    margin: 0 1rem;
 }

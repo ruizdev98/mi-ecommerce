@@ -3,35 +3,56 @@ import { useAuthContext } from '@/core/context/AuthContext'
 import { Link, useNavigate } from 'react-router-dom'
 import InputField from '@/shared/ui/InputField'
 import Button from '@/shared/ui/Button'
+import SocialButton from '@/shared/ui/SocialButton'
 import './LoginPage.css'
 
 export default function LoginPage() {
  
-  const { login, error, loading } = useAuthContext();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+  const { login, loginWithFacebook, error } = useAuthContext()
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [loadingEmail, setLoadingEmail] = useState(false);
+  const [loadingFacebook, setLoadingFacebook] = useState(false);
+
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
+    setLoadingEmail(true);
     try {
-      const user = await login(email, password);
-      console.log('Usuario logueado:', user);
-      navigate("/");
+      const user = await login(email, password)
+      console.log('Usuario logueado:', user)
+      navigate("/")
     } catch (err) {
-      console.error("Error login:", err);
+      console.error("Error login:", err)
 
       if (err.code === 'auth/user-not-found') {
-        alert('No existe un usuario con ese correo. Regístrate primero.');
+        alert('No existe un usuario con ese correo. Regístrate primero.')
       } else if (err.code === 'auth/wrong-password') {
-        alert('Contraseña incorrecta. Intenta nuevamente.');
+        alert('Contraseña incorrecta. Intenta nuevamente.')
       } else if (err.code === 'auth/invalid-email') {
-        alert('Correo inválido. Verifica que esté bien escrito.');
+        alert('Correo inválido. Verifica que esté bien escrito.')
       } else {
-        alert('Ocurrió un error. Intenta nuevamente.');
+        alert('Ocurrió un error. Intenta nuevamente.')
       }
+    } finally {
+      setLoadingEmail(false);
     }
-  };
+  }
+
+  const handleFacebookLogin = async () => {
+    setLoadingFacebook(true);
+    try {
+      const user = await loginWithFacebook();
+      console.log("Usuario logueado con Facebook:", user);
+      navigate("/");
+    } catch (err) {
+      console.error("Error loginWithFacebook:", err);
+      alert("Error iniciando sesión con Facebook. Intenta nuevamente.");
+    } finally {
+      setLoadingFacebook(false);
+    }
+  }
 
   return (
     <div className='container auth'>
@@ -63,13 +84,33 @@ export default function LoginPage() {
             type="submit"
             size="large"
             className="auth__button" 
-            disabled={loading}
+            disabled={loadingEmail}
           >
-            {loading ? "Cargando..." : "Iniciar Sesión"}
+            {loadingEmail ? "Cargando..." : "Iniciar Sesión"}
           </Button>
           {error && <p className='auth__error'>{error}</p>}
         </form>
-        <p className='auth__footer'>o conéctate con</p>
+        <div className="auth__separator">
+          <span>o conéctate con</span>
+        </div>
+        
+        <div className="social-buttons">
+          <SocialButton 
+            socialType="facebook" 
+            onClick={handleFacebookLogin} 
+            loading={loadingFacebook}
+          />
+          <SocialButton 
+            socialType="google" 
+            onClick={() => console.log("Google login")}
+            loading={false}
+          />
+          <SocialButton 
+            socialType="apple" 
+            onClick={() => console.log("Apple login")}
+            loading={false}
+          />
+        </div>
       </div>
     </div>
   )

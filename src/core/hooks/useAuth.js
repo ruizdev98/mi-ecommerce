@@ -4,7 +4,9 @@ import {
   createUserWithEmailAndPassword, 
   signInWithEmailAndPassword, 
   signOut, 
-  onAuthStateChanged 
+  onAuthStateChanged,
+  signInWithPopup,
+  FacebookAuthProvider
 } from 'firebase/auth'
 import { auth, db } from '@/core/firebase/firebaseConfig'
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore'
@@ -12,8 +14,13 @@ import { doc, setDoc, serverTimestamp } from 'firebase/firestore'
 
 export const useAuth = () => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true); // true al inicio para saber si estamos verificando sesión
+  const [loading, setLoading] = useState(true); // estado global para verificar sesión
   const [error, setError] = useState(null);
+
+  // Nuevos estados de carga específicos
+  const [loginLoading, setLoginLoading] = useState(false);
+  const [facebookLoading, setFacebookLoading] = useState(false);
+  const [registerLoading, setRegisterLoading] = useState(false);
 
   // Detectar cambios de sesión
   useEffect(() => {
@@ -53,9 +60,9 @@ export const useAuth = () => {
     }
   }
 
-  // Login
+  // Login con email y contraseña
   const login = async (email, password) => {
-    setLoading(true);
+    setLoginLoading(true);
     setError(null);
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email.toLowerCase(), password);
@@ -65,9 +72,39 @@ export const useAuth = () => {
       setError(err.message);
       throw err;
     } finally {
-      setLoading(false);
+      setLoginLoading(false);
     }
   }
+
+  // Login con Facebook
+  const loginWithFacebook = async () => {
+    setFacebookLoading(true);
+    setError(null);
+    try {
+      const provider = new FacebookAuthProvider();
+      const result = await signInWithPopup(auth, provider);
+      const newUser = result.user;
+
+      // Guardar/actualizar en Firestore si es primera vez
+      await setDoc(doc(db, "users", newUser.uid), {
+        uid: newUser.uid,
+        email: newUser.email || "",
+        name: newUser.displayName || "",
+        photoURL: newUser.photoURL || "",
+        provider: "facebook",
+        createdAt: serverTimestamp(),
+      }, { merge: true });
+
+      setUser(newUser);
+      return newUser;
+    } catch (err) {
+      console.error("Error loginWithFacebook:", err);
+      setError(err.message);
+      throw err;
+    } finally {
+      setFacebookLoading(false);
+    }
+  };
 
   // Logout
   const logout = async () => {
@@ -83,5 +120,17 @@ export const useAuth = () => {
     }
   }
 
-  return { user, loading, error, register, login, logout };
+  return {
+    user, 
+    loading, 
+    error, 
+    register, 
+    login, 
+    loginWithFacebook, 
+    logout,
+    // nuevos estados
+    loginLoading,
+    facebookLoading,
+    registerLoading
+  }
 }
