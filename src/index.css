@@ -29,6 +29,13 @@
 
   --header-navbar: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(248, 217, 209, 0.35) 50%, rgba(255, 255, 255, 1) 100%);
   --title-gradient: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(248, 217, 209, 1) 50%, rgba(255, 255, 255, 1) 100%);
+
+  /* Breakpoints 
+  --breakpoint-mobile: 375px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-laptop: 1024px;
+  --breakpoint-desktop: 1440px;
+  */
 }
 
 html {
