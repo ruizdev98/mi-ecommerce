@@ -55,7 +55,15 @@
   opacity: 0;
   pointer-events: none;
 }
-
+@media (min-width: 339px) {
+    .site-header__logo a img {
+        height: 4rem;
+        transition: height 0.3s ease;
+    }
+    .site-header.scrolled .site-header__logo a img {
+        height: 3rem;
+    }
+}
 @media (min-width: 768px) {
     .site-header__logo a img {
         height: 4.5rem;
@@ -66,7 +74,7 @@
     }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 992px) {
     .site-header__top {
         align-items: flex-start;
     }

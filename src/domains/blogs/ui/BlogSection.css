@@ -1,32 +1,34 @@
 .blog-section {
     padding: 0 2.8rem;
 }
-.blog-section__grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+.blog-section__slider-wrapper {
+    position: relative;
+    overflow: hidden;
+
 }
 .blog-section__card {
     display: flex;
     flex-direction: column;
     padding: 1.4rem;
     border-radius: 1rem;
+    transition: background-color 0.3s ease;
 }
 .blog-section__card:hover {
     background-color: var(--background-light);
 }
 .blog-section__image-wrapper {
-    height: 23.6rem;
-    width: 23.6rem;
+    width: 100%;
+    aspect-ratio: 1 / 1;
 }
 .blog-section__image{
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 1rem;
-    transition: transform 0.4s ease;
+    transition: transform 0.3s ease;
 }
 .blog-section__image:hover {
-  transform: scale(1.02);
+    transform: scale(1.04);
 }
 .blog-section__details {
     display: flex;
@@ -43,6 +45,15 @@
 .blog-section__content a:hover .blog-section__title{
     color: var(--color-primary-hover);
 }
+.blog-section__title {
+    display: -webkit-box;      /* necesario para line-clamp */
+    -webkit-line-clamp: 2;     /* número de líneas que quieres mostrar */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;   /* agrega "..." al final */ 
+    /* propiedad futura estándar (todavía no soportada en todos los navegadores) */
+    line-clamp: 2;
+}
 .blog-section__text {
     font-size: 1.33rem;
     color: var(--gray-600);
@@ -54,11 +65,45 @@
     text-transform: uppercase;
     align-self: center;
     width: auto;
+    transition: all 0.3s ease;
 }
 .blog-section__btn::before {
-  content: none !important;
+    content: none !important;
 }
 .blog-section__btn:hover {
     transform: translateY(-2px);
     background-color: var(--color-primary-hover);
+}
+.blog-section__slider {
+  margin: 0 3rem 1.5rem;
+  position: relative;
+}
+.swiper-button-prev-custom,
+.swiper-button-next-custom {
+    position: absolute;
+    top: 50%;
+    font-size: 2.8rem;
+    font-weight: 300;
+    color: var(--black);
+    z-index: 10;
+    cursor: pointer;
+    background: transparent;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+.swiper-button-prev-custom:hover,
+.swiper-button-next-custom:hover {
+    color: var(--white);
+    background-color: var(--color-primary);
+    border-radius: 0.4rem;
+}
+.swiper-button-prev-custom {
+    left: 0rem;
+}
+.swiper-button-next-custom {
+    right: 0rem;
 }

@@ -54,8 +54,7 @@ body {
 
 /** Globales **/
 .container {
-  width: min(90%, 120rem);
-  margin: 0 auto;
+  margin: 0;
   padding: 0 1.5rem;
 }
 h1, h2, h3, h4, h5, p {
@@ -88,4 +87,10 @@ h5 {
   font-size: 1.7rem;
   font-weight: 400;
   padding-bottom: 1.3rem;
+}
+@media (min-width: 1321px) {
+  .container {
+    width: min(90%, 120rem);
+    margin: 0 auto;
+  }
 }

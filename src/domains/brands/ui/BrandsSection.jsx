@@ -22,7 +22,6 @@ export default function BrandsSection({title, products, brands}) {
                 Ver todas las marcas
             </Button>
         </div>
-        
     </section>
   )
 }

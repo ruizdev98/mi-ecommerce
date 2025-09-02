@@ -3,7 +3,7 @@
 }
 .categories__grid {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 3rem;
 }
 .categories__card{
@@ -11,30 +11,8 @@
   cursor: pointer;
 }
 .categories__card:nth-child(1) {
-  grid-column: 1 / 5;
-}
-.categories__card:nth-child(2) {
-  grid-column: 5 / 9;
-}
-.categories__card:nth-child(3) {
-  grid-column: 9 / 13;
-}
-.categories__card:nth-child(4) {
-  grid-column: 1 / 4;
-  grid-row: 2 / 3;
-}
-.categories__card:nth-child(5) {
-  grid-column: 4 / 7;
-  grid-row: 2 / 3;
-}
-.categories__card:nth-child(6) {
-  grid-column: 7 / 10;
-  grid-row: 2 / 3;
-}
-.categories__card:nth-child(7) {
-  grid-column: 10 / 13;
-  grid-row: 2 / 3;
-}
+    grid-column: 1 / 3;
+  }
 .categories__image {
   width: 100%;
   height: 100%;
@@ -71,4 +49,81 @@
 }
 .categories__card:hover .categories__image {
   filter: brightness(70%);
+}
+@media (min-width: 768px) {
+  .categories {
+    padding: 0 0 1.5rem;
+  }
+  .categories__grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 3rem;
+  }
+  .categories__card{
+    position: relative;
+    cursor: pointer;
+  }
+  .categories__card:nth-child(1) {
+    grid-column: 1 / 5;
+  }
+  .categories__card:nth-child(2) {
+    grid-column: 5 / 9;
+  }
+  .categories__card:nth-child(3) {
+    grid-column: 9 / 13;
+  }
+  .categories__card:nth-child(4) {
+    grid-column: 1 / 4;
+    grid-row: 2 / 3;
+  }
+  .categories__card:nth-child(5) {
+    grid-column: 4 / 7;
+    grid-row: 2 / 3;
+  }
+  .categories__card:nth-child(6) {
+    grid-column: 7 / 10;
+    grid-row: 2 / 3;
+  }
+  .categories__card:nth-child(7) {
+    grid-column: 10 / 13;
+    grid-row: 2 / 3;
+  }
+  .categories__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .categories__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .categories__name {
+    color: var(--white);
+    font-size: 2.5rem;
+    font-weight: 300;
+    text-align: center;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .categories__card:hover .categories__overlay {
+    opacity: 1;
+  }
+  .categories__card:hover .categories__name {
+    opacity: 1;
+    transform: scale(1);
+  }
+  .categories__card:hover .categories__image {
+    filter: brightness(70%);
+  }
+
 }
