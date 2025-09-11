@@ -75,7 +75,7 @@ export default function LoginPage() {
       <div className='auth__box'>
         <h2 className='auth__title'>Iniciar Sesión</h2>
         <p className='auth__top'>
-          ¿Es tu primera vez? <Link to='/registro'>Regístrate</Link>
+          ¿Es tu primera vez? <Link to='/register'>Regístrate</Link>
         </p>
         <form action="" className='auth__form' onSubmit={handleSubmit}>
           <InputField

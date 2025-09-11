@@ -48,5 +48,5 @@ export function useData() {
       });
   }, []);
 
-  return { categories, products, bestSellers, featured, brands, genders, blogs, loading };
+  return { categories, products, bestSellers, featured, brands, genders, blogs, loading }
 }

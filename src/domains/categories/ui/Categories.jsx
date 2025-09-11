@@ -1,4 +1,3 @@
-import React from 'react'
 import './Categories.css'
 import SectionTitle from '../../../shared/ui/SectionTitle'
 
