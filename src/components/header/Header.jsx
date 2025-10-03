@@ -1,47 +1,51 @@
-import { useState, useRef } from 'react'
 import { useAuthContext } from '@/core/context/AuthContext'
 import useScroll from '@/core/hooks/useScroll'
 import useIsMobile from '@/core/hooks/useIsMobile'
 import useClickOutside from '@/core/hooks/useClickOutside'
+import useHeaderState from '@/core/hooks/useHeaderState'
+
 import Logo from './Logo'
 import Socials from './Socials'
 import Search from './Search'
 import MobileSearch from './MobileSearch'
-import MobileMenuToggle from './MobileMenuToggle'
 import Overlay from './Overlay'
 import NavBar from './navbar/NavBar'
+import SidebarToggle from './SidebarToggle'
 import styles from './Header.module.css'
 
 export default function Header() {
 
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-    const [isSearchOpen, setIsSearchOpen] = useState(false)
     const { user, logout } = useAuthContext()
-    const dropdownRef = useRef(null)
 
-    const isScrolled = useScroll()
-    const isMobile = useIsMobile()
-    
-    useClickOutside(dropdownRef, () => setIsDropdownOpen(false))
+    const {
+        isSidebarOpen,      // si el menú lateral (mobile) está abierto.
+        toggleSidebar,      // abre/cierra el sidebar en mobile.
+        closeSidebar,       // cierra el sidebar.
 
-    const toggleDropdown = () => setIsDropdownOpen(prev => !prev)
-    const handleLinkClick = () => setIsDropdownOpen(false)
-    const openSearch = () => setIsSearchOpen(true)
-    const closeSearch = () => setIsSearchOpen(false)
+        isDropdownOpen,     // si el menú de usuario está abierto.
+        toggleDropdown,     // abre/cierra el menú de usuario.
+        handleLinkClick,    // lógica para cuando haces clic en un enlace (ej. cerrar sidebar).
+        handleLogout,       // cierra sesión del usuario.
+        dropdownRef,        // referencia al menú de usuario, para detectar clics afuera.
 
-    const handleLogout = async () => {
-        try {
-            await logout()
-            console.log("Sesión cerrada correctamente")
-            setIsDropdownOpen(false)
-        } catch (err) {
-            console.error("Error al cerrar sesión:", err)
-        }
+        isSearchOpen,       // si el buscador en mobile está abierto.
+        openSearch,         // abre el buscador en mobile.
+        closeSearch         // cierra el buscador en mobile.
+    } = useHeaderState(logout)
+
+    const isScrolled    = useScroll()   // detecta si el usuario bajó con el scroll (para aplicar estilos).
+    const isMobile      = useIsMobile() // detecta si la pantalla es chica (para renderizar mobile vs desktop).
+
+    useClickOutside(dropdownRef, () => toggleDropdown(false)) // Si el usuario hace clic fuera del menú de usuario (dropdownRef), se cierra.
+
+    const userActions = {
+        isDropdownOpen,
+        toggleDropdown,
+        handleLinkClick,
+        handleLogout,
+        user,
+        dropdownRef
     }
-
-    const toggleMobileMenu = () => setIsMobileMenuOpen(prev => !prev)
-    const closeMobileMenu = () => setIsMobileMenuOpen(false)
 
   return (
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
@@ -49,21 +53,24 @@ export default function Header() {
             <Socials />
             <Logo />
             <Search isMobile={isMobile} openSearch={openSearch} />
-            {isMobile && <MobileMenuToggle toggleMobileMenu={toggleMobileMenu} />}
+            {isMobile && <SidebarToggle toggleSidebar={toggleSidebar} />}
         </div>
 
         <NavBar
-            isMobileMenuOpen={isMobileMenuOpen}
-            isDropdownOpen={isDropdownOpen}
-            toggleDropdown={toggleDropdown}
-            handleLinkClick={handleLinkClick}
-            handleLogout={handleLogout}
-            user={user}
-            dropdownRef={dropdownRef}
-            closeMobileMenu={closeMobileMenu}
+            isMobile={isMobile}
+            
+            // Sidebar
+            isSidebarOpen   = {isSidebarOpen}
+            closeSidebar    = {closeSidebar}
+
+            // Pasamos las acciones del usuario como un solo objeto
+            userActions={userActions}
         />
-        
-        {isMobileMenuOpen && <Overlay closeMobileMenu={closeMobileMenu} />}
+
+        {/* Si el sidebar está abierto, se muestra el overlay para cerrar haciendo clic afuera */}
+        {isSidebarOpen && <Overlay closeSidebar={closeSidebar} />}
+
+        {/* Si estás en mobile y el buscador está abierto, muestra el componente MobileSearch */}
         {isSearchOpen && isMobile && <MobileSearch closeSearch={closeSearch} />}
 
     </header>

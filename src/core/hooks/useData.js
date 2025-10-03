@@ -13,10 +13,12 @@ function addBrandName(products, brands) {
 }
 
 export function useData() {
+  const [departments, setDepartments] = useState([]);
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
   const [bestSellers, setBestSellers] = useState([]);
   const [featured, setFeatured] = useState([]);
+  const [offers, setOffers] = useState([]);
   const [brands, setBrands] = useState([]);
   const [genders, setGenders] = useState([]);
   const [blogs, setBlogs] = useState([]);
@@ -24,19 +26,23 @@ export function useData() {
 
   useEffect(() => {
     Promise.all([
+      fetch('http://localhost:4000/api/departments').then(res => res.json()),
       fetch('http://localhost:4000/api/categories').then(res => res.json()),
       fetch('http://localhost:4000/api/products').then(res => res.json()),
       fetch('http://localhost:4000/api/products/bestsellers').then(res => res.json()),
       fetch('http://localhost:4000/api/products/featured').then(res => res.json()),
+      fetch('http://localhost:4000/api/products/offers').then(res => res.json()),
       fetch('http://localhost:4000/api/brands').then(res => res.json()),
       fetch('http://localhost:4000/api/genders').then(res => res.json()),
       fetch('http://localhost:4000/api/blogs').then(res => res.json())
     ])
-      .then(([categoriesData, productsData, bestSellersData, featuredData, brandsData, gendersData, blogsData]) => {
+      .then(([departmentsData, categoriesData, productsData, bestSellersData, featuredData, offersData, brandsData, gendersData, blogsData]) => {
+        setDepartments(departmentsData);
         setCategories(categoriesData);
         setProducts(addBrandName(cleanProducts(productsData), brandsData));
         setBestSellers(addBrandName(cleanProducts(bestSellersData), brandsData));
         setFeatured(addBrandName(cleanProducts(featuredData), brandsData));
+        setFeatured(addBrandName(cleanProducts(offersData), brandsData));
         setBrands(brandsData);
         setGenders(gendersData);
         setBlogs(blogsData);
@@ -48,5 +54,5 @@ export function useData() {
       });
   }, []);
 
-  return { categories, products, bestSellers, featured, brands, genders, blogs, loading }
+  return { departments, categories, products, bestSellers, featured, offers, brands, genders, blogs, loading }
 }
