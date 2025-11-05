@@ -7,7 +7,15 @@ import BrandsSection from '@/domains/brands/ui/BrandsSection'
 import { useData } from '@/core/hooks/useData'
 
 export default function HomePage() {
-  const { categories, products, bestSellers, featured, brands, genders, blogs, loading } = useData();
+  const {
+    categories,
+    products,
+    bestSellers,
+    featured,
+    brands,
+    blogs,
+    loading 
+  } = useData();
   
   const banners = [
     { src: "https://res.cloudinary.com/dmvsu33ya/image/upload/v1754767042/banner1_xywskc.png", alt: "Banner 1" },

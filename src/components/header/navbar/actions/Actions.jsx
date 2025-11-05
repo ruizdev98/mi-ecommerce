@@ -2,10 +2,10 @@ import CartAction from './CartAction'
 import UserAction from './UserAction'
 import styles from '../NavBar.module.css'
 
-export default function NavActions({ isMobile, userActions }) {
+export default function Actions({ isMobile, openSidebarSubmenu, userActions }) {
   return (
     <div className={styles.actions}>
-        <UserAction isMobile={isMobile} {...userActions} />
+        <UserAction isMobile={isMobile} openSidebarSubmenu={openSidebarSubmenu} {...userActions} />
         <CartAction />
     </div>
   )

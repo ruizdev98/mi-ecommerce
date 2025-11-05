@@ -1,58 +1,102 @@
-import { useState, useEffect } from 'react';
-import { validateProduct, cleanProductNumbers } from '../utils/validation';
+import { useState, useEffect } from 'react'
+import { validateProduct, cleanProductNumbers } from '../utils/validation'
 
+// Función que limpia y valida productos
 function cleanProducts(products) {
-  return products.map(cleanProductNumbers).filter(validateProduct);
+  if (!Array.isArray(products)) return []
+  return products.map(cleanProductNumbers).filter(validateProduct)
 }
 
-function addBrandName(products, brands) {
-  return products.map(product => ({
-    ...product,
-    brandName: brands.find(b => b.id === product.brandId)?.name || 'Marca desconocida'
-  }));
-}
+// Asegura que cualquier dato sea un array
+const safeArray = (data) => Array.isArray(data) ? data : []
 
 export function useData() {
-  const [departments, setDepartments] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [products, setProducts] = useState([]);
-  const [bestSellers, setBestSellers] = useState([]);
-  const [featured, setFeatured] = useState([]);
-  const [offers, setOffers] = useState([]);
-  const [brands, setBrands] = useState([]);
-  const [genders, setGenders] = useState([]);
-  const [blogs, setBlogs] = useState([]);
-  const [loading, setLoading] = useState(true);
+
+  const [data, setData] = useState({
+    departments: [],
+    categories: [],
+    departmentCategories: [],
+    products: [],
+    bestSellers: [],
+    featured: [],
+    offers: [],
+    brands: [],
+    genders: [],
+    blogs: [],
+    loading: true
+  })
 
   useEffect(() => {
-    Promise.all([
-      fetch('http://localhost:4000/api/departments').then(res => res.json()),
-      fetch('http://localhost:4000/api/categories').then(res => res.json()),
-      fetch('http://localhost:4000/api/products').then(res => res.json()),
-      fetch('http://localhost:4000/api/products/bestsellers').then(res => res.json()),
-      fetch('http://localhost:4000/api/products/featured').then(res => res.json()),
-      fetch('http://localhost:4000/api/products/offers').then(res => res.json()),
-      fetch('http://localhost:4000/api/brands').then(res => res.json()),
-      fetch('http://localhost:4000/api/genders').then(res => res.json()),
-      fetch('http://localhost:4000/api/blogs').then(res => res.json())
-    ])
-      .then(([departmentsData, categoriesData, productsData, bestSellersData, featuredData, offersData, brandsData, gendersData, blogsData]) => {
-        setDepartments(departmentsData);
-        setCategories(categoriesData);
-        setProducts(addBrandName(cleanProducts(productsData), brandsData));
-        setBestSellers(addBrandName(cleanProducts(bestSellersData), brandsData));
-        setFeatured(addBrandName(cleanProducts(featuredData), brandsData));
-        setFeatured(addBrandName(cleanProducts(offersData), brandsData));
-        setBrands(brandsData);
-        setGenders(gendersData);
-        setBlogs(blogsData);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error('Error loading data:', err);
-        setLoading(false);
-      });
-  }, []);
+    const controller = new AbortController() // Crea el controlador
+    const { signal } = controller            // Extrae la señal para fetch
 
-  return { departments, categories, products, bestSellers, featured, offers, brands, genders, blogs, loading }
+    async function fetchData() {
+      try {
+        const endpoints = [
+          'departments',
+          'categories',
+          'department-categories',
+          'products',
+          'products/bestsellers',
+          'products/featured',
+          'products/offers',
+          'brands',
+          'genders',
+          'blogs'
+        ]
+
+        // Llamadas paralelas
+        const responses = await Promise.all(
+          endpoints.map(endpoint =>
+            fetch(`http://localhost:4000/api/${endpoint}`, { signal })
+              .then(res => res.json())
+          )
+        )
+
+        const [
+          departmentsData,
+          categoriesData,
+          departmentCategoriesData,
+          productsData,
+          bestSellersData,
+          featuredData,
+          offersData,
+          brandsData,
+          gendersData,
+          blogsData
+        ] = responses
+
+        setData({
+          departments: safeArray(departmentsData),
+          categories: safeArray(categoriesData),
+          departmentCategories: safeArray(departmentCategoriesData),
+          products: cleanProducts(productsData),
+          bestSellers: cleanProducts(bestSellersData),
+          featured: cleanProducts(featuredData),
+          offers: cleanProducts(offersData),
+          brands: safeArray(brandsData),
+          genders: safeArray(gendersData),
+          blogs: safeArray(blogsData),
+          loading: false
+        })
+
+      } catch (error) {
+        if (error.name === 'AbortError') {
+          console.log('Fetch cancelado al desmontar el componente')
+          return
+        }
+        console.error('Error cargando datos:', error)
+        setData(prev => ({ ...prev, loading: false }))
+      }
+    }
+
+    fetchData()
+    // Se ejecuta al desmontar el componente
+    return () => {
+      controller.abort() // Cancela todas las peticiones pendientes
+    }
+
+  }, [])
+
+  return data
 }

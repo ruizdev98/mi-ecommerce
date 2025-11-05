@@ -27,29 +27,34 @@
 /* ====== MOBILE HEADER ====== */
 .mobileHeader {
     display: flex;
-    justify-content: space-between;
+    justify-content: left;
     align-items: center;
     background-color: #fdf2ef;
     padding: 1.5rem 2.5rem;
+    height: 7rem;
+    gap: 2rem;
 }
 .mobileLogo img {
     max-height: 3.2rem;
 }
-.mobileClose {
+.mobileBackBtn {
     background: none;
     border: none;
-    font-size: 2rem;
+    font-size: 1.6rem;
     cursor: pointer;
     color: var(--color-primary);
     padding: 0;
     transition: all 0.3s ease;
 }
-.mobileClose:hover {
+.mobileBackBtn:hover {
     color: var(--color-primary-hover);
+}
+.mobileDeptName {
+    font-weight: 600;
 }
 
 /* ====== SIDEBAR ====== */
-.sidebarList {
+.sidebarList, .sidebarSubmenuList {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -57,10 +62,11 @@
     padding: 0 1.5rem 1.5rem;
 }
 .sidebarItem:hover,
-.actionIcon:hover {
+.actionIcon:hover,
+.sidebarSubmenuItem:hover {
     background-color: var(--color-accent);
 }
-.sidebarLink {
+.sidebarLink, .sidebarSubmenuLink {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -70,7 +76,7 @@
     font-size: 1.6rem;
     color: var(--gray-800);
 }
-.sidebarLink:hover {
+.sidebarLink:hover, .sidebarSubmenuLink:hover {
     color: var(--white);
 }
 .sidebarIcon {
