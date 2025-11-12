@@ -1,37 +1,40 @@
 import { useState, useRef } from 'react'
 
 export default function useHeaderState(logout) {
-    const [isDropdownOpen, setIsDropdownOpen]         = useState(false)
+    const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false)
     const [isSidebarOpen, setIsSidebarOpen]           = useState(false)
     const [isSearchOpen, setIsSearchOpen]             = useState(false)
-    const [activeDepartmentId, setActiveDepartmentId] = useState(null)
-    const dropdownRef                                 = useRef(null)
+    const [activeMenuId, setActiveMenuId]             = useState(null)
+    const userDropdownRef                             = useRef(null)
+    const menuRef                                     = useRef(null)
+    const submenuRef                                  = useRef(null)
 
     // Dropdown
-    const closeDropdown     = () => setIsDropdownOpen(false)
-    const toggleDropdown    = () => setIsDropdownOpen((prev) => !prev)
-    const handleLinkClick   = () => closeDropdown()
+    const closeUserDropdown   = () => setIsUserDropdownOpen(false)
+    const toggleUserDropdown  = () => setIsUserDropdownOpen((prev) => !prev)
+    const handleLinkClick     = () => closeUserDropdown()
 
     // Buscador
-    const openSearch        = () => setIsSearchOpen(true)
-    const closeSearch       = () => setIsSearchOpen(false)
+    const openSearch  = () => setIsSearchOpen(true)
+    const closeSearch = () => setIsSearchOpen(false)
 
     // Sidebar
-    const toggleSidebar     = () => setIsSidebarOpen(prev => !prev)
-    const closeSidebar      = () => {
+    const toggleSidebar = () => setIsSidebarOpen(prev => !prev)
+    const closeSidebar  = () => {
       setIsSidebarOpen(false)
-      setActiveDepartmentId(null)
+      setActiveMenuId(null)
     }
 
-    // Submenú del sidebar
-    const openSidebarSubmenu    = (id) => setActiveDepartmentId(id)
-    const closeSidebarSubmenu   = () => setActiveDepartmentId(null)
+    // Submenú
+    const openSubmenu   = (id) => setActiveMenuId(id)
+    const closeSubmenu  = () => setActiveMenuId(null)
+    const toggleSubmenu = (id) => setActiveMenuId(prev => (prev === id ? null : id))    
 
     // Logout con manejo de errores
     const handleLogout = async () => {
         try {
             await logout()
-            closeDropdown()
+            closeUserDropdown()
         } catch (err) {
             console.error("Error al cerrar sesión:", err)
         }
@@ -39,22 +42,25 @@ export default function useHeaderState(logout) {
 
   return {
     // Estados
-    isDropdownOpen,
+    isUserDropdownOpen,
     isSidebarOpen,
     isSearchOpen,
-    activeDepartmentId,
-    dropdownRef,
+    activeMenuId,
+    userDropdownRef,
+    menuRef,
+    submenuRef,
 
     // Métodos
-    closeDropdown,
-    toggleDropdown,
+    closeUserDropdown,
+    toggleUserDropdown,
     handleLinkClick,
     openSearch,
     closeSearch,
     toggleSidebar,
     closeSidebar,
-    openSidebarSubmenu,
-    closeSidebarSubmenu,
+    openSubmenu,
+    closeSubmenu,
+    toggleSubmenu,
     handleLogout
   }
 }

@@ -13,7 +13,6 @@
     align-items: center;
     justify-content: space-between;
 }
-
 /* Logo */
 .logo {
     order: 2;
@@ -26,7 +25,6 @@
 .scrolled .logo img {
     height: 2.5rem;
 }
-
 /* Buscador */
 .search {
     order: 3;
@@ -47,7 +45,6 @@
 .mobileMenuToggle:hover {
     color: var(--color-primary-hover);
 }
-
 /* Cuando se abre el buscador */
 .search.open .searchInput {
     display: inline-block;
@@ -56,7 +53,6 @@
     border: 0.1rem solid var(--color-primary);
     border-radius: 0.4rem;
 }
-
 /* Popup de búsqueda en mobile */
 .searchPopup {
     position: fixed;
@@ -107,12 +103,10 @@
 .searchPopupClose {
     padding: 0.8rem 1.375rem;
 }
-
 /* Redes sociales */
 .socials {
     display: none;
 }
-
 /* Menu Toggle */
 .menuToggle {
     order: 1;
@@ -122,7 +116,6 @@
     cursor: pointer;
     font-size: 2rem;
 }
-
 /* Fondo oscuro detrás del menú lateral */
 .overlay {
     position: fixed;

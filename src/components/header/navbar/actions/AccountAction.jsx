@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import styles from '../NavBar.module.css'
 
-export default function AccountAction({ isMobile, user, handleLinkClick, handleLogout, closeSidebar }) {
+export default function AccountAction({ user, handleLinkClick, handleLogout, closeSidebar, isMobile }) {
      const links = user
     ? [
         { to: '/perfil', label: 'Perfil' },
@@ -11,29 +11,22 @@ export default function AccountAction({ isMobile, user, handleLinkClick, handleL
         { to: '/login', label: 'Iniciar sesión' },
         { to: '/register', label: 'Registrarse' },
       ]
-    
-    // Clases dinámicas según mobile o desktop
-    const listClass = isMobile ? styles.sidebarSubmenuList : styles.dropdownMenu
-    const itemClass = isMobile ? styles.sidebarSubmenuItem : ''
-    const linkClass = isMobile ? styles.sidebarSubmenuLink : styles.dropdownLink
 
     // Función de click que maneja ambas variantes
     const handleClick = () => isMobile ? closeSidebar?.(): handleLinkClick?.()
 
   return (
-    <ul className={listClass}>
+    <ul className={isMobile ? styles.submenuList : styles.accountSubmenuList}>
         {user && !isMobile && (
             <>
-                <li className={styles.dropdownItem}>
+                <li className={styles.accountTitle}>
                     Hola, {user.displayName || user.email}
                 </li>
-                    
-                <li className={styles.dropdownDivider}></li>
             </>
         )}
             {links.map(({ to, label }) => (
-                <li key={to} className={itemClass} >
-                    <Link to={to} onClick={handleClick} className={linkClass}>
+                <li key={to} className={styles.submenuItem} >
+                    <Link to={to} onClick={handleClick} className={styles.submenuLink}>
                         {label}
                     </Link>
                 </li>
@@ -42,7 +35,7 @@ export default function AccountAction({ isMobile, user, handleLinkClick, handleL
             <li>
                 <button
                     onClick={handleLogout}
-                    className={isMobile ? '' : `${styles.dropdownLink} ${styles.logout}`}
+                    className={styles.logout}
                 >
                     Cerrar sesión
                 </button>

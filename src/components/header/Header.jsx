@@ -20,17 +20,19 @@ export default function Header() {
         isSidebarOpen,      // si el menú lateral (mobile) está abierto.
         toggleSidebar,      // abre/cierra el sidebar en mobile.
         closeSidebar,       // cierra el sidebar.
+        activeMenuId,       // id del department abierto
+        openSubmenu,
+        closeSubmenu,
+        toggleSubmenu,
+        menuRef,
+        submenuRef,
 
-        activeDepartmentId,   // id del department abierto
-        openSidebarSubmenu,
-        closeSidebarSubmenu,
-
-        isDropdownOpen,     // si el menú de usuario está abierto.
-        closeDropdown,      // cierra el dropdown
-        toggleDropdown,     // abre/cierra el dropdown.
+        isUserDropdownOpen, // si el menú de usuario está abierto.
+        closeUserDropdown,  // cierra el dropdown
+        toggleUserDropdown, // abre/cierra el dropdown.
         handleLinkClick,    // lógica para cuando haces clic en un enlace (ej. cerrar sidebar).
         handleLogout,       // cierra sesión del usuario.
-        dropdownRef,        // referencia al menú de usuario, para detectar clics afuera.
+        userDropdownRef,    // referencia al menú de usuario, para detectar clics afuera.
 
         isSearchOpen,       // si el buscador en mobile está abierto.
         openSearch,         // abre el buscador en mobile.
@@ -40,29 +42,34 @@ export default function Header() {
     const isScrolled    = useScroll()   // detecta si el usuario bajó con el scroll (para aplicar estilos).
     const isMobile      = useIsMobile() // detecta si la pantalla es chica (para renderizar mobile vs desktop).
 
-    useClickOutside(dropdownRef, closeDropdown) // Si el usuario hace clic fuera del menú de usuario (dropdownRef), se cierra.
+    useClickOutside(userDropdownRef, closeUserDropdown) // Si el usuario hace clic fuera del menú de usuario (dropdownRef), se cierra.
+    useClickOutside(menuRef, closeSidebar)
+    useClickOutside(submenuRef, closeSubmenu)
 
-    const userControls = {
+    const actions = {
         isMobile,
         user,
         handleLinkClick,
-        handleLogout
+        handleLogout,
+        closeSidebar,
+        openSubmenu
     }
 
     const userActions = {
-        ...userControls,
-        dropdownRef,
-        isDropdownOpen,
-        toggleDropdown,
+        ...actions,
+        userDropdownRef,
+        isUserDropdownOpen,
+        toggleUserDropdown,
     }
 
     const menuActions = {
-        ...userControls,
+        ...actions,
         isSidebarOpen,
-        closeSidebar,
-        activeDepartmentId,
-        openSidebarSubmenu,
-        closeSidebarSubmenu
+        activeMenuId,
+        closeSubmenu,
+        toggleSubmenu,
+        menuRef,
+        submenuRef
     }
 
   return (
@@ -101,7 +108,14 @@ export default function Header() {
 
         {/* Si el sidebar está abierto, se muestra el overlay para cerrar haciendo clic afuera */}
         {isSidebarOpen && 
-            <div className={styles.overlay} onClick={closeSidebar}></div>
+            <div 
+                className={styles.overlay} 
+                onClick={() => {
+                    closeSidebar()
+                    closeSubmenu()
+                }}
+            >
+            </div>
         }
 
     </header>

@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faSortDown, faChevronRight } from '@fortawesome/free-solid-svg-icons'
-import UserDropdown from './UserDropdown.jsx'
+import AccountAction from './AccountAction'
 import styles from '../NavBar.module.css'
 
 export default function UserAction({
@@ -8,15 +8,16 @@ export default function UserAction({
     user,
     handleLinkClick,
     handleLogout,
-    dropdownRef,
-    isDropdownOpen,
-    toggleDropdown,
-    openSidebarSubmenu
+    closeSidebar,
+    openSubmenu,
+    userDropdownRef,
+    isUserDropdownOpen,
+    toggleUserDropdown
 }) {
 
 
   return (
-    <div  ref={dropdownRef} className={`${styles.action} ${styles.userDropdown}`}>
+    <div  ref={userDropdownRef} className={`${styles.action} ${styles.userAction}`}>
         {isMobile ? (
             <ul>
                 <li>
@@ -25,10 +26,10 @@ export default function UserAction({
                         className={`${styles.actionIcon} ${styles.userIcon}`}
                         onClick={(e) => {
                             e.preventDefault()
-                            openSidebarSubmenu('account')
+                            openSubmenu('account')
                         }}
                     >
-                        <div className={styles.actionLabel}>
+                        <div className={styles.userTitle}>
                             {user ? (
                                 <>
                                     <FontAwesomeIcon icon={faUser} /> {user.displayName || user.email}
@@ -50,18 +51,25 @@ export default function UserAction({
                 {/* 🔹 DESKTOP: mostrar dropdown normal */}
                 <button
                     className={`${styles.actionIcon} ${styles.userIcon}`}
-                    onClick={toggleDropdown}
+                    onClick={toggleUserDropdown}
                     aria-haspopup='true'
-                    aria-expanded={isDropdownOpen}
+                    aria-expanded={isUserDropdownOpen}
                     aria-label='Menú de usuario'
                 >
                     <FontAwesomeIcon icon={faUser} /> 
                     <FontAwesomeIcon icon={faSortDown} />
                 </button>
 
-                {isDropdownOpen && (
-                    <UserDropdown user={user} handleLinkClick={handleLinkClick} handleLogout={handleLogout} />
+                {isUserDropdownOpen && (
+                    <AccountAction 
+                        isMobile={isMobile}
+                        user={user}
+                        handleLinkClick={handleLinkClick}
+                        handleLogout={handleLogout}
+                        closeSidebar={closeSidebar}
+                    />
                 )}
+                
             </>
         )}
     </div>

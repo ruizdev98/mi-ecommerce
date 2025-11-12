@@ -23,9 +23,8 @@
     gap: 2rem;
     height: 100%;
 }
-
-/* ====== MOBILE HEADER ====== */
-.mobileHeader {
+/* ====== MENÚ HEADER ====== */
+.menuHeader {
     display: flex;
     justify-content: left;
     align-items: center;
@@ -34,10 +33,7 @@
     height: 7rem;
     gap: 2rem;
 }
-.mobileLogo img {
-    max-height: 3.2rem;
-}
-.mobileBackBtn {
+.menuHeaderBackBtn {
     background: none;
     border: none;
     font-size: 1.6rem;
@@ -46,27 +42,32 @@
     padding: 0;
     transition: all 0.3s ease;
 }
-.mobileBackBtn:hover {
+.menuHeaderBackBtn:hover {
     color: var(--color-primary-hover);
 }
-.mobileDeptName {
+.menuHeaderTitle {
     font-weight: 600;
 }
-
-/* ====== SIDEBAR ====== */
-.sidebarList, .sidebarSubmenuList {
+.menuHeaderLogo img {
+    max-height: 3.2rem;
+}
+/* ====== MENU AND SUBMENU ====== */
+.menuList, 
+.submenuList {
     display: flex;
     flex-direction: column;
     width: 100%;
     order: 2;
     padding: 0 1.5rem 1.5rem;
 }
-.sidebarItem:hover,
-.actionIcon:hover,
-.sidebarSubmenuItem:hover {
+
+.menuItem:hover,
+.submenuItem:hover,
+.actionIcon:hover {
     background-color: var(--color-accent);
 }
-.sidebarLink, .sidebarSubmenuLink {
+.menuLink, 
+.submenuLink {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -76,14 +77,14 @@
     font-size: 1.6rem;
     color: var(--gray-800);
 }
-.sidebarLink:hover, .sidebarSubmenuLink:hover {
+.menuLink:hover, 
+.submenuLink:hover {
     color: var(--white);
 }
-.sidebarIcon {
+.menuIcon {
     font-size: 1.2rem;
 }
-
-/* ====== ACCIONES ====== */
+/* ====== ACCIONS ====== */
 .actions {
     display: flex;
     flex-direction: column;
@@ -97,17 +98,6 @@
 .action:nth-child(2) {
     display: none;
 }
-.userDropdown {
-    border-bottom: 0.1rem solid var(--gray-300);
-}
-.userDropdown:hover {
-    border-bottom: 0.1rem solid transparent;
-}
-.actionLabel {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
 .actionIcon {
     display: flex;
     gap: 0.3rem;
@@ -117,6 +107,13 @@
 }
 .actionIcon:hover {
     color: var(--white);
+}
+/* ====== USER ACCIONS ====== */
+.userAction {
+    border-bottom: 0.1rem solid var(--gray-300);
+}
+.userAction:hover {
+    border-bottom: 0.1rem solid transparent;
 }
 .userIcon {
     background: none;
@@ -128,40 +125,12 @@
     gap: 0.3rem;
     justify-content: space-between;
 }
-
-/* ====== DROPDOWN ====== */
-.dropdownMenu {
-    position: absolute;
-    right: 0;
-    top: 100%;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 0.5rem;
-    list-style: none;
-    padding: 0.5rem 0;
-    margin: 0;
-    min-width: 16rem;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    z-index: 1000;
+.userTitle {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
-.dropdownItem {
-    padding: 0.8rem 1rem;
-    font-weight: bold;
-}
-.dropdownDivider {
-    height: 0.1rem;
-    background: #eee;
-    margin: 0.5rem 0;
-}
-.dropdownLink {
-    display: block;
-    padding: 0.8rem 1rem;
-    text-decoration: none;
-    color: #333;
-}
-.dropdownLink:hover {
-    background: #f5f5f5;
-}
+/* ====== ACCOUNT ACCION ====== */
 .logout {
     background: none;
     border: none;
@@ -190,13 +159,8 @@
         justify-content: space-between;
         align-items: center;
     }
-    .mobileHeader {
-        display: none;
-    }
-
-/* ====== MENÚ ====== */
+    /* ====== MENU ====== */
     .menuList {
-        display: flex;
         flex-direction: row;
         order: 1;
         padding: 0 1.5rem;
@@ -210,18 +174,55 @@
         background-color: transparent;
     }
     .menuLink {
-        display: flex;
         align-items: flex-start;
-        gap: 0.4rem;
         padding: 1.1rem;
-        color: var(--gray-800);
         font-size: 1.4rem;
-        border-bottom: none;
     }
     .menuLink:hover {
         color: var(--color-accent);
     }
-
+    /* ====== SUBMENU ====== */
+    .submenuContainer {
+        position: relative;
+    }
+    .menuItem:hover .submenu,
+    .menuItem:focus-within .submenu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    .submenu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 15rem;
+        background: #fff;
+        border-radius: 0 0 0.8rem 0.8rem;
+        border: 1px solid #c6c5c1;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        padding: 0.5rem 0;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        transition: all 0.25s ease;
+        z-index: 1000;
+    }
+    .submenuList {
+        margin: 0;
+        padding: 0;
+    }
+    .submenuItem {
+        padding: 0;
+    }
+    .submenuLink {
+        display: block;
+        padding: 0.7rem 1.6rem;
+        color: #333;
+        text-decoration: none;
+        font-size: 1.3rem;
+        transition: all 0.1s ease;
+    }
+    /* ====== ACTIONS ====== */
     .actions {
         flex-direction: row;
         gap: 1.8rem;
@@ -231,12 +232,6 @@
     .action:nth-child(2) {
         display: block;
     }
-    .userDropdown {
-        border-bottom: none;
-        margin-bottom: 0;
-        position: relative;
-        display: inline-block;
-    }
     .actionIcon {
         padding: 0;
     }
@@ -244,6 +239,37 @@
         background-color: transparent;
         color: var(--color-primary-hover);
     }
+    /* ====== USER ACTION ====== */
+    .userActionContainer {
+        border-bottom: none;
+        margin-bottom: 0;
+        position: relative;
+        display: inline-block;
+    }
+    .userAction {
+        border-bottom: none;
+    }
+    /* ====== ACCOUNT ACTION ====== */
+    .accountSubmenuList {
+        position: absolute;
+        right: 0;
+        top: 100%;
+        background: #fff;
+        border: 1px solid #c6c5c1;
+        border-radius: 0.5rem;
+        list-style: none;
+        padding: 0.5rem 0;
+        margin: 0;
+        min-width: 16rem;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        z-index: 1000;
+    }
+    .accountTitle {
+        padding: 0.8rem 1rem;
+        font-weight: bold;
+        border-bottom: 1px solid #eee;
+    }
+    /* ====== CART ACTION ====== */
     .cartIcon {
         position: relative;
     }
@@ -258,7 +284,6 @@
         top: -5px;
         right: -10px;
     }
-    
 }
 
 
