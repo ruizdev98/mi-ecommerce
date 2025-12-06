@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronRight, faSortDown } from '@fortawesome/free-solid-svg-icons'
 import { capitalizeFirstLetter } from '@/core/utils/textFormat'
 import Submenu from './Submenu'
-import styles from './NavBar.module.css'
+import styles from '../NavBar.module.css'
 
 
 export default function Menu({ 

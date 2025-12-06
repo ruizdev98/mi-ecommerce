@@ -1,6 +1,6 @@
 import { capitalizeFirstLetter } from '@/core/utils/textFormat'
-import AccountAction from './actions/AccountAction'
-import styles from './NavBar.module.css'
+import AccountAction from '../actions/AccountAction'
+import styles from '../NavBar.module.css'
 
 export default function Submenu({ 
     user, 
@@ -53,7 +53,7 @@ export default function Submenu({
                         </li>
                     ))
                 ) : (
-                    <p className={styles.sidebarSubmenuEmpty}>
+                    <p className={styles.submenuEmpty}>
                         No hay categorías disponibles.
                     </p>
                 )}

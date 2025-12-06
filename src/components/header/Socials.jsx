@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faInstagram, faTiktok, faXTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons'
-import styles from '../Header.module.css';
+import styles from './Header.module.css';
 
 export default function Socials() {
   return (

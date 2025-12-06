@@ -68,6 +68,10 @@ export const useAuth = () => {
     setError(null)
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email.toLowerCase(), password)
+      const loggedUser = userCredential.user
+
+      localStorage.setItem("userId", loggedUser.uid)
+
       setUser(userCredential.user)
       return userCredential.user
     } catch (err) {
@@ -86,6 +90,8 @@ export const useAuth = () => {
       const provider = new FacebookAuthProvider()
       const result = await signInWithPopup(auth, provider)
       const newUser = result.user
+
+      localStorage.setItem("userId", newUser.uid)
 
       // Guardar/actualizar en Firestore si es primera vez
       await setDoc(doc(db, "users", newUser.uid), {
@@ -117,6 +123,8 @@ export const useAuth = () => {
       const result = await signInWithPopup(auth, provider)
       const newUser = result.user
 
+      localStorage.setItem("userId", newUser.uid)
+
       // Guardar/actualizar en Firestore
       await setDoc(doc(db, "users", newUser.uid), {
         uid: newUser.uid,
@@ -143,6 +151,7 @@ export const useAuth = () => {
     setLoading(true);
     try {
       await signOut(auth)
+      localStorage.removeItem("userId")
       setUser(null)
     } catch (err) {
       setError(err.message)

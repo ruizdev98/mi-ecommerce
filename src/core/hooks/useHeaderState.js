@@ -2,17 +2,23 @@ import { useState, useRef } from 'react'
 
 export default function useHeaderState(logout) {
     const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false)
+    const [isCartDropdownOpen, setIsCartDropdownOpen] = useState(false)
     const [isSidebarOpen, setIsSidebarOpen]           = useState(false)
     const [isSearchOpen, setIsSearchOpen]             = useState(false)
     const [activeMenuId, setActiveMenuId]             = useState(null)
     const userDropdownRef                             = useRef(null)
     const menuRef                                     = useRef(null)
     const submenuRef                                  = useRef(null)
+    const cartDropdownRef                             = useRef(null)
 
-    // Dropdown
+    // User Dropdown
     const closeUserDropdown   = () => setIsUserDropdownOpen(false)
     const toggleUserDropdown  = () => setIsUserDropdownOpen((prev) => !prev)
     const handleLinkClick     = () => closeUserDropdown()
+
+    // Cart Dropdown
+    const closeCartDropdown   = () => setIsCartDropdownOpen(false)
+    const toggleCartDropdown  = () => setIsCartDropdownOpen((prev) => !prev)
 
     // Buscador
     const openSearch  = () => setIsSearchOpen(true)
@@ -43,17 +49,21 @@ export default function useHeaderState(logout) {
   return {
     // Estados
     isUserDropdownOpen,
+    isCartDropdownOpen,
     isSidebarOpen,
     isSearchOpen,
     activeMenuId,
     userDropdownRef,
     menuRef,
     submenuRef,
+    cartDropdownRef,
 
     // Métodos
     closeUserDropdown,
     toggleUserDropdown,
     handleLinkClick,
+    closeCartDropdown,
+    toggleCartDropdown,
     openSearch,
     closeSearch,
     toggleSidebar,

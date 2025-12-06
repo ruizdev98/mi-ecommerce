@@ -1,14 +1,13 @@
 import { AnimatePresence } from 'framer-motion'
 import { useData } from '@/core/hooks/useData'
-import Menu from './Menu'
-import MenuHeader from './MenuHeader'
-import Submenu from './Submenu'
+import Menu from './menu/Menu'
+import MenuHeader from './menu/MenuHeader'
+import Submenu from './menu/Submenu'
 import Actions from './actions/Actions'
-import AnimatedSection from './ui/AnimatedSection'
+import AnimatedSection from './AnimatedSection'
 import styles from './NavBar.module.css'
 
-
-export default function NavBar({ menuActions, userActions }) {
+export default function NavBar({ menuActions, userActions, cartActions }) {
 
   const {
     isMobile,
@@ -50,7 +49,7 @@ export default function NavBar({ menuActions, userActions }) {
   const menuContent = (
       <>
         <Menu {...mainMenuActions} secondaryMenuActions={secondaryMenuActions} />
-        <Actions userActions={userActions} />
+        <Actions userActions={userActions} cartActions={cartActions} />
       </>
   )
 

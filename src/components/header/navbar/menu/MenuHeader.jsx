@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { capitalizeFirstLetter } from '@/core/utils/textFormat'
 import { Link } from 'react-router-dom'
-import styles from './NavBar.module.css'
+import styles from '../NavBar.module.css'
 
 export default function MenuHeader({ user, activeMenuId, closeSubmenu, data}) {
 

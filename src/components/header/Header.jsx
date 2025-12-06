@@ -5,12 +5,11 @@ import useScroll from '@/core/hooks/useScroll'
 import useIsMobile from '@/core/hooks/useIsMobile'
 import useClickOutside from '@/core/hooks/useClickOutside'
 import useHeaderState from '@/core/hooks/useHeaderState'
-import Socials from './ui/Socials'
-import Logo from './ui/Logo'
-import Search from './ui/Search'
-import styles from './Header.module.css'
+import Socials from './Socials'
+import Logo from './Logo'
+import Search from './Search'
 import NavBar from './navbar/NavBar'
-
+import styles from './Header.module.css'
 
 export default function Header() {
 
@@ -31,8 +30,12 @@ export default function Header() {
         closeUserDropdown,  // cierra el dropdown
         toggleUserDropdown, // abre/cierra el dropdown.
         handleLinkClick,    // lógica para cuando haces clic en un enlace (ej. cerrar sidebar).
+        isCartDropdownOpen,
+        closeCartDropdown,
+        toggleCartDropdown,
         handleLogout,       // cierra sesión del usuario.
         userDropdownRef,    // referencia al menú de usuario, para detectar clics afuera.
+        cartDropdownRef,
 
         isSearchOpen,       // si el buscador en mobile está abierto.
         openSearch,         // abre el buscador en mobile.
@@ -45,6 +48,7 @@ export default function Header() {
     useClickOutside(userDropdownRef, closeUserDropdown) // Si el usuario hace clic fuera del menú de usuario (dropdownRef), se cierra.
     useClickOutside(menuRef, closeSidebar)
     useClickOutside(submenuRef, closeSubmenu)
+    useClickOutside(cartDropdownRef, closeCartDropdown)
 
     const actions = {
         isMobile,
@@ -60,6 +64,12 @@ export default function Header() {
         userDropdownRef,
         isUserDropdownOpen,
         toggleUserDropdown,
+    }
+
+    const cartActions = {
+        isCartDropdownOpen,
+        toggleCartDropdown,
+        cartDropdownRef
     }
 
     const menuActions = {
@@ -104,6 +114,8 @@ export default function Header() {
             menuActions={menuActions}
             // Pasamos las acciones del usuario como un solo objeto
             userActions={userActions}
+            // Pasamos las acciones del carrito como un solo objeto
+            cartActions={cartActions}
         />
 
         {/* Si el sidebar está abierto, se muestra el overlay para cerrar haciendo clic afuera */}

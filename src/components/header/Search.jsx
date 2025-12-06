@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom'
-import styles from '../Header.module.css'
+import styles from './Header.module.css'
 
 export default function Search({ isMobile, isSearchOpen, openSearch, closeSearch }) {
     const navigate = useNavigate();

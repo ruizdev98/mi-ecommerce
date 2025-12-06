@@ -1,13 +1,17 @@
 import { faBagShopping } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useCartContext } from '@/core/context/CartContext'
 import Button from '@/shared/ui/Button';
 import './ProductCard.css'
 
 export default function ProductCard({product}) {
+
+    const { addToCart } = useCartContext()
+
     const formatPrice = (value) => {
         const num = Number(value);
         return isNaN(num) ? '0.00' : num.toFixed(2);
-    };
+    }
 
   return (
     <div className='product-section__card'>
@@ -40,6 +44,8 @@ export default function ProductCard({product}) {
         <Button
             size="medium" 
             className="product-section__add-btn"
+            disabled={product.stock === 0}
+            onClick={() => addToCart(product)}
         >
             <FontAwesomeIcon icon={faBagShopping} />
             Agregar
