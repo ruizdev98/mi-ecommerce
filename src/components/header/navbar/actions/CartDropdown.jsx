@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom'
 import styles from '../NavBar.module.css'
 
 export default function CartDropdown({
@@ -9,6 +10,7 @@ export default function CartDropdown({
   totalPrice,
   getItemTotalPrice,
 }) {
+
   if (cartItems.length === 0) {
     return (
       <div className={styles.cartDropdown}>
@@ -17,7 +19,6 @@ export default function CartDropdown({
     )
   }
 
-  // 🔹 Asegura que cualquier valor numérico se pueda formatear
   const formatPrice = (value) => {
     const num = Number(value)
     return isNaN(num) ? '0.00' : num.toFixed(2)
@@ -27,24 +28,42 @@ export default function CartDropdown({
     <div className={styles.cartDropdown}>
       <ul className={styles.cartList}>
         {cartItems.map(item => (
-          <li key={item.id} className={styles.cartItem}>
-            <img src={item.image} alt={item.name} className={styles.cartImage} />
+          <li
+            key={item.variantId}   
+            className={styles.cartItem}
+          >
+            <img
+              src={item.image}
+              alt={item.name}
+              className={styles.cartImage}
+            />
 
             <div className={styles.cartDetails}>
-              <p className={styles.cartName}>{item.name}</p>
+              <p className={styles.cartName}>
+                {item.name}
+              </p>
+
               <div className={styles.cartQty}>
                 <button
                   onClick={() =>
-                    updateQuantity(item.id, Math.max(item.quantity - 1, 1))
+                    updateQuantity(
+                      item.variantId,
+                      Math.max(item.quantity - 1, 1)
+                    )
                   }
-                  aria-label="Disminuir cantidad"
                 >
                   <FontAwesomeIcon icon={faMinus} />
                 </button>
+
                 <span>{item.quantity}</span>
+
                 <button
-                  onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                  aria-label="Aumentar cantidad"
+                  onClick={() =>
+                    updateQuantity(
+                      item.variantId,
+                      item.quantity + 1
+                    )
+                  }
                 >
                   <FontAwesomeIcon icon={faPlus} />
                 </button>
@@ -55,9 +74,9 @@ export default function CartDropdown({
               <p className={styles.cartPrice}>
                 S/ {formatPrice(getItemTotalPrice(item))}
               </p>
+
               <button
-                onClick={() => removeFromCart(item.id)}
-                aria-label="Eliminar producto"
+                onClick={() => removeFromCart(item.variantId)}
               >
                 <FontAwesomeIcon icon={faTrash} />
               </button>
@@ -70,7 +89,9 @@ export default function CartDropdown({
         <p>
           Total: <strong>S/ {formatPrice(totalPrice)}</strong>
         </p>
-        <button className={styles.cartCheckoutBtn}>Ver carrito</button>
+        <Link to='/checkout/cart' className={styles.cartCheckoutBtn}>
+          Ver carrito
+        </Link>
       </div>
     </div>
   )

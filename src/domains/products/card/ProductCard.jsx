@@ -1,12 +1,13 @@
-import { faBagShopping } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useCartContext } from '@/core/context/CartContext'
-import Button from '@/shared/ui/Button';
+import { faBagShopping } from '@fortawesome/free-solid-svg-icons'
+import { useState } from 'react'
+import Button from '@/shared/ui/Button'
+import ProductModal from '../modal/ProductModal'
 import './ProductCard.css'
 
 export default function ProductCard({product}) {
 
-    const { addToCart } = useCartContext()
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     const formatPrice = (value) => {
         const num = Number(value);
@@ -45,11 +46,18 @@ export default function ProductCard({product}) {
             size="medium" 
             className="product-section__add-btn"
             disabled={product.stock === 0}
-            onClick={() => addToCart(product)}
+            onClick={() => setIsModalOpen(true)}
         >
             <FontAwesomeIcon icon={faBagShopping} />
             Agregar
         </Button>
+
+        {isModalOpen && (
+            <ProductModal
+                product={product}
+                onClose={() => setIsModalOpen(false)}
+            />
+        )}
     </div>
   )
 }

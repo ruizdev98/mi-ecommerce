@@ -1,0 +1,32 @@
+.logo {
+    padding: 1.4rem 0;
+}
+.logo img {
+    height: 3.5rem;
+    transition: height 0.3s ease;
+}
+
+/* ======= MEDIA QUERIES ======= */
+@media (min-width: 339px) {
+    .logo img {
+        height: 4rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .logo img {
+        height: 4.5rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .logo {
+        padding: 1.4rem 0;
+    }
+    .logo img {
+        height: 5.5rem;
+    }
+    .scrolled .logo img {
+        height: 4.5rem;
+    }
+}

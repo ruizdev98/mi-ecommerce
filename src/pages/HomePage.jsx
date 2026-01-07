@@ -1,7 +1,7 @@
 import ImageCarousel from '@/shared/ui/ImageCarousel'
 import Categories from '@/domains/categories/ui/Categories'
 import ParallaxBanner from '@/shared/ui/ParallaxBanner'
-import ProductSection from '@/domains/products/ui/ProductSection'
+import ProductSection from '@/domains/products/section/ProductSection'
 import BlogSection from '@/domains/blogs/ui/BlogSection'
 import BrandsSection from '@/domains/brands/ui/BrandsSection'
 import { useData } from '@/core/hooks/useData'

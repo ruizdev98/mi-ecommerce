@@ -1,0 +1,89 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal {
+  background: #ffffff;
+  width: 42rem;
+  border-radius: 1.2rem;
+  padding: 2.4rem;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.6rem;
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.close:hover {
+  background-color: #ccc;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.section {
+  margin-bottom: 2rem;
+}
+
+.label {
+  font-size: 1.4rem;
+  margin-bottom: 0.8rem;
+  color: #444;
+  font-weight: 600;
+}
+.colorName {
+  font-weight: normal;
+}
+.colors, .sizes {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.color {
+  background-clip: content-box;
+  padding: 0.4rem;
+  border: 2px solid transparent;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  outline: 1px solid #bbbbbb;
+  outline-offset: -6px;
+}
+
+.color.active {
+  border: 2px solid #bbbbbb;
+}
+
+.size {
+  padding: 0.9rem 1rem;
+  border: 1px solid #d3d7db;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+  color: #888888;
+  font-size: 1.3rem;
+  min-width: 4.7rem;
+  height: 4.7rem;
+}
+
+.size.active {
+  border-color: #111;
+  font-weight: 600;
+  background-color: #eceef0;
+  color: #333333;
+}

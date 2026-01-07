@@ -86,7 +86,7 @@ export default function Header() {
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
         <div className={`container ${styles.top}`}>
             <Socials />
-            <Logo />
+            <Logo className={styles.logoHeader} />
 
             {/* Search unificado para desktop y mobile */}
             <Search

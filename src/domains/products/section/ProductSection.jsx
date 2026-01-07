@@ -1,5 +1,5 @@
 import SectionTitle from '@/shared/ui/SectionTitle'
-import ProductCard from './ProductCard'
+import ProductCard from '../card/ProductCard'
 import Button from '@/shared/ui/Button'
 import './ProductSection.css'
 

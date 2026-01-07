@@ -5,9 +5,9 @@ const API = "http://localhost:4000/api/cart"
 // GET carrito del backend
 const fetchCart = async (userId) => {
   const res = await fetch(`${API}?userId=${userId}`)
-  if (!res.ok) return null
+  if (!res.ok) return []
   const data = await res.json()
-  return data.cart?.items ?? null
+  return data.cart?.items ?? []
 }
 
 // PUT carrito al backend
@@ -17,8 +17,8 @@ const saveCart = async (userId, cart) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       userId,
-      items: cart.map((i) => ({
-        productId: i.productId,
+      items: cart.map(i => ({
+        variantId: i.variantId,
         quantity: i.quantity,
       })),
     }),
@@ -26,84 +26,87 @@ const saveCart = async (userId, cart) => {
 }
 
 export const useCart = () => {
-  const [userId, setUserId] = useState(() => localStorage.getItem("userId") || null)
-
-  // Estado inicial del carrito para invitados
+  const [userId, setUserId] = useState(() => localStorage.getItem("userId"))
   const [cartItems, setCartItems] = useState(() => {
     return userId ? [] : JSON.parse(localStorage.getItem("cart") || "[]")
   })
 
-  // 1. Cargar o fusionar carrito al iniciar sesión
+  // 🔹 Al iniciar sesión → merge carrito
   useEffect(() => {
-
     if (!userId) return
 
     async function loadCart() {
-
       const localCart = JSON.parse(localStorage.getItem("cart") || "[]")
       const backendCart = await fetchCart(userId)
 
-      // Fusionar backend + local
       const map = new Map()
-      backendCart.forEach(item => map.set(item.productId, { ...item }))
+
+      backendCart.forEach(item => {
+        map.set(item.variantId, { ...item })
+      })
+
       localCart.forEach(item => {
-        if (map.has(item.productId)) {
-          map.set(item.productId, {
-            ...map.get(item.productId),
-            quantity: map.get(item.productId).quantity + item.quantity,
+        if (map.has(item.variantId)) {
+          map.set(item.variantId, {
+            ...map.get(item.variantId),
+            quantity: map.get(item.variantId).quantity + item.quantity,
           })
         } else {
-          map.set(item.productId, { ...item })
+          map.set(item.variantId, ...item)
         }
       })
+
       const merged = [...map.values()]
 
       setCartItems(merged)
       await saveCart(userId, merged)
-
       localStorage.removeItem("cart")
     }
 
     loadCart()
   }, [userId])
 
-  // 2. Guardar carrito en localStorage si NO hay usuario
+  // 🔹 Guardar local si es invitado
   useEffect(() => {
-    if (!userId) localStorage.setItem("cart", JSON.stringify(cartItems))
+    if (!userId) {
+      localStorage.setItem("cart", JSON.stringify(cartItems))
+    }
   }, [cartItems, userId])
 
   // -----------------------------
-  //   Funciones del carrito
+  // Funciones del carrito
   // -----------------------------
-  const addToCart = (product) => {
+  const addToCart = (item) => {
     setCartItems(prev => {
-      const existing = prev.find(i => i.productId === product.id)
+      const existing = prev.find(i => i.variantId === item.variantId)
 
       const newCart = existing
         ? prev.map(i =>
-            i.productId === product.id
-              ? { ...i, quantity: i.quantity + 1 }
+            i.variantId === item.variantId
+              ? { ...i, quantity: i.quantity + item.quantity }
               : i
           )
-        : [...prev, { ...product, productId: product.id, quantity: 1 }]
+        : [...prev, item]
 
       if (userId) saveCart(userId, newCart)
       return newCart
     })
   }
 
-  const removeFromCart = (productId) => {
+  const removeFromCart = (variantId) => {
     setCartItems(prev => {
-      const newCart = prev.filter(i => i.productId !== productId)
+      const newCart = prev.filter(i => i.variantId !== variantId)
       if (userId) saveCart(userId, newCart)
       return newCart
     })
   }
 
-  const updateQuantity = (productId, quantity) => {
+  const updateQuantity = (variantId, quantity) => {
+    if (quantity < 1) return
+
     setCartItems(prev => {
       const newCart = prev.map(i =>
-        i.productId === productId ? { ...i, quantity } : i
+        i.variantId === variantId ? { ...i, quantity } : i
       )
       if (userId) saveCart(userId, newCart)
       return newCart
@@ -118,8 +121,10 @@ export const useCart = () => {
 
   // Totales
   const totalItems = cartItems.reduce((s, i) => s + i.quantity, 0)
-
-  const totalPrice = cartItems.reduce((s, i) => s + Number(i.discountPrice ?? i.price ?? 0) * i.quantity, 0)
+  const totalPrice = cartItems.reduce(
+    (s, i) => s + Number(i.discountPrice ?? i.price ?? 0) * i.quantity,
+    0
+  )
 
   const getItemTotalPrice = (item) => {
     const unitPrice = Number(item.discountPrice ?? item.price ?? 0)

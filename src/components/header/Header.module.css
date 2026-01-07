@@ -14,15 +14,10 @@
     justify-content: space-between;
 }
 /* Logo */
-.logo {
+.logoHeader {
     order: 2;
-    padding: 1.4rem 0;
 }
-.logo img {
-    height: 3.5rem;
-    transition: height 0.3s ease;
-}
-.scrolled .logo img {
+.scrolled .logoHeader img {
     height: 2.5rem;
 }
 /* Buscador */
@@ -136,18 +131,12 @@
 
 /* ======= MEDIA QUERIES ======= */
 @media (min-width: 339px) {
-    .logo img {
-        height: 4rem;
-    }
-    .scrolled .logo img {
+    .scrolled .logoHeader img {
         height: 3rem;
     }
 }
 @media (min-width: 768px) {
-    .logo img {
-        height: 4.5rem;
-    }
-    .scrolled .logo img {
+    .scrolled .logoHeader img {
         height: 3.5rem;
     }
 }
@@ -168,13 +157,7 @@
     .socialIcon:hover {
         color: var(--color-primary-hover);
     }
-    .logo {
-        padding: 1.4rem 0;
-    }
-    .logo img {
-        height: 5.5rem;
-    }
-    .scrolled .logo img {
+    .scrolled .logoHeader img {
         height: 4.5rem;
     }
     .searchForm {
