@@ -9,6 +9,7 @@ export default function CartDropdown({
   removeFromCart,
   totalPrice,
   getItemTotalPrice,
+  user
 }) {
 
   if (cartItems.length === 0) {
@@ -89,9 +90,23 @@ export default function CartDropdown({
         <p>
           Total: <strong>S/ {formatPrice(totalPrice)}</strong>
         </p>
-        <Link to='/checkout/cart' className={styles.cartCheckoutBtn}>
-          Ver carrito
-        </Link>
+
+        {/* BOTÓN DIFERENCIADO SEGÚN USUARIO */}
+        {user?.uid ? (
+          <button
+            className={styles.cartCheckoutBtn}
+            onClick={() => window.location.href = '/checkout/cart'} // recarga
+          >
+            Ver carrito
+          </button>
+        ) : (
+          <Link
+            to="/login" // no recarga
+            className={styles.cartCheckoutBtn}
+          >
+            Ver carrito
+          </Link>
+        )}
       </div>
     </div>
   )

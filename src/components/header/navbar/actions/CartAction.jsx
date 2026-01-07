@@ -4,16 +4,24 @@ import { useCartContext } from '@/core/context/CartContext'
 import CartDropdown from './CartDropdown'
 import styles from '../NavBar.module.css'
 
-export default function CartAction({ isCartDropdownOpen, toggleCartDropdown, cartDropdownRef }) {
+export default function CartAction({ isCartDropdownOpen, toggleCartDropdown, cartDropdownRef, user }) {
 
-  const { cartItems, updateQuantity, removeFromCart, totalPrice, totalItems, getItemTotalPrice } = useCartContext()
+  const { 
+    cartItems, 
+    updateQuantity, 
+    removeFromCart, 
+    totalPrice, 
+    totalItems, 
+    getItemTotalPrice 
+  } = useCartContext()
 
   const cartDropdownActions = {
     cartItems, 
     updateQuantity, 
     removeFromCart, 
     totalPrice,
-    getItemTotalPrice
+    getItemTotalPrice,
+    user
   }
 
   return (

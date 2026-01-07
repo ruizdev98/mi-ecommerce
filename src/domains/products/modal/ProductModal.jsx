@@ -52,6 +52,13 @@ export default function ProductVariantModal({ product, onClose }) {
       image: product.image,
       name: product.name,
       price: product.price,
+      discountPrice: product.discountPrice,
+      promoNote: product.promoNote,
+      sku: selectedVariant.sku,
+      color: selectedColor.name,
+      size: selectedSizeId
+      ? sizes.find(s => s.id === selectedSizeId).name
+      : null
     })
 
     onClose()

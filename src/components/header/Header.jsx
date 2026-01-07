@@ -69,7 +69,8 @@ export default function Header() {
     const cartActions = {
         isCartDropdownOpen,
         toggleCartDropdown,
-        cartDropdownRef
+        cartDropdownRef,
+        user
     }
 
     const menuActions = {

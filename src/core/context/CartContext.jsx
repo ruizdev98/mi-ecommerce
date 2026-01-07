@@ -1,4 +1,4 @@
-/* src/core/context/CartProvider.js */
+/* src/core/context/CartContext.jsx */
 import { createContext, useContext, useEffect } from "react";
 import { useCart } from "@/core/hooks/useCart";
 import { useAuth } from "@/core/hooks/useAuth";

@@ -1,23 +1,31 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
 import { useCartContext } from "@/core/context/CartContext"
 import "./CartPage.css"
 
 export default function CartPage() {
-    const {
-        cartItems, 
-        updateQuantity, 
-        removeFromCart, 
-        totalPrice,
-        getItemTotalPrice 
-    } = useCartContext()
+  const {
+      cartItems,
+      loading,
+      updateQuantity, 
+      removeFromCart, 
+      totalPrice,
+      getItemTotalPrice 
+  } = useCartContext()
 
-    if (cartItems.length === 0) {
-        return (
-        <div className="cartPageEmpty">
-            <h2>Tu carrito está vacío</h2>
-            <a href="/" className="cartReturn">Volver a comprar</a>
-        </div>
-        )
-    }
+    // 🟡 1. Estado de carga (MUY IMPORTANTE)
+  if (loading) {
+    return <div className="cartPageEmpty"><h2>Cargando carrito...</h2></div>
+  }
+
+  if (cartItems.length === 0) {
+      return (
+      <div className="cartPageEmpty">
+          <h2>Tu carrito está vacío</h2>
+          <a href="/" className="cartReturn">Volver a comprar</a>
+      </div>
+      )
+  }
 
   return (
     <div className="cartPage">
@@ -26,41 +34,60 @@ export default function CartPage() {
         <h2>Carrito de Compras</h2>
 
         {cartItems.map(item => (
-          <div key={item.productId} className="cartItemRow">
-            
+          <div key={item.variantId} className="cartItemRow">
             <img src={item.image} alt={item.name} className="cartItemImage" />
 
             <div className="cartItemInfo">
               <h3>{item.name}</h3>
               <p className="brand">{item.brandName}</p>
+              <p className="sku">{item.sku}</p>
 
+              {/* Color y Talla */}
+              <div className="variantInfo">
+                <span>
+                  Color: <strong>{item.color}</strong>
+                </span>
+                <div className="verticalLine"></div>
+                <span>
+                  Talla: <strong>{item.size}</strong>
+                </span>
+              </div>
+            </div>
+            
+            <div className="cartItemPrice">
+              <p className="itemPrice">
+                S/ {getItemTotalPrice(item).toFixed(2)}
+              </p>
+            </div>
+
+            {/* Precio */}
+            <div className="cartItemActions">
+              {/* Cantidad */}
               <div className="qtyControls">
                 <button 
                   onClick={() =>
-                    updateQuantity(item.productId, Math.max(1, item.quantity - 1))
+                    updateQuantity(item.variantId, Math.max(1, item.quantity - 1))
                   }
-                >-</button>
+                >
+                  <FontAwesomeIcon icon={faMinus} />
+                </button>
 
                 <span>{item.quantity}</span>
 
                 <button 
                   onClick={() =>
-                    updateQuantity(item.productId, item.quantity + 1)
+                    updateQuantity(item.variantId, item.quantity + 1)
                   }
-                >+</button>
+                >
+                  <FontAwesomeIcon icon={faPlus} />
+                </button>
               </div>
-            </div>
-
-            <div className="cartItemActions">
-              <p className="itemPrice">
-                S/ {getItemTotalPrice(item).toFixed(2)}
-              </p>
 
               <button 
                 className="removeBtn"
-                onClick={() => removeFromCart(item.productId)}
+                onClick={() => removeFromCart(item.variantId)}
               >
-                🗑
+                <FontAwesomeIcon icon={faTrash} />
               </button>
             </div>
           </div>
