@@ -1,18 +1,15 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBagShopping } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
-import Button from '@/shared/ui/Button'
+import { formatPrice } from '@/core/utils/pricing'
+import { Link } from 'react-router-dom'
+import GeneralButton from '@/shared/ui/GeneralButton'
 import ProductModal from '../modal/ProductModal'
 import './ProductCard.css'
 
 export default function ProductCard({product}) {
 
     const [isModalOpen, setIsModalOpen] = useState(false)
-
-    const formatPrice = (value) => {
-        const num = Number(value);
-        return isNaN(num) ? '0.00' : num.toFixed(2);
-    }
 
   return (
     <div className='product-section__card'>
@@ -23,7 +20,9 @@ export default function ProductCard({product}) {
             {product.stock === 0 && (
                 <span className='product-section__out-of-stock'>Sin Stock</span>
             )}
-            <img src={product.image} alt={product.name} className='product-section__image'/>
+            <Link to={`/products/${product.id}`}>
+                <img src={product.image} alt={product.name} className='product-section__image'/>
+            </Link>
         </div>
         <div className='product-section__info'>
             <div className='product-section__header'>
@@ -42,7 +41,7 @@ export default function ProductCard({product}) {
                 </span>
             </div>
         </div>
-        <Button
+        <GeneralButton
             size="medium" 
             className="product-section__add-btn"
             disabled={product.stock === 0}
@@ -50,7 +49,7 @@ export default function ProductCard({product}) {
         >
             <FontAwesomeIcon icon={faBagShopping} />
             Agregar
-        </Button>
+        </GeneralButton>
 
         {isModalOpen && (
             <ProductModal

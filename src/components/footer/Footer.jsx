@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook, faInstagram, faTiktok, faXTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons'
 import { faClock, faEnvelope, faLocationDot, faPhone } from '@fortawesome/free-solid-svg-icons'
 import InputField from "@/shared/ui/InputField";
-import Button from '@/shared/ui/Button'
+import GeneralButton from '@/shared/ui/GeneralButton'
 import './Footer.css'
 
 export default function Footer() {
@@ -78,9 +78,9 @@ export default function Footer() {
                         placeholder="Correo"
                         className="footer__newsletter-input"
                     />
-                    <Button className="footer__newsletter-button">
+                    <GeneralButton Button className="footer__newsletter-button">
                         Enviar
-                    </Button>
+                    </GeneralButton>
                 </div>
             </div>
             <div className='footer__payment'>

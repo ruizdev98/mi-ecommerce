@@ -9,6 +9,8 @@ export default function InputField({
   size = "medium",
   onChange,
   required = false,
+  disabled = false,
+  maxLength,
   className = "",
 }) {
 
@@ -23,6 +25,8 @@ export default function InputField({
         value={value}
         onChange={onChange}
         required={required}
+        disabled={disabled}
+        maxLength={maxLength}
       />
     </div>
   )

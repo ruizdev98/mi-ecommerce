@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useAuthContext } from '@/core/context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import InputField from '@/shared/ui/InputField'
-import Button from '@/shared/ui/Button'
+import GeneralButton from '@/shared/ui/GeneralButton'
 import './RegisterPage.css'
 
 export default function RegisterPage() {
@@ -125,14 +125,14 @@ export default function RegisterPage() {
             onChange={handleChange}
             required
           />
-          <Button 
+          <GeneralButton 
             type="submit"
             size="large"
             className="auth__button" 
             disabled={loading}
           >
             {loading ? "Cargando..." : "Registrarse"}
-          </Button>
+          </GeneralButton>
           {error && <p className='auth__error'>{error}</p>}
         </form>
       </div>

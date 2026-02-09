@@ -11,6 +11,7 @@ import {
 } from 'firebase/auth'
 import { auth, db } from '@/core/firebase/firebaseConfig'
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore'
+import api, { setAuthToken } from "@/core/api/api"
 
 
 export const useAuth = () => {
@@ -24,22 +25,47 @@ export const useAuth = () => {
   const [googleLoading, setGoogleLoading] = useState(false)
   const [registerLoading, setRegisterLoading] = useState(false)
 
+  const syncUserWithBackend = async (firebaseUser) => {
+    if (!firebaseUser) return
+
+    try {
+      const token = await firebaseUser.getIdToken()
+      // 🔑 GUARDAR TOKEN
+      localStorage.setItem("token", token)
+
+      // 🔗 INYECTAR EN AXIOS
+      setAuthToken(token)
+
+      await api.post("/auth/sync")
+    } catch (error) {
+      console.error("Error syncing user with backend:", error)
+    }
+  }
+
   // Detectar cambios de sesión
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log('onAuthStateChanged =>', currentUser)
-      setUser(currentUser)
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      setLoading(true)
+
+      if (currentUser) {
+        await syncUserWithBackend(currentUser)
+        setUser(currentUser)
+      } else {
+        setAuthToken(null)
+        setUser(null)
+      }
+
       setLoading(false)
-    });
+    })
     return () => unsubscribe()
-  }, []);
+  }, [])
 
   // Registrar usuario (con Firestore)
   const register = async (email, password, extraData = {}) => {
-    setLoading(true)
+    setRegisterLoading(true)
     setError(null)
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password)
+      const userCredential = await createUserWithEmailAndPassword(auth, email.toLowerCase(), password)
       const newUser = userCredential.user
 
       // Guardar datos adicionales en Firestore
@@ -58,7 +84,7 @@ export const useAuth = () => {
       setError(err.message)
       throw err
     } finally {
-      setLoading(false)
+      setRegisterLoading(false)
     }
   }
 
@@ -70,10 +96,8 @@ export const useAuth = () => {
       const userCredential = await signInWithEmailAndPassword(auth, email.toLowerCase(), password)
       const loggedUser = userCredential.user
 
-      localStorage.setItem("userId", loggedUser.uid)
-
-      setUser(userCredential.user)
-      return userCredential.user
+      setUser(loggedUser)
+      return loggedUser
     } catch (err) {
       setError(err.message)
       throw err
@@ -90,8 +114,6 @@ export const useAuth = () => {
       const provider = new FacebookAuthProvider()
       const result = await signInWithPopup(auth, provider)
       const newUser = result.user
-
-      localStorage.setItem("userId", newUser.uid)
 
       // Guardar/actualizar en Firestore si es primera vez
       await setDoc(doc(db, "users", newUser.uid), {
@@ -123,8 +145,6 @@ export const useAuth = () => {
       const result = await signInWithPopup(auth, provider)
       const newUser = result.user
 
-      localStorage.setItem("userId", newUser.uid)
-
       // Guardar/actualizar en Firestore
       await setDoc(doc(db, "users", newUser.uid), {
         uid: newUser.uid,
@@ -151,6 +171,8 @@ export const useAuth = () => {
     setLoading(true);
     try {
       await signOut(auth)
+      setAuthToken(null)
+      localStorage.removeItem("token")
       localStorage.removeItem("userId")
       setUser(null)
     } catch (err) {

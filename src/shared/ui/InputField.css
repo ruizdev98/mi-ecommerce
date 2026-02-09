@@ -2,23 +2,28 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    width: 100%;
 }
 .input-field {
     font-family: var(--font-base);
     border: 1px solid var(--color-primary);
     border-radius: 0.5rem;
+    
 }
 .input-small {
     padding: 0.6rem 0.8rem;
     font-size: 1.2rem;
+    min-height: 3.6rem;
 }
 .input-medium {
     padding: 1.0rem 1.0rem;
     font-size: 1.4rem;
+    min-height: 4.4rem;
 }
 .input-large {
     padding: 1.3rem 1.2rem;
     font-size: 1.6rem;
+    min-height: 5.2rem;
 }
 /* Estado focus */
 .input-field:focus {

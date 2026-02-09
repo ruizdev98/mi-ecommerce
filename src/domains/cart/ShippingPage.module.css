@@ -1,0 +1,141 @@
+.checkout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 4rem;
+  padding: 2rem;
+  min-height: 70vh;
+}
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+.title {
+  font-size: 2.4rem;
+  font-weight: 600;
+}
+.deliveryOptions {
+  display: flex;
+  gap: 1.5rem;
+}
+
+/* CARD */
+.deliveryCard {
+  flex: 1;
+  border: 2px solid #e5e5e5;
+  border-radius: 10px;
+  padding: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  position: relative;
+}
+
+/* Ocultamos el radio real */
+.deliveryCard input {
+  display: none;
+}
+
+/* Contenido */
+.cardContent {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.4rem;
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5rem;
+  width: 5rem;
+  padding: 0.5rem;
+  background-color: var(--color-primary-hover);
+  border-radius: 50%;
+  color: var(--white);
+  font-size: 2.4rem;
+}
+
+/* Check circular */
+.check {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  position: relative;
+}
+
+/* ACTIVO */
+.active {
+  border-color: var(--color-primary-hover);
+}
+
+.active .check {
+  border-color: var(--color-primary-hover);
+  background-color: var(--color-primary-hover);
+}
+
+.active .check::after {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.2rem;
+  color: var(--white);
+}
+
+/* Hover */
+.deliveryCard:hover {
+  border-color: var(--color-primary-hover);
+}
+
+.lineDivider {
+  height: 0.1rem;
+  background-color: #e5e5e5;
+}
+
+/* ===================== */
+/* FORMULARIO */
+/* ===================== */
+
+.shippingForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-bottom: 3rem;
+}
+
+.formRow {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.shippingForm input {
+  padding: 1rem;
+  font-size: 1.4rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.shippingForm input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+.selectID {
+  padding: 1rem;
+  border-radius: 0.6rem;
+}
+.selectUB {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 0.6rem;
+}
+
+.right {
+  position: sticky;
+  top: 10rem;
+}

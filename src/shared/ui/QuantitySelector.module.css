@@ -1,0 +1,50 @@
+.wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.wrapper button {
+  width: 3.6rem;
+  height: 3.6rem;
+  border: 1px solid #d3d7db;
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.wrapper button:hover:not(:disabled) {
+  transform: scale(1.1);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.wrapper button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.value {
+  min-width: 2.5rem;
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+/* Sizes */
+.sm button {
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+.md button {
+  width: 3.4rem;
+  height: 3.4rem;
+}
+
+.lg button {
+  width: 4.6rem;
+  height: 4.6rem;
+}

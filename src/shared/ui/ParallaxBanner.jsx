@@ -1,4 +1,4 @@
-import Button from '@/shared/ui/Button'
+import GeneralButton from '@/shared/ui/GeneralButton'
 import './ParallaxBanner.css'
 
 export default function ParallaxBanner({ title, buttonText, logoSrc, backgroundUrl}) {
@@ -7,12 +7,12 @@ export default function ParallaxBanner({ title, buttonText, logoSrc, backgroundU
         <div className='parallax-banner__content'>
             <img src={logoSrc} alt="Logo" className='parallax-banner__logo'/>
             <h2 className='parallax-banner__title'>{title}</h2>
-            <Button 
+            <GeneralButton 
               variant="secondary"
               className="parallax-banner__btn"
             >
               {buttonText}
-            </Button>
+            </GeneralButton>
         </div>
     </section>
   )

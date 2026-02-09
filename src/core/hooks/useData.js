@@ -48,7 +48,7 @@ export function useData() {
         // Llamadas paralelas
         const responses = await Promise.all(
           endpoints.map(endpoint =>
-            fetch(`http://localhost:4000/api/${endpoint}`, { signal })
+            fetch(`https://ecommerce-api-he4w.onrender.com/api/${endpoint}`, { signal })
               .then(res => res.json())
           )
         )

@@ -1,0 +1,155 @@
+/* ===== GENERAL ===== */
+.title {
+  font-size: 2.4rem;
+  font-weight: 600;
+  padding: 2rem 0 1.5rem;
+  color: var(--black);
+}
+
+/* ===== LAYOUT ===== */
+.layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 4rem;
+  align-items: flex-start;
+  padding-bottom: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== LEFT ===== */
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ===== CARDS ===== */
+
+
+/* ===== PRODUCT ITEM ===== */
+.item {
+  display: grid;
+  grid-template-columns: 0.2fr 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+.image {
+  width: 100%;
+  height: 15rem;
+  object-fit: cover;
+  border-radius: 0.8rem;
+}
+
+.name {
+  font-size: 1.6rem;
+  margin: 0;
+}
+.brand {
+  margin-bottom: 0.3rem;
+  font-size: 1.2rem;
+}
+.sku {
+  font-size: 1.2rem;
+  color: #A9A9A9;
+  margin-bottom: 0.3rem;
+}
+.colorSize {
+  display: flex;
+  gap: 1rem;
+}
+.colorSize span {
+  font-size: 1.2rem;
+  background-color: #dedede;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.5rem;
+}
+.quantity {
+  padding-top: 0.3rem;
+  font-size: 1.2rem;
+}
+.price {
+  font-size: 1.4rem;
+}
+
+/* ===== RIGHT ===== */
+.right {
+  position: sticky;
+  top: 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* ===== SUMMARY ===== */
+.summaryCard {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.summaryCard h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1.2rem;
+}
+
+/* ===== ROWS ===== */
+.row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  margin-bottom: 0.6rem;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 1rem 0 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ddd;
+}
+.card {
+  padding: 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: #fafafa;
+  height: fit-content;
+}
+.cardTitle {
+  margin-bottom: 1.5rem;
+  font-size: 2.4rem;
+  text-align: center;
+  color: var(--color-secondary);
+  font-weight: 600;
+}
+.divider {
+    height: 0.1rem;
+    background-color: #e5e5e5;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+.card p {
+  font-size: 1.4rem;
+  padding-bottom: 0.5rem;
+}
+.userPhone {
+  padding: 0;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}

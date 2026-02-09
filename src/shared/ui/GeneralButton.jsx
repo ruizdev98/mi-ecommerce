@@ -1,6 +1,6 @@
-import './Button.css';
+import './GeneralButton.css';
 
-export default function Button({
+export default function GeneralButton({
   children,
   variant = "primary", // primary | secondary
   size = "medium",     // small | medium | large

@@ -1,5 +1,5 @@
 import SectionTitle from '@/shared/ui/SectionTitle'
-import Button from '@/shared/ui/Button'
+import GeneralButton from '@/shared/ui/GeneralButton'
 import { useEffect, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation } from 'swiper/modules'
@@ -65,12 +65,12 @@ export default function BlogSection({ title, blogs }) {
                                         <p className='blog-section__text'>{post.text}</p>
                                     </a>
                                 </div>
-                                <Button
+                                <GeneralButton
                                     size="small" 
                                     className="blog-section__btn"
                                 >
                                 Ver más
-                                </Button>
+                                </GeneralButton>
                             </div>
                         </div>
                     </SwiperSlide>

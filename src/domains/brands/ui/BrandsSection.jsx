@@ -1,5 +1,5 @@
 import SectionTitle from '@/shared/ui/SectionTitle';
-import Button from '@/shared/ui/Button';
+import GeneralButton from '@/shared/ui/GeneralButton';
 import './BrandsSection.css'
 
 export default function BrandsSection({title, products, brands}) {
@@ -18,9 +18,9 @@ export default function BrandsSection({title, products, brands}) {
             ))}
         </div>
         <div className='brands-section__view-all'>
-            <Button className="product-section__btn">
+            <GeneralButton className="product-section__btn">
                 Ver todas las marcas
-            </Button>
+            </GeneralButton>
         </div>
     </section>
   )

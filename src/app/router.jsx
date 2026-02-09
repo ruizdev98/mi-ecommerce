@@ -36,7 +36,7 @@ const router = createBrowserRouter([
       // Rutas dinámicas
       { path: "categoria/:categorySlug", element: <CategoryPage /> },
       { path: "marca/:brandSlug", element: <BrandPage /> },
-      { path: "producto/:productId", element: <ProductDetailPage /> },
+      { path: "products/:productId", element: <ProductDetailPage /> },
     ],
   },
 
@@ -46,7 +46,7 @@ const router = createBrowserRouter([
     children: [
       { path: "cart", element: <CartPage /> },
       { path: "shipping", element: <ShippingPage /> },
-      { path: "payment", element: <PaymentPage /> },
+      { path: "payment/:orderId", element: <PaymentPage /> },
     ],
   },
 

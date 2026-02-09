@@ -6,18 +6,18 @@ import { useAuth } from "@/core/hooks/useAuth";
 const CartContext = createContext(null);
 
 export const CartProvider = ({ children }) => {
-  const cart = useCart();
   const { user } = useAuth(); // user puede ser null o { uid, ... }
-
+  const cart = useCart();
+ 
   // 🔹 Efecto para detectar cambios de sesión
   useEffect(() => {
     if (user?.uid) {
       // Usuario inicia sesión → actualizar userId en useCart
-      cart.setUserId(user.uid);
+      cart.setUserId(user.uid)
       // useCart se encargará de fusionar carrito local con backend
     } else {
-      // Usuario cierra sesión → limpiar carrito local e invitado
-      cart.clearCartOnLogout();
+      // Usuario cierra sesión → limpiar carrito
+      cart.clearCart()
     }
   }, [user]);
 

@@ -45,6 +45,12 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.product-section__image:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 .product-section__info {
     display: flex;

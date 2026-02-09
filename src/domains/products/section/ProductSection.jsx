@@ -1,6 +1,6 @@
 import SectionTitle from '@/shared/ui/SectionTitle'
 import ProductCard from '../card/ProductCard'
-import Button from '@/shared/ui/Button'
+import GeneralButton from '@/shared/ui/GeneralButton'
 import './ProductSection.css'
 
 export default function ProductSection({title, products}) {
@@ -14,9 +14,9 @@ export default function ProductSection({title, products}) {
             ))}
         </div>
         <div className='product-section__view-all'>
-            <Button className="product-section__btn">
+            <GeneralButton className="product-section__btn">
               Ver todos los productos
-            </Button>
+            </GeneralButton>
         </div>
     </section>
   )

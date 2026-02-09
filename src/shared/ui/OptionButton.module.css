@@ -1,0 +1,51 @@
+/* ===== Base ===== */
+.base {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: #fff;
+}
+/* ===== COLOR ===== */
+.color {
+  background-clip: content-box;
+  padding: 0.4rem;
+  width: 6rem;
+  height: 6rem;
+  border: 2px solid transparent;
+  outline: 1px solid #bbbbbb;
+  outline-offset: -6px;
+}
+.color:hover {
+  transform: scale(1.08);
+}
+.color.active {
+  border: 2px solid #bbbbbb;
+}
+
+/* ===== SIZE ===== */
+.size {
+  padding: 0.9rem 1rem;
+  min-width: 4.7rem;
+  height: 4.7rem;
+  border: 1px solid #d3d7db;
+  border-radius: 4px;
+  color: #888888;
+  font-size: 1.3rem;
+}
+.size:hover {
+  transform: scale(1.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.size.active {
+  border-color: #111;
+  font-weight: 600;
+  background-color: #eceef0;
+  color: #333333;
+}
+
+/* ===== Disabled (opcional) ===== */
+.base:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}

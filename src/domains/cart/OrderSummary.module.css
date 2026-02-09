@@ -1,0 +1,100 @@
+.orderSummary {
+    padding: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: #fafafa;
+    height: fit-content;
+}
+
+.title {
+    margin-bottom: 1.5rem;
+    font-size: 2.4rem;
+    text-align: center;
+    color: var(--color-secondary);
+    font-weight: 600;
+}
+
+.productsCount {
+    text-align: center;
+    padding-bottom: 1rem;
+}
+
+.divider {
+    height: 0.1rem;
+    background-color: #e5e5e5;
+    margin-top: 1.5rem;
+}
+
+.summaryRow {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0;
+    font-size: 1.4rem;
+}
+
+.totalRow {
+    font-weight: 700;
+    font-size: 1.8rem;
+}
+
+.totalPrice {
+    color: var(--color-secondary);
+}
+
+.button {
+    width: 100%;
+    margin-top: 1rem;
+}
+.items {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.item {
+    display: flex;
+    gap: 2rem;
+}
+.image {
+    width: 30%;
+    height: 8rem;
+    object-fit: cover;
+    border-radius: 8px;
+}
+.info {
+    width: 100%;
+}
+.name, .brand {
+    font-size: 1.3rem;
+}
+.qty {
+    font-size: 1.2rem;
+}
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+.priceBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.2rem;
+}
+
+.originalPrice {
+  text-decoration: line-through;
+  color: #999;
+  font-size: 1.2rem;
+}
+.finalPrice {
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--color-secondary);
+}
+
+.priceTotalTitle, .priceTotal {
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+.priceTotal {
+    color: var(--color-secondary);
+}

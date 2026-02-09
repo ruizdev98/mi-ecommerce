@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from 'react'
+import api from '@/core/api/api'
 
-const API = "http://localhost:4000/api/cart"
+//const API = 'http://localhost:4000/api/cart'
+const API = 'https://ecommerce-api-he4w.onrender.com/api/cart'
 
 // GET carrito del backend
 const fetchCart = async (userId) => {
@@ -46,14 +48,17 @@ const saveCart = async (userId, cart) => {
   }
 }
 
-
 export const useCart = () => {
   const [userId, setUserId] = useState(() => localStorage.getItem("userId"))
   const [cartItems, setCartItems] = useState([])
   const [loading, setLoading] = useState(true)
+  const [isLoggingIn, setIsLoggingIn] = useState(false)
+  const [hasPendingOrder, setHasPendingOrder] = useState(false)
 
   // ✅ Cargar carrito
   useEffect(() => {
+    if (isLoggingIn) return
+
     async function loadCart() {
       setLoading(true)
       try {
@@ -61,8 +66,8 @@ export const useCart = () => {
           const backendCart = await fetchCart(userId)
           setCartItems(backendCart)
         } else {
-          const localCart = JSON.parse(localStorage.getItem("cart") || "[]")
-          setCartItems(localCart)
+          const guestCart = JSON.parse(localStorage.getItem("cart") || "[]")
+          setCartItems(guestCart)
         }
       } catch (error) {
         console.error("❌ Error cargando carrito:", error)
@@ -72,7 +77,7 @@ export const useCart = () => {
       }
     }
     loadCart()
-  }, [userId])
+  }, [userId, isLoggingIn])
 
   // ✅ 2️⃣ Guardar en localStorage solo si es invitado
   useEffect(() => {
@@ -81,10 +86,34 @@ export const useCart = () => {
     }
   }, [cartItems, userId])
 
+  const checkPendingOrder = async () => {
+    try {
+      const { data } = await api.get("/orders/pending")
+      setHasPendingOrder(!!data?.orderId)
+      return !!data?.orderId
+    } catch {
+      setHasPendingOrder(false)
+      return false
+    }
+  }
+
+  useEffect(() => {
+    if (!userId) {
+      setHasPendingOrder(false)
+      return
+    }
+    checkPendingOrder()
+  }, [userId])
+
   // -----------------------------
   // Funciones del carrito
   // -----------------------------
   const addToCart = async (item) => {
+    if (hasPendingOrder) {
+      alert("Tienes una compra pendiente. Finalízala o cancélala para seguir comprando.")
+      return
+    }
+
     if (!item.variantId) return
 
     setCartItems(prev => {
@@ -105,6 +134,8 @@ export const useCart = () => {
   }
 
   const removeFromCart = (variantId) => {
+    if (hasPendingOrder) return
+
     setCartItems(prev => {
       const newCart = prev.filter(i => i.variantId !== variantId)
 
@@ -116,7 +147,7 @@ export const useCart = () => {
   }
 
   const updateQuantity = (variantId, quantity) => {
-    if (quantity < 1) return
+    if (hasPendingOrder || quantity < 1) return
 
     setCartItems(prev => {
       const newCart = prev.map(i =>
@@ -129,10 +160,12 @@ export const useCart = () => {
     })
   }
 
-  const clearCartOnLogout = () => {
+  const clearCart = async () => {
     setCartItems([])
     localStorage.removeItem("cart")
-    setUserId(null)
+    if (userId) {
+      await saveCart(userId, [])
+    }
   }
 
   const getItemTotalPrice = (item) => {
@@ -146,10 +179,19 @@ export const useCart = () => {
     return unitPrice * item.quantity
   }
 
+  const getItemOriginalTotal = (item) => {
+    return Number(item.price ?? 0) * item.quantity
+  }
+
+  const getItemDiscount = (item) => {
+    return getItemOriginalTotal(item) - getItemTotalPrice(item)
+  }
+
   // -----------------------------
   // 3️⃣ Login: fusionar carrito invitado con backend
   // -----------------------------
   const handleLogin = async (newUserId) => {
+    setIsLoggingIn(true)
     // Solo fusionar si hay productos en localStorage
     const localCart = JSON.parse(localStorage.getItem("cart") || "[]")
     if (localCart.length === 0) {
@@ -175,8 +217,18 @@ export const useCart = () => {
     setCartItems(savedCart)
     setUserId(newUserId)
     localStorage.removeItem("cart")
+
+    setIsLoggingIn(false)
   }
 
+  const subtotal = cartItems.reduce(
+    (sum, item) => sum + getItemOriginalTotal(item),
+    0
+  )
+  const totalDiscount = cartItems.reduce(
+    (sum, item) => sum + getItemDiscount(item),
+    0
+  )
 
   // Totales
   const totalItems = cartItems.reduce((s, i) => s + i.quantity, 0)
@@ -188,14 +240,20 @@ export const useCart = () => {
   return {
     cartItems,
     loading,
+    hasPendingOrder,
+    setHasPendingOrder,
+    checkPendingOrder,
     addToCart,
     removeFromCart,
     updateQuantity,
     totalItems,
     totalPrice,
+    subtotal,
+    totalDiscount,
     getItemTotalPrice,
+    getItemOriginalTotal,
     setUserId,
-    clearCartOnLogout,
+    clearCart,
     handleLogin,
   }
 }

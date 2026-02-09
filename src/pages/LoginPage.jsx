@@ -1,14 +1,16 @@
 import { useState } from 'react'
 import { useAuthContext } from '@/core/context/AuthContext'
 import { Link, useNavigate } from 'react-router-dom'
+import { useCartContext } from '@/core/context/CartContext'
 import InputField from '@/shared/ui/InputField'
-import Button from '@/shared/ui/Button'
+import GeneralButton from '@/shared/ui/GeneralButton'
 import SocialButton from '@/shared/ui/SocialButton'
 import './LoginPage.css'
 
 export default function LoginPage() {
  
   const { login, loginWithFacebook, loginWithGoogle, error } = useAuthContext()
+  const { handleLogin } = useCartContext()
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -24,6 +26,7 @@ export default function LoginPage() {
     try {
       const user = await login(email, password)
       console.log('Usuario logueado:', user)
+      await handleLogin(user.uid)
       navigate("/")
     } catch (err) {
       console.error("Error login:", err)
@@ -47,6 +50,7 @@ export default function LoginPage() {
     try {
       const user = await loginWithFacebook()
       console.log("Usuario logueado con Facebook:", user)
+      await handleLogin(user.uid)
       navigate("/")
     } catch (err) {
       console.error("Error loginWithFacebook:", err)
@@ -61,6 +65,7 @@ export default function LoginPage() {
     try {
       const user = await loginWithGoogle()
       console.log("Usuario logueado con Google:", user)
+      await handleLogin(user.uid)
       navigate("/")
     } catch (err) {
       console.error("Error loginWithGoogle:", err)
@@ -96,14 +101,14 @@ export default function LoginPage() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <Button 
+          <GeneralButton 
             type="submit"
             size="large"
             className="auth__button" 
             disabled={loadingEmail}
           >
             {loadingEmail ? "Cargando..." : "Iniciar Sesión"}
-          </Button>
+          </GeneralButton>
           {error && <p className='auth__error'>{error}</p>}
         </form>
         <div className="auth__separator">

@@ -1,15 +1,15 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
-import { useEffect, useState } from "react"
 import { useCartContext } from "@/core/context/CartContext"
 import { useProduct } from "@/core/hooks/useProduct"
-import Button from "@/shared/ui/Button"
+import { useProductSelection } from "@/core/hooks/useProductSelection"
+import GeneralButton from "@/shared/ui/GeneralButton"
+import OptionButton from '../../../shared/ui/OptionButton'
 import styles from "./ProductModal.module.css"
-import { color } from 'framer-motion'
 
 export default function ProductVariantModal({ product, onClose }) {
 
-  const { addToCart } = useCartContext()
+  const { addToCart, checkPendingOrder } = useCartContext()
 
   const {
     colors,
@@ -18,33 +18,28 @@ export default function ProductVariantModal({ product, onClose }) {
     getVariant,
   } = useProduct(product.id)
 
-  const [selectedColorId, setSelectedColorId] = useState(null)
-  const [selectedSizeId, setSelectedSizeId] = useState(null)
+  const {
+    selectedColorId,
+    setSelectedColorId,
+    selectedSizeId,
+    setSelectedSizeId,
+    selectedColor,
+    sizes,
+    selectedVariant,
+    resetSize
+  } = useProductSelection({ colors, getSizesByColor, getVariant })
 
-  /**
-   * 👉 Seleccionar el PRIMER color automáticamente
-   */
-  useEffect(() => {
-    if (colors.length > 0 && !selectedColorId) {
-      setSelectedColorId(colors[0].id)
-    }
-  }, [colors, selectedColorId])
-
-  const selectedColor = colors.find(
-    color => color.id === selectedColorId
-  )
-
-  const sizes = selectedColorId
-    ? getSizesByColor(selectedColorId)
-    : []
-
-  const selectedVariant =
-    selectedColorId && selectedSizeId
-      ? getVariant(selectedColorId, selectedSizeId)
-      : null
-
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     if (!selectedVariant) return
+
+      // 🔒 Verificar si hay orden pendiente
+    const hasPendingOrder = await checkPendingOrder()
+
+    if (hasPendingOrder) {
+      alert("⚠️ Tienes una orden pendiente de pago. Finalízala o cancélala para continuar.")
+      onClose()
+      return
+    }
 
     addToCart({
       variantId: selectedVariant.id,
@@ -82,13 +77,14 @@ export default function ProductVariantModal({ product, onClose }) {
           </p>
           <div className={styles.colors}>
             {colors.map(color => (
-              <button
+              <OptionButton
                 key={color.id}
-                className={`${styles.color} ${selectedColorId === color.id ? styles.active : ""}`}
-                style={{ backgroundColor: color.hex }}
+                variant="color"
+                value={color.hex}
+                isActive={selectedColorId === color.id}
                 onClick={() => {
                   setSelectedColorId(color.id)
-                  setSelectedSizeId(null)
+                  resetSize()
                 }}
               />
             ))}
@@ -100,26 +96,24 @@ export default function ProductVariantModal({ product, onClose }) {
           <p className={styles.label}>Talla</p>
           <div className={styles.sizes}>
             {sizes.map(size => (
-              <button
+              <OptionButton
                 key={size.id}
-                className={`${styles.size} ${
-                  selectedSizeId === size.id ? styles.active : ""
-                }`}
+                variant="size"
+                value={size.name}
+                isActive={selectedSizeId === size.id}
                 onClick={() => setSelectedSizeId(size.id)}
-              >
-                {size.name}
-              </button>
+              />
             ))}
           </div>
         </div>
 
-        <Button
+        <GeneralButton
           size="large"
           disabled={!selectedVariant}
           onClick={handleAddToCart}
         >
           Agregar al carrito
-        </Button>
+        </GeneralButton>
       </div>
     </div>
   )

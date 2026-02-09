@@ -1,6 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
+import { useNavigate } from 'react-router-dom'
+import { formatPrice } from '@/core/utils/pricing'
 import { Link } from 'react-router-dom'
+import api from "@/core/api/api"
 import styles from '../NavBar.module.css'
 
 export default function CartDropdown({
@@ -12,6 +15,9 @@ export default function CartDropdown({
   user
 }) {
 
+  const navigate = useNavigate()
+  
+
   if (cartItems.length === 0) {
     return (
       <div className={styles.cartDropdown}>
@@ -20,9 +26,25 @@ export default function CartDropdown({
     )
   }
 
-  const formatPrice = (value) => {
-    const num = Number(value)
-    return isNaN(num) ? '0.00' : num.toFixed(2)
+  const handleCheckoutClick = async () => {
+    // 🔐 SI NO ESTÁ LOGUEADO
+    if (!user?.uid) {
+      navigate("/login")
+      return
+    }
+    try {
+      const { data } = await api.get("/orders/pending")
+
+      if (data?.orderId) {
+        navigate(`/checkout/payment/${data.orderId}`)
+      } else {
+        navigate("/checkout/cart")
+      }
+
+    } catch (error) {
+      console.error("Error checkout:", error)
+      navigate("/checkout/cart")
+    }
   }
 
   return (
@@ -95,7 +117,7 @@ export default function CartDropdown({
         {user?.uid ? (
           <button
             className={styles.cartCheckoutBtn}
-            onClick={() => window.location.href = '/checkout/cart'} // recarga
+            onClick={handleCheckoutClick}
           >
             Ver carrito
           </button>
