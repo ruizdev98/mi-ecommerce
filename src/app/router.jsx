@@ -13,7 +13,6 @@ import RegisterPage from "@/pages/RegisterPage"
 import CartPage from "@/domains/cart/CartPage"
 import ShippingPage from "@/domains/cart/ShippingPage"
 import PaymentPage from "@/domains/cart/PaymentPage"
-import CheckoutSuccess from "@/domains/cart/CheckoutSuccess"
 
 // Páginas por dominio
 import CategoryPage from "@/domains/categories/pages/CategoryPage"
@@ -48,10 +47,6 @@ const router = createBrowserRouter([
       { path: "cart", element: <CartPage /> },
       { path: "shipping", element: <ShippingPage /> },
       { path: "payment/:orderId", element: <PaymentPage /> },
-      // ✅ SUCCESS
-      { path: "success", element: <CheckoutSuccess /> },
-      { path: "failure", element: <div>Pago fallido</div> },
-      { path: "pending", element: <div>Pago pendiente</div> },
     ],
   },
 

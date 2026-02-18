@@ -1,10 +1,15 @@
+import { useEffect } from "react"
+import { useSearchParams } from "react-router-dom"
+import { useCartContext } from "@/core/context/CartContext"
+import { useData } from '@/core/hooks/useData'
+
 import ImageCarousel from '@/shared/ui/ImageCarousel'
 import Categories from '@/domains/categories/ui/Categories'
 import ParallaxBanner from '@/shared/ui/ParallaxBanner'
 import ProductSection from '@/domains/products/section/ProductSection'
 import BlogSection from '@/domains/blogs/ui/BlogSection'
 import BrandsSection from '@/domains/brands/ui/BrandsSection'
-import { useData } from '@/core/hooks/useData'
+
 
 export default function HomePage() {
   const {
@@ -15,7 +20,55 @@ export default function HomePage() {
     brands,
     blogs,
     loading 
-  } = useData();
+  } = useData()
+
+  // 👉 NUEVO
+  const { clearCart } = useCartContext()
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  // 👉 NUEVO: validar pago al volver del checkout
+  useEffect(() => {
+    const status = searchParams.get("status")
+    const orderId = localStorage.getItem("lastOrderId")
+
+    if (status !== "approved" || !orderId) return
+
+    const confirmPayment = async () => {
+      try {
+        let attempts = 0
+        let paid = false
+
+        while (attempts < 5 && !paid) {
+          const res = await fetch(
+            `${import.meta.env.VITE_API_URL}/orders/${orderId}`
+          )
+
+          if (!res.ok) break
+
+          const order = await res.json()
+
+          if (order.status === "paid") {
+            paid = true
+            break
+          }
+
+          // Espera 1 segundo antes de volver a intentar
+          await new Promise(resolve => setTimeout(resolve, 1000))
+          attempts++
+        }
+
+        if (paid) {
+          clearCart()
+          localStorage.removeItem("lastOrderId")
+          setSearchParams({})
+        }
+      } catch (err) {
+        console.error("Error confirmando pago", err)
+      }
+    }
+
+    confirmPayment()
+  }, [searchParams, clearCart, setSearchParams])
   
   const banners = [
     { src: "https://res.cloudinary.com/dmvsu33ya/image/upload/v1754767042/banner1_xywskc.png", alt: "Banner 1" },
