@@ -12,15 +12,18 @@ const MainLayout = () => {
 
   useEffect(() => {
     const orderId = localStorage.getItem("lastOrderId")
+    console.log("🟡 Effect ejecutado. orderId:", orderId)
     if (!orderId) return
 
     const confirmPayment = async () => {
       try {
+        console.log("🔎 Consultando orden...")
         const { data: order } = await api.get(`/orders/${orderId}`)
 
-        console.log("Checking order:", order.status)
+        console.log("📦 Order status:", order.status)
 
         if (order.status === "paid") {
+          console.log("✅ Detectado como paid")
           clearCart()
           localStorage.removeItem("lastOrderId")
           console.log("🧹 Carrito limpiado")
