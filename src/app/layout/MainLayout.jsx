@@ -35,6 +35,7 @@ const MainLayout = () => {
 
     confirmPayment()
   }, [])
+  console.log("MainLayout mounted")
   return (
     <>
       <Header />
