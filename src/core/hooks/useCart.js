@@ -166,6 +166,7 @@ export const useCart = () => {
     if (userId) {
       await saveCart(userId, [])
     }
+    setHasPendingOrder(false) // 🔥 IMPORTANTE
   }
 
   const getItemTotalPrice = (item) => {
