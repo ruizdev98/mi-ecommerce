@@ -11,7 +11,7 @@ import {
 } from 'firebase/auth'
 import { auth, db } from '@/core/firebase/firebaseConfig'
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore'
-import api, { setAuthToken } from "@/core/api/api"
+import api from "@/core/api/api"
 
 
 export const useAuth = () => {
@@ -29,13 +29,6 @@ export const useAuth = () => {
     if (!firebaseUser) return
 
     try {
-      const token = await firebaseUser.getIdToken()
-      // 🔑 GUARDAR TOKEN
-      localStorage.setItem("token", token)
-
-      // 🔗 INYECTAR EN AXIOS
-      setAuthToken(token)
-
       await api.post("/auth/sync")
     } catch (error) {
       console.error("Error syncing user with backend:", error)
@@ -51,7 +44,6 @@ export const useAuth = () => {
         await syncUserWithBackend(currentUser)
         setUser(currentUser)
       } else {
-        setAuthToken(null)
         setUser(null)
       }
 
@@ -171,7 +163,6 @@ export const useAuth = () => {
     setLoading(true);
     try {
       await signOut(auth)
-      setAuthToken(null)
       localStorage.removeItem("token")
       localStorage.removeItem("userId")
       setUser(null)
