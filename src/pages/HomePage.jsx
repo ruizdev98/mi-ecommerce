@@ -27,10 +27,12 @@ export default function HomePage() {
   const [searchParams, setSearchParams] = useSearchParams()
 
   // 👉 NUEVO: validar pago al volver del checkout
-  console.log("STATUS:", searchParams.get("status"))
-  console.log("ORDER ID:", localStorage.getItem("lastOrderId"))
   
   useEffect(() => {
+    // 👉 NUEVO: validar pago al volver del checkout
+    console.log("STATUS:", searchParams.get("status"))
+    console.log("ORDER ID:", localStorage.getItem("lastOrderId"))
+
     const status = searchParams.get("status")
     const orderId = localStorage.getItem("lastOrderId")
 
