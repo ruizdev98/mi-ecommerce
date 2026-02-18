@@ -1,21 +1,19 @@
 import axios from "axios"
+import { getAuth } from "firebase/auth"
 
 const api = axios.create({
   baseURL: "https://ecommerce-api-he4w.onrender.com/api",
 })
 
-export const setAuthToken = token => {
-  if (token) {
-    api.defaults.headers.common["Authorization"] = `Bearer ${token}`
-  } else {
-    delete api.defaults.headers.common["Authorization"]
+api.interceptors.request.use(async (config) => {
+  const auth = getAuth()
+  const user = auth.currentUser
+
+  if (user) {
+    const token = await user.getIdToken()
+    config.headers.Authorization = `Bearer ${token}`
   }
-}
 
-// 🧠 RESTAURAR TOKEN AL REFRESCAR
-const token = localStorage.getItem("token")
-if (token) {
-  setAuthToken(token)
-}
-
+  return config
+})
 export default api

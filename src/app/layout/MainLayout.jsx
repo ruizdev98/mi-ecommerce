@@ -1,14 +1,14 @@
 // src/app/layout/MainLayout.jsx
 import { useEffect } from "react"
-import { Outlet, useLocation } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import { useCartContext } from "@/core/context/CartContext"
+import api from "@/core/api/api"
 import Header from '@/components/header/Header'
 import Footer from '@/components/footer/Footer'
 
 
 const MainLayout = () => {
   const { clearCart } = useCartContext()
-  const location = useLocation()
 
   useEffect(() => {
     const orderId = localStorage.getItem("lastOrderId")
@@ -16,13 +16,7 @@ const MainLayout = () => {
 
     const confirmPayment = async () => {
       try {
-        const res = await fetch(
-          `https://ecommerce-api-he4w.onrender.com/api/orders/${orderId}`
-        )
-
-        if (!res.ok) return
-
-        const order = await res.json()
+        const { data: order } = await api.get(`/orders/${orderId}`)
 
         console.log("Checking order:", order.status)
 
@@ -37,7 +31,7 @@ const MainLayout = () => {
     }
 
     confirmPayment()
-  }, [])  // 👈 sin dependencias
+  }, [])
   return (
     <>
       <Header />
