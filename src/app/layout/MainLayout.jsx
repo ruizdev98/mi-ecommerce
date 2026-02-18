@@ -37,8 +37,7 @@ const MainLayout = () => {
     }
 
     confirmPayment()
-  }, [location.pathname]) // 👈 se ejecuta cuando cambias de página
-
+  }, [])  // 👈 sin dependencias
   return (
     <>
       <Header />
