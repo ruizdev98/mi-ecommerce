@@ -1,6 +1,3 @@
-import { useEffect } from "react"
-import { useSearchParams } from "react-router-dom"
-import { useCartContext } from "@/core/context/CartContext"
 import { useData } from '@/core/hooks/useData'
 
 import ImageCarousel from '@/shared/ui/ImageCarousel'
@@ -21,59 +18,6 @@ export default function HomePage() {
     blogs,
     loading 
   } = useData()
-
-  // 👉 NUEVO
-  const { clearCart } = useCartContext()
-  const [searchParams, setSearchParams] = useSearchParams()
-
-  // 👉 NUEVO: validar pago al volver del checkout
-  
-  useEffect(() => {
-    // 👉 NUEVO: validar pago al volver del checkout
-    console.log("STATUS:", searchParams.get("status"))
-    console.log("ORDER ID:", localStorage.getItem("lastOrderId"))
-
-    const status = searchParams.get("status")
-    const orderId = localStorage.getItem("lastOrderId")
-
-    if (status !== "approved" || !orderId) return
-
-    const confirmPayment = async () => {
-      try {
-        let attempts = 0
-        let paid = false
-
-        while (attempts < 5 && !paid) {
-          const res = await fetch(
-            `${import.meta.env.VITE_API_URL}/orders/${orderId}`
-          )
-
-          if (!res.ok) break
-
-          const order = await res.json()
-
-          if (order.status === "paid") {
-            paid = true
-            break
-          }
-
-          // Espera 1 segundo antes de volver a intentar
-          await new Promise(resolve => setTimeout(resolve, 1000))
-          attempts++
-        }
-
-        if (paid) {
-          clearCart()
-          localStorage.removeItem("lastOrderId")
-          setSearchParams({})
-        }
-      } catch (err) {
-        console.error("Error confirmando pago", err)
-      }
-    }
-
-    confirmPayment()
-  }, [searchParams, clearCart, setSearchParams])
   
   const banners = [
     { src: "https://res.cloudinary.com/dmvsu33ya/image/upload/v1754767042/banner1_xywskc.png", alt: "Banner 1" },
