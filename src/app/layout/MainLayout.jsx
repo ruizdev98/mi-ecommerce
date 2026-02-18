@@ -11,31 +11,21 @@ const MainLayout = () => {
   const { clearCart } = useCartContext()
 
   useEffect(() => {
-    const orderId = localStorage.getItem("lastOrderId")
-    console.log("🟡 Effect ejecutado. orderId:", orderId)
-    if (!orderId) return
-
-    const confirmPayment = async () => {
+    const checkPaidOrder = async () => {
       try {
-        console.log("🔎 Consultando orden...")
-        const { data: order } = await api.get(`/orders/${orderId}`)
+        const { data } = await api.get("/orders/pending")
 
-        console.log("📦 Order status:", order.status)
-
-        if (order.status === "paid") {
-          console.log("✅ Detectado como paid")
+        if (data?.status === "paid") {
           clearCart()
-          localStorage.removeItem("lastOrderId")
-          console.log("🧹 Carrito limpiado")
         }
       } catch (err) {
-        console.error("Error verificando pago:", err)
+        console.error(err)
       }
     }
 
-    confirmPayment()
+    checkPaidOrder()
   }, [])
-  console.log("MainLayout mounted")
+
   return (
     <>
       <Header />
