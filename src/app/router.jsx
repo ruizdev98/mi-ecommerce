@@ -1,4 +1,5 @@
-import { createBrowserRouter } from "react-router-dom"
+//import { createBrowserRouter } from "react-router-dom"
+import { createHashRouter } from "react-router-dom"
 
 import MainLayout from "./layout/MainLayout"
 import CheckoutLayout from "./layout/CheckoutLayout"
@@ -22,7 +23,7 @@ import ProductDetailPage from "@/domains/products/pages/ProductDetailPage"
 // Página no encontrada
 import NotFoundPage from "@/pages/NotFoundPage"
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <MainLayout />,
