@@ -169,4 +169,9 @@
     position: static;
     margin-top: 2rem;
   }
+  
+  .orderSummary {
+    position: sticky;
+    top: 10rem;
+  }
 }
