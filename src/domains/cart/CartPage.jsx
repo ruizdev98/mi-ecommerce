@@ -3,7 +3,8 @@ import { faTrash, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
 import { useCartContext } from "@/core/context/CartContext"
 import { useNavigate } from 'react-router-dom'
 import OrderSummary from './OrderSummary'
-import "./CartPage.css"
+//import "./CartPage.css"
+import styles from './CartPage.module.css'
 
 export default function CartPage() {
   const {
@@ -23,61 +24,58 @@ export default function CartPage() {
 
     // 🟡 1. Estado de carga (MUY IMPORTANTE)
   if (loading) {
-    return <div className="cartPageEmpty"><h2>Cargando carrito...</h2></div>
+    return <div className={styles.cartPageEmpty}><h2>Cargando carrito...</h2></div>
   }
 
   if (cartItems.length === 0) {
       return (
-      <div className="cartPageEmpty">
+      <div className={styles.cartPageEmpty}>
           <h2>Tu carrito está vacío</h2>
-          <a href="/" className="cartReturn">Volver a comprar</a>
+          <a href="/" className={styles.cartReturn}>Volver a comprar</a>
       </div>
       )
   }
   
   return (
     <div className="container">
-      <div className="cartPage" >
-        {/* Parte izquierda: Lista */}
-        <div className="cartListSection">
+      <div className={styles.cartPage}>
+        
+        <div className={styles.cartListSection}>
           <h2>Carrito de Compras</h2>
 
           {cartItems.map(item => (
-            <div key={item.variantId} className="cartItemRow">
-              <img src={item.image} alt={item.name} className="cartItemImage" />
+            <div key={item.variantId} className={styles.cartItemRow}>
+              <img src={item.image} alt={item.name} className={styles.cartItemImage} />
 
-              <div className="cartItemInfo">
+              <div className={styles.cartItemInfo}>
                 <h3>{item.name}</h3>
-                <p className="brand">{item.brandName}</p>
-                <p className="sku">{item.sku}</p>
+                <p className={styles.brand}>{item.brandName}</p>
+                <p className={styles.sku}>{item.sku}</p>
 
-                {/* Color y Talla */}
-                <div className="variantInfo">
+                <div className={styles.variantInfo}>
                   <span>
                     Color: <strong>{item.color}</strong>
                   </span>
-                  <div className="verticalLine"></div>
+                  <div className={styles.verticalLine}></div>
                   <span>
                     Talla: <strong>{item.size}</strong>
                   </span>
                 </div>
               </div>
               
-              <div className="cartItemPrice">
+              <div className={styles.cartItemPrice}>
                 {getItemOriginalTotal(item) !== getItemTotalPrice(item) && (
-                  <p className="originalPrice">
+                  <p className={styles.originalPrice}>
                     S/ {getItemOriginalTotal(item).toFixed(2)}
                   </p>
                 )}
-                <p className="itemPrice">
+                <p className={styles.itemPrice}>
                   S/ {getItemTotalPrice(item).toFixed(2)}
                 </p>
               </div>
 
-              {/* Precio */}
-              <div className="cartItemActions">
-                {/* Cantidad */}
-                <div className="qtyControls">
+              <div className={styles.cartItemActions}>
+                <div className={styles.qtyControls}>
                   <button 
                     onClick={() =>
                       updateQuantity(item.variantId, Math.max(1, item.quantity - 1))
@@ -98,7 +96,7 @@ export default function CartPage() {
                 </div>
 
                 <button 
-                  className="removeBtn"
+                  className={styles.removeBtn}
                   onClick={() => removeFromCart(item.variantId)}
                 >
                   <FontAwesomeIcon icon={faTrash} />
@@ -108,8 +106,7 @@ export default function CartPage() {
           ))}
         </div>
 
-        {/* Parte derecha: Resumen */}
-        <div className='orderSummary'>
+        <div className={styles.orderSummary}>
           <OrderSummary
             cartItems={cartItems}
             totalItems={totalItems}
