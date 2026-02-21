@@ -153,6 +153,7 @@
 .orderSummary {
   position: sticky;
   top: 10rem;
+  align-self: start;
 }
 
 /* --- Responsivo --- */
@@ -169,7 +170,7 @@
     position: static;
     margin-top: 2rem;
   }
-  
+
   .orderSummary {
     position: sticky;
     top: 10rem;
