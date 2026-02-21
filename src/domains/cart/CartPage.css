@@ -5,6 +5,7 @@
   gap: 4rem;
   padding: 2rem 4%;
   min-height: 70vh;
+  align-items: start;
 }
 
 /* --- Carrito vacío --- */
