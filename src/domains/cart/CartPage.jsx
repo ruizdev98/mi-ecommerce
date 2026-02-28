@@ -3,21 +3,20 @@ import { faTrash, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
 import { useCartContext } from "@/core/context/CartContext"
 import { useNavigate } from 'react-router-dom'
 import OrderSummary from './OrderSummary'
-//import "./CartPage.css"
 import styles from './CartPage.module.css'
 
 export default function CartPage() {
   const {
-      cartItems,
-      loading,
-      updateQuantity, 
-      removeFromCart, 
-      totalPrice,
-      subtotal,
-      totalDiscount,
-      totalItems,
-      getItemTotalPrice,
-      getItemOriginalTotal, 
+    cartItems,
+    loading,
+    updateQuantity, 
+    removeFromCart, 
+    totalPrice,
+    subtotal,
+    totalDiscount,
+    totalItems,
+    getItemTotalPrice,
+    getItemOriginalTotal, 
   } = useCartContext()
 
   const navigate = useNavigate()
@@ -37,7 +36,7 @@ export default function CartPage() {
   }
   
   return (
-    <div className="container">
+    <div className='container'>
       <div className={styles.cartPage}>
         
         <div className={styles.cartListSection}>
@@ -53,13 +52,9 @@ export default function CartPage() {
                 <p className={styles.sku}>{item.sku}</p>
 
                 <div className={styles.variantInfo}>
-                  <span>
-                    Color: <strong>{item.color}</strong>
-                  </span>
+                  <span>Color: <strong>{item.color}</strong></span>
                   <div className={styles.verticalLine}></div>
-                  <span>
-                    Talla: <strong>{item.size}</strong>
-                  </span>
+                  <span>Talla: <strong>{item.size}</strong></span>
                 </div>
               </div>
               

@@ -1,12 +1,13 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPhone } from "@fortawesome/free-solid-svg-icons"
-import { useEffect, useState } from "react"
-import { useParams, useNavigate } from "react-router-dom"
-import { useCartContext } from "@/core/context/CartContext"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPhone } from '@fortawesome/free-solid-svg-icons'
+import { useEffect, useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+import { useCartContext } from '@/core/context/CartContext'
 import { formatPrice } from '@/core/utils/pricing'
+import OrderItemsList from './OrderItemsList'
 import OrderSummary from './OrderSummary'
-import api from "@/core/api/api"
-import styles from "./PaymentPage.module.css"
+import api from '@/core/api/api'
+import styles from './PaymentPage.module.css'
 
 export default function PaymentPage() {
   const navigate = useNavigate()
@@ -81,26 +82,7 @@ export default function PaymentPage() {
       <div className={styles.layout}>
         {/* 🟢 IZQUIERDA */}
         <div className={styles.left}>
-
-          {/* PRODUCTOS */}
-          <section className={styles.items}>
-            {order.items?.map(item => (
-              <div key={item.variantId} className={styles.item}>
-                <img className={styles.image} src={item.image} alt={item.productName} />
-                <div className={styles.info}>
-                  <p className={styles.name}>{item.productName}</p>
-                  <p className={styles.brand}>{item.brandName}</p>
-                  <p className={styles.sku}>{item.sku}</p>
-                  <div className={styles.colorSize}>
-                    <span>Color: <strong>{item.colorName}</strong></span>
-                    <span>Talla: <strong>{item.sizeName}</strong></span>
-                  </div>
-                  <p className={styles.quantity}>Cantidad: {item.quantity}</p>
-                </div>
-                <strong className={styles.price}>S/ {formatPrice(item.total)}</strong>
-              </div>
-            ))}
-          </section>
+          <OrderItemsList items={order.items} />
         </div>
 
         {/* 🟡 DERECHA */}

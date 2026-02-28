@@ -245,10 +245,11 @@ export default function ShippingPage() {
                     type="tel"
                     name="phone"
                     placeholder="Celular"
-                    size="large"
                     value={formData.phone}
-                    onChange={handleChange}
+                    maxLength={9}
+                    size="large"
                     required
+                    onChange={handleChange}
                   />
                 </div>
 
