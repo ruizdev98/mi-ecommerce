@@ -47,6 +47,7 @@ export default function CartPage() {
             items={cartItems}
             showQuantityControls
             showRemoveButton
+            showPrice
             onIncrease={(item) =>
               updateQuantity(item.variantId, item.quantity + 1)
             }
