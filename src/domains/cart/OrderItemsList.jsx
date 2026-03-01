@@ -42,19 +42,13 @@ export default function OrderItemsList({
                             <p className={styles.quantity}>Cantidad: {item.quantity}</p>
                         )}
                     </div>
-                    
+
                     {showQuantityControls && (
                         <div className={styles.qtyControls}>
                             <button onClick={() => onDecrease(item)}><FontAwesomeIcon icon={faMinus} /></button>
                             <span>{item.quantity}</span>
                             <button onClick={() => onIncrease(item)}><FontAwesomeIcon icon={faPlus} /></button>
                         </div>
-                    )}
-
-                    {showRemoveButton && (
-                        <button className={styles.removeBtn} onClick={() => onRemove(item)}>
-                            <FontAwesomeIcon icon={faTrash} />
-                        </button>
                     )}
 
                     {showPrice && (
@@ -69,6 +63,14 @@ export default function OrderItemsList({
                             </p>
                         </div>
                     )}
+
+                    {showRemoveButton && (
+                        <button className={styles.removeBtn} onClick={() => onRemove(item)}>
+                            <FontAwesomeIcon icon={faTrash} />
+                        </button>
+                    )}
+
+                    
                 </div>
             )
         })}
