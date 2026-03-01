@@ -47,7 +47,8 @@ export default function CartPage() {
             items={cartItems}
             showQuantityControls
             showRemoveButton
-            showPrice
+            getOriginalPrice={getItemOriginalTotal}
+            getFinalPrice={getItemTotalPrice}
             onIncrease={(item) =>
               updateQuantity(item.variantId, item.quantity + 1)
             }
