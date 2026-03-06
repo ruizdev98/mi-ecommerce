@@ -117,8 +117,8 @@
 
 @media (min-width: 768px) {
   .image {
-    width: 100%;
-    height: 15rem;
+    width: 70%;
+    height: 20rem;
   }
 }
 
