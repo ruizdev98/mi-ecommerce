@@ -7,8 +7,11 @@
   padding: 1rem 0;
   border-bottom: 0.1rem solid #ddd;
 }
+.imageContainer {
+  text-align: center;
+}
 .image {
-  width: 100%;
+  width: 50%;
   object-fit: cover;
   border-radius: 0.8rem;
 }

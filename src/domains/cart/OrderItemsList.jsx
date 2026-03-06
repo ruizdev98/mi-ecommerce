@@ -22,7 +22,9 @@ export default function OrderItemsList({
 
             return (
                 <div key={item.variantId} className={styles.item}>
-                    <img className={styles.image} src={item.image} alt={item.productName || item.name} />
+                    <picture className={styles.imageContainer}>
+                        <img className={styles.image} src={item.image} alt={item.productName || item.name} />
+                    </picture>
 
                     <div className={styles.info}>
                         <p className={styles.name}>{item.productName || item.name}</p>
