@@ -7,8 +7,6 @@ export default function OrderItemsList({
     items,
     showQuantityControls = false,
     showPrice = true,
-    getOriginalPrice,
-    getFinalPrice,
     onIncrease,
     onDecrease,
     onRemove,
@@ -19,8 +17,7 @@ export default function OrderItemsList({
   return (
     <section className={styles.items}>
         {items.map(item => {
-            const original = getOriginalPrice?.(item)
-            const final = getFinalPrice?.(item)
+
             const { total, originalTotal, hasDiscount } = getItemTotals(item)
 
             return (

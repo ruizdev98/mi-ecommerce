@@ -46,7 +46,6 @@ export default function CartPage() {
           <OrderItemsList
             items={cartItems}
             showQuantityControls
-            showRemoveButton
             getOriginalPrice={getItemOriginalTotal}
             getFinalPrice={getItemTotalPrice}
             onIncrease={(item) =>
