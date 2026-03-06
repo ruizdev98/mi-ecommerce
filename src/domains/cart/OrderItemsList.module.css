@@ -101,12 +101,12 @@
   .priceBlock {
     grid-column: 2 / 3;
   }
-  
   .qtyControls {
     grid-column: 1 / 2;
+    grid-row: 2 / 3;
   }
   .image {
-    width: 100%;
+    width: 70%;
     height: 15rem;
   }
 }
