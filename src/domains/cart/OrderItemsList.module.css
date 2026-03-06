@@ -46,7 +46,6 @@
 .verticalLine {
   border: 0.05rem solid;
 }
-
 .priceBlock {
   padding: 0 2rem;
   text-align: center;
@@ -58,14 +57,13 @@
 .price {
   font-weight: bold;
 }
-
 .qtyControls {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 0.7rem;
 }
-
 .buttonDI {
   padding: 0 2rem;
 }
@@ -78,11 +76,9 @@
   cursor: pointer;
   font-size: 1rem;
 }
-
 .buttonDI button:hover {
   background: #eee;
 }
-
 .removeBtn {
   background: none;
   border: none;
@@ -90,102 +86,31 @@
   font-size: 1.3rem;
   color: var(--color-secondary);
 }
-
 .removeBtn:hover {
   color: var(--color-accent);
 }
 
 /* --- Responsivo --- */
-@media (min-width: 1024px) {
+@media (min-width: 480px) {
   .item {
-    display: grid;
-    grid-template-columns: 0.2fr 1fr auto auto;
-    gap: 1rem;
-    align-items: center;
-    padding: 1rem 0;
-    border-bottom: 0.1rem solid #ddd;
+    grid-template-columns: 1fr 1fr;
   }
   .image {
-    width: 100%;
     height: 15rem;
-    object-fit: cover;
-    border-radius: 0.8rem;
   }
-  .name {
-    font-size: 1.6rem;
-    margin: 0;
-  }
-  .brand {
-    margin-bottom: 0.3rem;
-    font-size: 1.2rem;
-  }
-  .sku {
-    font-size: 1.2rem;
-    color: #A9A9A9;
-    margin-bottom: 0.3rem;
-  }
-  .colorSize {
-    display: flex;
-    gap: 1rem;
-  }
-  .colorSize span {
-    font-size: 1.2rem;
-    background-color: #dedede;
-    padding: 0.2rem 0.5rem;
-    border-radius: 0.5rem;
-  }
-  .quantity {
-    padding-top: 0.3rem;
-    font-size: 1.2rem;
-  }
+}
 
-  .verticalLine {
-    border: 0.05rem solid;
+/* --- Responsivo --- */
+@media (min-width: 1024px) {
+  .item {
+    grid-template-columns: 0.2fr 1fr auto auto;
   }
-
-  .priceBlock {
-    padding: 0 2rem;
+  .image {
+    height: 15rem;
   }
-  .originalPrice {
-    text-decoration: line-through;
-    color: #999;
-  }
-  .price {
-    font-weight: bold;
-  }
-
   .qtyControls {
-    display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: flex-end;
-    gap: 0.7rem;
-  }
-  .buttonDI {
-    padding: 0 2rem;
-  }
-  .buttonDI button {
-    width: 28px;
-    height: 28px;
-    border: 1px solid #aaa;
-    background: #fff;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1rem;
-  }
-
-  .buttonDI button:hover {
-    background: #eee;
-  }
-
-  .removeBtn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1.3rem;
-    color: var(--color-secondary);
-  }
-
-  .removeBtn:hover {
-    color: var(--color-accent);
   }
 }
