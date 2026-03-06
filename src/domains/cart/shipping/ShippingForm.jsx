@@ -213,16 +213,18 @@ export default function ShippingForm({onSubmit}) {
                 />
             ))}
 
+            <GeneralButton
+                type="submit"
+                size="large"
+                className={styles.continueBtn}
+                disabled={!isFormValid}
+            >
+                Continuar al pago →
+            </GeneralButton>
+
         </form>
 
-        <GeneralButton
-            type="submit"
-            size="large"
-            className={styles.continueBtn}
-            disabled={!isFormValid}
-        >
-            Continuar al pago →
-        </GeneralButton>
+        
 
     </div>
   )
