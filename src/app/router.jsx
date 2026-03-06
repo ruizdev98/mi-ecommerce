@@ -11,7 +11,7 @@ import RegisterPage from "@/pages/RegisterPage"
 
 // Checkout pages (dominio)
 import CartPage from "@/domains/cart/CartPage"
-import ShippingPage from "@/domains/cart/ShippingPage"
+import ShippingPage from "@/domains/cart/shipping/ShippingPage"
 import PaymentPage from "@/domains/cart/PaymentPage"
 
 // Páginas por dominio

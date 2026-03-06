@@ -1,7 +1,5 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
-import { useCartContext } from "@/core/context/CartContext"
 import { useNavigate } from 'react-router-dom'
+import { useCartContext } from "@/core/context/CartContext"
 import OrderItemsList from './OrderItemsList'
 import OrderSummary from './OrderSummary'
 import styles from './CartPage.module.css'
