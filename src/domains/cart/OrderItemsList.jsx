@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
-import { formatPrice } from '@/core/utils/pricing'
+import { getItemTotals, formatPrice } from '@/core/utils/pricing'
 import styles from './OrderItemsList.module.css'
 
 export default function OrderItemsList({ 
@@ -21,6 +21,7 @@ export default function OrderItemsList({
         {items.map(item => {
             const original = getOriginalPrice?.(item)
             const final = getFinalPrice?.(item)
+            const { total, originalTotal, hasDiscount } = getItemTotals(item)
 
             return (
                 <div key={item.variantId} className={styles.item}>
@@ -44,13 +45,14 @@ export default function OrderItemsList({
 
                     {showPrice && (
                         <div className={styles.priceBlock}>
-                            {original && final && original !== final && (
+                            {hasDiscount && (
                                 <p className={styles.originalPrice}>
-                                    S/ {original.toFixed(2)}
+                                    S/ {formatPrice(originalTotal)}
                                 </p>
                             )}
+
                             <p className={styles.price}>
-                                S/ {(final ?? item.total).toFixed(2)}
+                                S/ {formatPrice(total)}
                             </p>
                         </div>
                     )}

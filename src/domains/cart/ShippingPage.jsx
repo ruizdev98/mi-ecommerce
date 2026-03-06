@@ -242,7 +242,6 @@ export default function ShippingPage() {
                     }}
                   />
                   <InputField
-                    type="tel"
                     name="phone"
                     placeholder="Celular"
                     value={formData.phone}
