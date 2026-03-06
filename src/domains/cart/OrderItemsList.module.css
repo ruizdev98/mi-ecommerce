@@ -100,14 +100,18 @@
   }
   .priceBlock {
     grid-column: 2 / 3;
-  }
-  .qtyControls {
-    grid-column: 1 / 2;
     grid-row: 2 / 3;
   }
+  .qtyControls {
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+  }
+  .imageContainer {
+    grid-column: 1 / 2;
+    grid-row: 1 / 4;
+  }
   .image {
-    width: 70%;
-    height: 15rem;
+    width: 60%;
   }
 }
 
