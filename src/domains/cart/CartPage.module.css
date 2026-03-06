@@ -1,3 +1,11 @@
+.cartPage {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  /*padding: 2rem 4%;*/
+  min-height: 70vh;
+  align-items: start;
+}
 .cartPageEmpty {
   text-align: center;
   padding: 4rem 1rem;
@@ -26,10 +34,9 @@
 }
 
 /* --- Responsivo --- */
-@media (min-width: 900px) {
+@media (min-width: 1024px) {
 
-    .cartPage {
-    display: grid;
+  .cartPage {
     grid-template-columns: 2fr 1fr;
     gap: 4rem;
     padding: 2rem 4%;

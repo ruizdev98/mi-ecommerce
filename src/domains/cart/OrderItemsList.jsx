@@ -10,7 +10,7 @@ export default function OrderItemsList({
     onIncrease,
     onDecrease,
     onRemove,
-    }) {
+}) {
 
     if (!items?.length) return null
 
