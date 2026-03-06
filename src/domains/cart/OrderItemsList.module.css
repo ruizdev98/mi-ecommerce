@@ -9,7 +9,6 @@
 }
 .image {
   width: 100%;
-  height: 15rem;
   object-fit: cover;
   border-radius: 0.8rem;
 }
@@ -31,6 +30,7 @@
 }
 .colorSize {
   display: flex;
+  justify-content: center;
   gap: 1rem;
 }
 .colorSize span {
@@ -43,13 +43,13 @@
   padding-top: 0.3rem;
   font-size: 1.2rem;
 }
-
 .verticalLine {
   border: 0.05rem solid;
 }
 
 .priceBlock {
   padding: 0 2rem;
+  text-align: center;
 }
 .originalPrice {
   text-decoration: line-through;
@@ -62,9 +62,10 @@
 .qtyControls {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   gap: 0.7rem;
 }
+
 .buttonDI {
   padding: 0 2rem;
 }
