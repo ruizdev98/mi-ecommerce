@@ -116,21 +116,6 @@
 }
 
 @media (min-width: 768px) {
-  .item {
-    grid-template-columns: 0.2fr 1fr auto ;
-  }
-  .priceBlock {
-    grid-column: 3 / 4;
-    grid-row: 1 / 2;
-  }
-  .qtyControls {
-    grid-column: 3 / 4;
-    grid-row: 2 / 3;
-  }
-  .imageContainer {
-    grid-column: 1 / 2;
-    grid-row: 1 / 3;
-  }
   .image {
     width: 100%;
     height: 15rem;

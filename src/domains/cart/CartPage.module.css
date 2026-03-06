@@ -32,6 +32,12 @@
   top: 10rem;
 }
 
+@media (min-width: 768px) {
+  .cartPage {
+    grid-template-columns: 1fr auto;
+  }
+}
+
 /* --- Responsivo --- */
 @media (min-width: 1024px) {
 
