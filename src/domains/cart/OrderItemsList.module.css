@@ -39,11 +39,20 @@
   padding-top: 0.3rem;
   font-size: 1.2rem;
 }
-.price {
-  font-size: 1.4rem;
-}
+
 .verticalLine {
   border: 0.05rem solid;
+}
+
+.priceBlock {
+  padding: 0 2rem;
+}
+.originalPrice {
+  text-decoration: line-through;
+  color: #999;
+}
+.price {
+  font-weight: bold;
 }
 
 .qtyControls {
@@ -52,8 +61,10 @@
   justify-content: flex-end;
   gap: 0.7rem;
 }
-
-.qtyControls button {
+.buttonDI {
+  padding: 0 2rem;
+}
+.buttonDI button {
   width: 28px;
   height: 28px;
   border: 1px solid #aaa;
@@ -63,18 +74,8 @@
   font-size: 1rem;
 }
 
-.qtyControls button:hover {
+.buttonDI button:hover {
   background: #eee;
-}
-
-/* Precio + eliminar */
-.cartItemActions {
-  text-align: right;
-}
-
-.itemPrice {
-  font-weight: bold;
-  margin-bottom: 0.5rem;
 }
 
 .removeBtn {

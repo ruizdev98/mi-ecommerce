@@ -6,7 +6,6 @@ import styles from './OrderItemsList.module.css'
 export default function OrderItemsList({ 
     items,
     showQuantityControls = false,
-    showRemoveButton = false,
     showPrice = true,
     getOriginalPrice,
     getFinalPrice,
@@ -43,14 +42,6 @@ export default function OrderItemsList({
                         )}
                     </div>
 
-                    {showQuantityControls && (
-                        <div className={styles.qtyControls}>
-                            <button onClick={() => onDecrease(item)}><FontAwesomeIcon icon={faMinus} /></button>
-                            <span>{item.quantity}</span>
-                            <button onClick={() => onIncrease(item)}><FontAwesomeIcon icon={faPlus} /></button>
-                        </div>
-                    )}
-
                     {showPrice && (
                         <div className={styles.priceBlock}>
                             {original && final && original !== final && (
@@ -64,13 +55,18 @@ export default function OrderItemsList({
                         </div>
                     )}
 
-                    {showRemoveButton && (
-                        <button className={styles.removeBtn} onClick={() => onRemove(item)}>
-                            <FontAwesomeIcon icon={faTrash} />
-                        </button>
-                    )}
-
-                    
+                    {showQuantityControls && (
+                        <div className={styles.qtyControls}>
+                            <div className={styles.buttonDI}>
+                                <button onClick={() => onDecrease(item)}><FontAwesomeIcon icon={faMinus} /></button>
+                                <span> {item.quantity} </span>
+                                <button onClick={() => onIncrease(item)}><FontAwesomeIcon icon={faPlus} /></button>
+                            </div>
+                            <button className={styles.removeBtn} onClick={() => onRemove(item)}>
+                                <FontAwesomeIcon icon={faTrash} />
+                            </button>
+                        </div>
+                    )}                    
                 </div>
             )
         })}
