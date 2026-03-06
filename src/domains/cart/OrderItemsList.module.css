@@ -98,7 +98,15 @@
   .item {
     grid-template-columns: 1fr 1fr;
   }
+  .priceBlock {
+    grid-column: 2 / 3;
+  }
+  
+  .qtyControls {
+    grid-column: 1 / 2;
+  }
   .image {
+    width: 100%;
     height: 15rem;
   }
 }
