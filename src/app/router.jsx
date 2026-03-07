@@ -10,9 +10,9 @@ import LoginPage from "@/pages/LoginPage"
 import RegisterPage from "@/pages/RegisterPage"
 
 // Checkout pages (dominio)
-import CartPage from "@/domains/cart/CartPage"
-import ShippingPage from "@/domains/cart/shipping/ShippingPage"
-import PaymentPage from "@/domains/cart/PaymentPage"
+import CartPage from "@/domains/checkout/cart/CartPage"
+import ShippingPage from "@/domains/checkout/shipping/ShippingPage"
+import PaymentPage from "@/domains/checkout/payment/PaymentPage"
 
 // Páginas por dominio
 import CategoryPage from "@/domains/categories/pages/CategoryPage"

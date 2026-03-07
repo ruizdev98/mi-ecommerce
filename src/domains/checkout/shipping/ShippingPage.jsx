@@ -5,7 +5,7 @@ import { useCreateOrder } from "@/core/hooks/useCreateOrder"
 import { getFinalUnitPrice } from "@/core/utils/pricing"
 import DeliveryMethod from "./DeliveryMethod"
 import ShippingForm from "./ShippingForm"
-import OrderSummary from "../OrderSummary"
+import OrderSummary from "../ui/OrderSummary"
 import styles from "./ShippingPage.module.css"
 
 export default function ShippingPage() {
