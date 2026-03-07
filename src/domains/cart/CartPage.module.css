@@ -34,7 +34,7 @@
 
 @media (min-width: 768px) {
   .cartPage {
-    grid-template-columns: 1fr 0.5fr;
+    grid-template-columns: 1fr 0.8fr;
   }
 }
 
