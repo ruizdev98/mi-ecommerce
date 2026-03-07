@@ -125,15 +125,11 @@
 /* --- Responsivo --- */
 @media (min-width: 1024px) {
   .item {
-    grid-template-columns: 0.2fr 1fr auto auto;
+    grid-template-columns: 0.4fr 1fr auto auto;
   }
   .imageContainer {
     grid-column: 1 / 2;
     grid-row: 1 / 2;
-  }
-  .image {
-    width: 100%;
-    height: 15rem;
   }
   .info {
     grid-column: 2 / 3;
