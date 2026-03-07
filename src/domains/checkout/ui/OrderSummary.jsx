@@ -1,5 +1,5 @@
 import { getItemTotals, formatPrice } from '@/core/utils/pricing'
-import GeneralButton from '../../shared/ui/GeneralButton'
+import GeneralButton from '@/shared/ui/GeneralButton'
 import styles from './OrderSummary.module.css'
 
 export default function OrderSummary({
