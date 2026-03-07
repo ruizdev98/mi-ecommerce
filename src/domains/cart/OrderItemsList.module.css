@@ -111,12 +111,6 @@
     grid-row: 1 / 4;
   }
   .image {
-    width: 60%;
-  }
-}
-
-@media (min-width: 768px) {
-  .image {
     width: 100%;
   }
 }
