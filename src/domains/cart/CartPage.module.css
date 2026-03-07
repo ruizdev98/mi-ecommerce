@@ -44,7 +44,4 @@
     grid-template-columns: 2fr 1fr;
     align-items: start;
   }
-  .cartPage {
-    grid-template-columns: 1fr;
-  }
 }

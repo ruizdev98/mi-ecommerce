@@ -127,10 +127,17 @@
   .item {
     grid-template-columns: 0.2fr 1fr auto auto;
   }
+  .imageContainer {
+    grid-column: 1 / 2;
+  }
   .image {
     height: 15rem;
   }
+  .priceBlock {
+    grid-column: 2 / 3;
+  }
   .qtyControls {
+    grid-column: 3 / 4;
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
