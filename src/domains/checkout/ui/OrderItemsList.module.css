@@ -11,8 +11,8 @@
   text-align: center;
 }
 .image {
-  width: 50%;
-  height: 40vh;
+  width: 60%;
+  height: 35vh;
   object-fit: cover;
   border-radius: 0.8rem;
 }
