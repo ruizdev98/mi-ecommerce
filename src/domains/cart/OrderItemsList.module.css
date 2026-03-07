@@ -131,13 +131,15 @@
     grid-column: 1 / 2;
     grid-row: 1 / 2;
   }
+  .image {
+    height: 15rem;
+  }
   .info {
     grid-column: 2 / 3;
     grid-row: 1 / 2;
-    text-align: left;
   }
-  .image {
-    height: 15rem;
+  .info, .colorSize {
+    text-align: left;
   }
   .priceBlock {
     grid-column: 3 / 4;
