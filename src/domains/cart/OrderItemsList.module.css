@@ -137,9 +137,10 @@
   .info {
     grid-column: 2 / 3;
     grid-row: 1 / 2;
-  }
-  .info, .colorSize {
     text-align: left;
+  }
+  .colorSize {
+    justify-content: flex-start;
   }
   .priceBlock {
     grid-column: 3 / 4;
