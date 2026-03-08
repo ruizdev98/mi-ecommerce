@@ -58,7 +58,7 @@ export default function CartPage() {
           />
         </div>
 
-        <div className={styles.orderSummary}>
+        <div className={styles.orderSummaryContainer}>
           <OrderSummary
             cartItems={cartItems}
             totalItems={totalItems}

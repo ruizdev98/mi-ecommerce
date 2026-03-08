@@ -30,6 +30,10 @@ h2 {
   background: #333;
 }
 
+.orderSummaryContainer {
+  padding-bottom: 5rem;
+}
+
 
 @media (min-width: 768px) {
   .cartPage {
@@ -43,7 +47,8 @@ h2 {
     grid-template-columns: 2fr 1fr;
     align-items: start;
   }
-  .orderSummary {
+  .orderSummaryContainer {
+    padding-bottom: 0;
     position: sticky;
     top: 10rem;
   }
