@@ -102,8 +102,6 @@ export default function ShippingForm({onSubmit}) {
   return (
 
     <div>
-        <div className={styles.lineDivider}></div>
-
         <form 
             className={styles.shippingForm} 
             onSubmit={(e) => {
