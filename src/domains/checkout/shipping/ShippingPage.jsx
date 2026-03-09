@@ -91,8 +91,6 @@ export default function ShippingPage() {
             <ShippingForm onSubmit={handleCreateOrder} />
           )}
         </div>
-        
-        <div className={styles.lineDivider}></div>
 
         <aside className={styles.right}>
           <OrderSummary

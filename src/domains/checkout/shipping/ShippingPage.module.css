@@ -89,11 +89,6 @@
   border-color: var(--color-primary-hover);
 }
 
-.lineDivider {
-  height: 0.1rem;
-  background-color: #e5e5e5;
-}
-
 /* ===================== */
 /* FORMULARIO */
 /* ===================== */
