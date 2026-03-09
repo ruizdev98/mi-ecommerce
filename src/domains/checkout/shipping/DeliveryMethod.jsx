@@ -13,9 +13,9 @@ export default function DeliveryMethod({ deliveryMethod, setDeliveryMethod }) {
             className={`${styles.deliveryCard} ${isHomeDelivery ? styles.active : ""}`}
         >
             <input
-            type="radio"
-            checked={isHomeDelivery}
-            onChange={() => setDeliveryMethod("home")}
+                type="radio"
+                checked={isHomeDelivery}
+                onChange={() => setDeliveryMethod("home")}
             />
             <div className={styles.cardContent}>
                 <span className={styles.icon}><FontAwesomeIcon icon={faTruckFast} /></span>

@@ -109,7 +109,6 @@ export default function ShippingForm({onSubmit}) {
                 handleSubmit()
             }}
         >
-
             <div className={styles.formRow}>
                 {nameFields.map(field => (
                     <InputField
