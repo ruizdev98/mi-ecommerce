@@ -79,19 +79,17 @@ export default function ShippingPage() {
 
   return (
     <div className={`container`}>
+      <h2 className={styles.title}>Elige tu método de entrega</h2>
+      
       <div className={styles.checkout}>
         <div className={styles.left}>
-          <h1 className={styles.title}>Elige tu método de entrega</h1>
-
           <DeliveryMethod
             deliveryMethod={deliveryMethod}
             setDeliveryMethod={setDeliveryMethod}
           />
-
           {deliveryMethod === "home" && (
             <ShippingForm onSubmit={handleCreateOrder} />
           )}
-
         </div>
 
         <aside className={styles.right}>

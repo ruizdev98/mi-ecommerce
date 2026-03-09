@@ -6,6 +6,7 @@ h2 {
   grid-template-columns: 1fr;
   gap: 4rem;
   min-height: 70vh;
+  padding-bottom: 4rem;
 }
 .cartPageEmpty {
   text-align: center;
