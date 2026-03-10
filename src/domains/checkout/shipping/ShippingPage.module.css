@@ -81,6 +81,11 @@
 }
 
 /*********************** Form ***********************/
+.shippingForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
 .formRow {
   display: flex;
   flex-direction: column;
