@@ -105,9 +105,7 @@
   padding: 1rem;
   border-radius: 0.6rem;
   border-color: #ccc;
-}
-.selectID:focus, .selectUB:focus {
-  outline: var(--color-primary);
+  outline: none;
 }
 .selectUB {
   width: 100%;
