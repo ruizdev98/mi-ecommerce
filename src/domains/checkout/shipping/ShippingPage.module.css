@@ -94,21 +94,21 @@
 .shippingForm input {
   padding: 1rem;
   font-size: 1.4rem;
-  border: 1px solid #ccc;
+  border: #ccc;
 }
 .shippingForm input:focus {
   outline: none;
   border-color: var(--color-primary);
 }
-.selectID {
-  padding: 1rem;
-  border-radius: 0.6rem;
-}
-.selectUB {
-  width: 100%;
+.selectID, .selectUB {
   min-height: 5.2rem;
   padding: 1rem;
   border-radius: 0.6rem;
+  border-color: #ccc;
+  outline: var(--color-primary);
+}
+.selectUB {
+  width: 100%;
 }
 .right {
   position: sticky;
