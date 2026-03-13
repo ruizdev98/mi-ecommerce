@@ -115,6 +115,13 @@
   top: 10rem;
 }
 
+@media (min-width: 1024px) {
+  .checkout {
+    grid-template-columns: 2fr 1fr;
+    min-height: 70vh;
+  }
+}
+
 /* --- Responsivo --- */
 @media (min-width: 1024px) {
   .checkout {

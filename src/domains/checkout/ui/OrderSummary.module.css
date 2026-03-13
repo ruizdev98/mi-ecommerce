@@ -71,24 +71,25 @@
 }
 .row {
     display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     justify-content: space-between;
 }
 .priceBlock {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
 }
 
 .originalPrice {
-  text-decoration: line-through;
-  color: #999;
-  font-size: 1.2rem;
+    text-decoration: line-through;
+    color: #999;
+    font-size: 1.2rem;
 }
 .finalPrice {
-  font-weight: 700;
-  font-size: 1.3rem;
-  color: var(--color-secondary);
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--color-secondary);
 }
 
 .priceTotalTitle, .priceTotal {
@@ -97,4 +98,15 @@
 }
 .priceTotal {
     color: var(--color-secondary);
+}
+
+/* --- Responsivo --- */
+@media (min-width: 1024px) {
+    .row {
+        flex-direction: row;
+    }
+
+    .priceBlock {
+        align-items: flex-end;
+    }
 }
