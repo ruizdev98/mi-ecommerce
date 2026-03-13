@@ -116,14 +116,7 @@
     .row {
         flex-direction: row;
     }
-    .image {
-        flex: 1;
-    }
-    .info {
-        flex: 1;
-    }
     .priceBlock {
         align-items: flex-end;
-        flex: 1;
     }
 }
