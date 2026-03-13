@@ -115,7 +115,7 @@
   top: 10rem;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .checkout {
     grid-template-columns: 2fr 1fr;
     min-height: 70vh;
