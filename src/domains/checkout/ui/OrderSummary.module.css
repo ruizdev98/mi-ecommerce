@@ -101,12 +101,29 @@
 }
 
 /* --- Responsivo --- */
+@media (min-width: 768px) {
+    .image {
+        width: 100%;
+        flex: 1;
+    }
+    .info {
+        flex: 2;
+    }
+}
+
+/* --- Responsivo --- */
 @media (min-width: 1024px) {
     .row {
         flex-direction: row;
     }
-
+    .image {
+        flex: 1;
+    }
+    .info {
+        flex: 1;
+    }
     .priceBlock {
         align-items: flex-end;
+        flex: 1;
     }
 }

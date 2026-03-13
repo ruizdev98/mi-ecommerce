@@ -117,7 +117,8 @@
 
 @media (min-width: 768px) {
   .checkout {
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 2fr 1.5fr;
+    gap: 2rem;
     min-height: 70vh;
   }
 }
