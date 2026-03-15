@@ -81,8 +81,8 @@
 }
 
 .storeMap {
-  margin-top: 1rem;
-  border-radius: 10px;
+  padding-top: 2rem;
+  border-radius: 1rem;
   overflow: hidden;
 }
 /*********************** Form ***********************/

@@ -92,9 +92,10 @@ export default function ShippingPage() {
           ) : (
             <div>
               <div>
+                <p><strong>Dirección:</strong></p>
                 <p>Av. Francisco Bolognesi 302</p>
-                <p>Barranco</p>
-                <p>Horario de atención:</p>
+                <p>Barranco</p><br />
+                <p><strong>Horario de atención:</strong></p>
                 <p>Lunes a Viernes de 08:00am a 18:00pm.</p>
               </div>
               <div className={styles.storeMap}>
