@@ -80,6 +80,11 @@
   border-color: var(--color-primary-hover);
 }
 
+.storeMap {
+  margin-top: 1rem;
+  border-radius: 10px;
+  overflow: hidden;
+}
 /*********************** Form ***********************/
 .shippingForm {
   display: flex;
