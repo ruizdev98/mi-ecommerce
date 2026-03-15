@@ -75,11 +75,14 @@ export default function OrderSummary({
                     return (
                         
                         <div key={item.variantId} className={styles.item}>
-                            <img
-                                src={item.image}
-                                alt={item.name}
-                                className={styles.image}
-                            />
+                            <picture className={styles.imageContainer}>
+                                <img
+                                    src={item.image}
+                                    alt={item.name}
+                                    className={styles.image}
+                                />
+                            </picture>
+                            
                             <div className={styles.info}>
                                 <p className={styles.name}>{item.name}</p>
                                 <p className={styles.brand}>{item.brandName}</p>
