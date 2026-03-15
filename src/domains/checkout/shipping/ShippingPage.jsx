@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faClock, faLocationDot } from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useCartContext } from "@/core/context/CartContext"
@@ -92,11 +94,10 @@ export default function ShippingPage() {
           ) : (
             <div>
               <div>
-                <p><strong>Dirección:</strong></p>
-                <p>Av. Francisco Bolognesi 302</p>
-                <p>Barranco</p><br />
-                <p><strong>Horario de atención:</strong></p>
-                <p>Lunes a Viernes de 08:00am a 18:00pm.</p>
+                <p><FontAwesomeIcon icon={faLocationDot} className={styles.locationIcon} /><strong>Dirección:</strong></p>
+                <p>Av. Francisco Bolognesi 302, Barranco</p><br />
+                <p><FontAwesomeIcon icon={faClock} className={styles.clockIcon} /><strong>Horario de atención:</strong></p>
+                <p>Lunes a Viernes de 08:00am a 18:00pm.</p><br />
               </div>
               <div className={styles.storeMap}>
                 <iframe

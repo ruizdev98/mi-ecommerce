@@ -85,6 +85,10 @@
   border-radius: 1rem;
   overflow: hidden;
 }
+.locationIcon {
+  color: red;
+}
+
 /*********************** Form ***********************/
 .shippingForm {
   display: flex;
