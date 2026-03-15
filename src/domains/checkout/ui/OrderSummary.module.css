@@ -125,9 +125,6 @@
     .info {
         flex: 3;
     }
-    .row {
-        flex-direction: column;
-    }
     .priceBlock {
         align-items: flex-end;
     }
