@@ -108,13 +108,25 @@
         flex: 1;
     }
     .info {
-        flex: 3;
+        flex: 4;
+    }
+    .row {
+        flex-direction: row;
+    }
+    .priceBlock {
+        align-items: flex-end;
     }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
+    .imageContainer {
+        flex: 1;
+    }
+    .info {
+        flex: 3;
+    }
     .row {
-        flex-direction: row;
+        flex-direction: column;
     }
     .priceBlock {
         align-items: flex-end;
