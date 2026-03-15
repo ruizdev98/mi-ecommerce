@@ -87,8 +87,12 @@ export default function ShippingPage() {
             deliveryMethod={deliveryMethod}
             setDeliveryMethod={setDeliveryMethod}
           />
-          {deliveryMethod === "home" && (
+          {deliveryMethod === "home" ?  (
             <ShippingForm onSubmit={handleCreateOrder} />
+          ) : (
+            <div>
+              <p>Av. Francisco Bolognesi 302, Barranco</p>
+            </div>
           )}
         </div>
 
