@@ -86,9 +86,11 @@
   overflow: hidden;
 }
 .locationIcon {
-  color: red;
+  color: #e60023;
 }
-
+.clockIcon {
+  color: var(--gray-600);
+}
 /*********************** Form ***********************/
 .shippingForm {
   display: flex;

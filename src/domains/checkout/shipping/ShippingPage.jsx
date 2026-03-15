@@ -94,9 +94,9 @@ export default function ShippingPage() {
           ) : (
             <div>
               <div>
-                <p><FontAwesomeIcon icon={faLocationDot} className={styles.locationIcon} /><strong>Dirección:</strong></p>
+                <p><FontAwesomeIcon icon={faLocationDot} className={styles.locationIcon} /> <strong>Dirección:</strong></p>
                 <p>Av. Francisco Bolognesi 302, Barranco</p><br />
-                <p><FontAwesomeIcon icon={faClock} className={styles.clockIcon} /><strong>Horario de atención:</strong></p>
+                <p><FontAwesomeIcon icon={faClock} className={styles.clockIcon} /> <strong>Horario de atención:</strong></p>
                 <p>Lunes a Viernes de 08:00am a 18:00pm.</p><br />
               </div>
               <div className={styles.storeMap}>
