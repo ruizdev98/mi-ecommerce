@@ -89,6 +89,7 @@
 .clockIcon {
   color: var(--gray-600);
 }
+
 /*********************** Form ***********************/
 .shippingForm {
   display: flex;
@@ -132,7 +133,6 @@
   }
 }
 
-/* --- Responsivo --- */
 @media (min-width: 1024px) {
   .checkout {
     grid-template-columns: 2fr 1fr;
