@@ -8,6 +8,7 @@ import { getFinalUnitPrice } from "@/core/utils/pricing"
 import DeliveryMethod from "./DeliveryMethod"
 import ShippingForm from "./ShippingForm"
 import OrderSummary from "../ui/OrderSummary"
+import GeneralButton from "@/shared/ui/GeneralButton"
 import styles from "./ShippingPage.module.css"
 
 export default function ShippingPage() {
