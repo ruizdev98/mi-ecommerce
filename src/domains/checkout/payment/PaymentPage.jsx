@@ -3,6 +3,7 @@ import { faPhone } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useCartContext } from '@/core/context/CartContext'
+import { getAuth, onAuthStateChanged } from "firebase/auth"
 import OrderItemsList from '../ui/OrderItemsList'
 import OrderSummary from '../ui/OrderSummary'
 import api from '@/core/api/api'
@@ -17,19 +18,24 @@ export default function PaymentPage() {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    const fetchOrder = async () => {
+    const auth = getAuth()
+
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (!user || !orderId) return
+
       try {
         const { data } = await api.get(`/orders/${orderId}`)
         setOrder(data)
       } catch (error) {
         console.error(error)
-        navigate("/")
+        setError("No se pudo cargar la orden")
       } finally {
         setLoading(false)
       }
-    }
-    if (orderId) fetchOrder()
-  }, [orderId, navigate])
+    })
+
+    return () => unsubscribe()
+  }, [orderId])
 
   // 🟢 PAGAR (luego conectamos pasarela)
   const handlePay = async () => {
