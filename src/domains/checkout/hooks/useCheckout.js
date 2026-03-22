@@ -28,7 +28,7 @@ export function useCheckout() {
       const quantity = Number(item.quantity) || 1
 
       return {
-        productId: Number(item.productId ?? item.id) || 0,
+        productId: Number(item.productId) ?? null,
         variantId: Number(item.variantId) || 0,
         productName: item.name || '',
         unitPrice,

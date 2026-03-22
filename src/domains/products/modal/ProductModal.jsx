@@ -42,6 +42,7 @@ export default function ProductVariantModal({ product, onClose }) {
     }
 
     addToCart({
+      productId: product.id,
       variantId: selectedVariant.id,
       quantity: 1,
       image: product.image,

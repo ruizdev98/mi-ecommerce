@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import api from '@/core/api/api'
 
-//const API = 'http://localhost:4000/api/cart'
 const API = 'https://ecommerce-api-he4w.onrender.com/api/cart'
 
 // GET carrito del backend
@@ -20,17 +19,30 @@ const saveCart = async (userId, cart) => {
     cart.forEach(item => {
       if (!item.variantId) return
       if (!normalized[item.variantId]) {
-        normalized[item.variantId] = { ...item }
-        normalized[item.variantId].quantity = 0
+        normalized[item.variantId] = {
+          variantId: item.variantId,
+          quantity: 0,
+          productId: item.productId ?? null // ✅ aseguramos productId
+        }
       }
       normalized[item.variantId].quantity += item.quantity
     })
     const filtered = Object.values(normalized)
 
+    // 🔥 Enviar solo lo necesario
+    const payload = {
+      userId,
+      items: filtered.map(item => ({
+        variantId: item.variantId,
+        quantity: item.quantity,
+        productId: item.productId
+      }))
+    }
+
     const res = await fetch(API, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId, items: filtered }),
+      body: JSON.stringify({ payload }),
     })
 
     if (!res.ok) {
