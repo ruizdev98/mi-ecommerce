@@ -3,16 +3,19 @@ import api from '@/core/api/api'
 
 const API = 'https://ecommerce-api-he4w.onrender.com/api/cart'
 
-// GET carrito del backend
-const fetchCart = async (userId) => {
-  const res = await fetch(`${API}?userId=${userId}`)
-  if (!res.ok) return []
-  const data = await res.json()
-  return data.cart?.items ?? []
+/* ================= GET CART ================= */
+const fetchCart = async () => {
+  try {
+    const { data } = await api.get("/cart")
+    return data.cart?.items ?? []
+  } catch (error) {
+    console.error("❌ Error fetchCart:", error)
+    return []
+  }
 }
 
 // PUT carrito al backend
-const saveCart = async (userId, cart) => {
+const saveCart = async (cart) => {
   try {
     // 🔹 Normalizar duplicados
     const normalized = {}
@@ -22,65 +25,41 @@ const saveCart = async (userId, cart) => {
         normalized[item.variantId] = {
           variantId: item.variantId,
           quantity: 0,
-          productId: item.productId ?? null // ✅ aseguramos productId
+          productId: item.productId ?? null
         }
       }
       normalized[item.variantId].quantity += item.quantity
     })
-    const filtered = Object.values(normalized)
+    const items = Object.values(normalized)
 
-    // 🔥 Enviar solo lo necesario
-    const payload = {
-      userId,
-      items: filtered.map(item => ({
+    const { data } = await api.put("/cart", {
+      items: items.map(item => ({
         variantId: item.variantId,
         quantity: item.quantity,
         productId: item.productId
       }))
-    }
-
-    const res = await fetch(API, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ payload }),
     })
 
-    if (!res.ok) {
-      const text = await res.text()
-      console.error("❌ Error al guardar carrito:", text)
-      throw new Error(text)
-    }
-
-    const data = await res.json()
-    return data.cart?.items ?? [] // 🔹 devolvemos el carrito actualizado
+    return data.cart?.items ?? []
     
   } catch (err) {
-    console.error("❌ saveCart catch:", err)
+    console.error("❌ saveCart:", err)
     return null
   }
 }
 
 export const useCart = () => {
-  const [userId, setUserId] = useState(() => localStorage.getItem("userId"))
   const [cartItems, setCartItems] = useState([])
   const [loading, setLoading] = useState(true)
-  const [isLoggingIn, setIsLoggingIn] = useState(false)
   const [hasPendingOrder, setHasPendingOrder] = useState(false)
 
-  // ✅ Cargar carrito
+  /* ================= LOAD CART ================= */
   useEffect(() => {
-    if (isLoggingIn) return
-
     async function loadCart() {
       setLoading(true)
       try {
-        if (userId) {
-          const backendCart = await fetchCart(userId)
-          setCartItems(backendCart)
-        } else {
-          const guestCart = JSON.parse(localStorage.getItem("cart") || "[]")
-          setCartItems(guestCart)
-        }
+        const backendCart = await fetchCart()
+        setCartItems(backendCart)
       } catch (error) {
         console.error("❌ Error cargando carrito:", error)
         setCartItems([])
@@ -89,15 +68,9 @@ export const useCart = () => {
       }
     }
     loadCart()
-  }, [userId, isLoggingIn])
+  }, [])
 
-  // ✅ 2️⃣ Guardar en localStorage solo si es invitado
-  useEffect(() => {
-    if (!userId) {
-      localStorage.setItem("cart", JSON.stringify(cartItems))
-    }
-  }, [cartItems, userId])
-
+  /* ================= PENDING ORDER ================= */
   const checkPendingOrder = async () => {
     try {
       const { data } = await api.get("/orders/pending")
@@ -108,18 +81,11 @@ export const useCart = () => {
       return false
     }
   }
-
   useEffect(() => {
-    if (!userId) {
-      setHasPendingOrder(false)
-      return
-    }
     checkPendingOrder()
-  }, [userId])
+  }, [])
 
-  // -----------------------------
-  // Funciones del carrito
-  // -----------------------------
+  /* ================= LOAD CART ================= */
   const addToCart = async (item) => {
     if (hasPendingOrder) {
       alert("Tienes una compra pendiente. Finalízala o cancélala para seguir comprando.")
@@ -174,13 +140,11 @@ export const useCart = () => {
 
   const clearCart = async () => {
     setCartItems([])
-    localStorage.removeItem("cart")
-    if (userId) {
-      await saveCart(userId, [])
-    }
-    setHasPendingOrder(false) // 🔥 IMPORTANTE
+    await saveCart([])
+    setHasPendingOrder(false)
   }
-
+  
+  /* ================= PRICE HELPERS ================= */
   const getItemTotalPrice = (item) => {
     // Precio por unidad
     const unitPrice = item.promoNote
