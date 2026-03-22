@@ -79,15 +79,15 @@
 .deliveryCard:hover {
   border-color: var(--color-primary-hover);
 }
-
-.storeMap {
-  overflow: hidden;
-}
 .locationIcon {
   color: #e60023;
 }
 .clockIcon {
   color: var(--gray-600);
+}
+.storeMap {
+  overflow: hidden;
+  padding-bottom: 2rem;
 }
 
 /*********************** Form ***********************/
