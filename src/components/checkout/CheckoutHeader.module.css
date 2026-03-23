@@ -19,6 +19,7 @@
 .stepWrapper {
   display: flex;
   align-items: center;
+  max-width: 25rem;
 }
 .stepWrapper:not(:last-child) {
   flex: 1;
