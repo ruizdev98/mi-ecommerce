@@ -5,6 +5,7 @@ import ParallaxBanner from '@/shared/ui/ParallaxBanner'
 import ProductSection from '@/domains/products/section/ProductSection'
 import BlogSection from '@/domains/blogs/ui/BlogSection'
 import BrandsSection from '@/domains/brands/ui/BrandsSection'
+import FloatingCartButton from '@/shared/ui/FloatingCartButton'
 
 export default function HomePage() {
   const {
