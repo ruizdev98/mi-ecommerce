@@ -1,12 +1,13 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBagShopping } from '@fortawesome/free-solid-svg-icons'
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 import { useCartContext } from "@/core/context/CartContext"
 import useIsMobile from "@/core/hooks/useIsMobile"
 import styles from "./FloatingCartButton.module.css"
 
 export default function FloatingCartButton() {
     const navigate = useNavigate()
+    const { pathname } = useLocation()
     const { totalItems } = useCartContext()
     const isMobile = useIsMobile()
 
