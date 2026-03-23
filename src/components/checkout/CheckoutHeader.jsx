@@ -8,9 +8,9 @@ export default function CheckoutHeader() {
   const { pathname } = useLocation()
 
   const steps = [
-      { id: 1, label: "Carrito", path: "/carrito" },
-      { id: 2, label: "Entrega", path: "/shipping" },
-      { id: 3, label: "Pago", path: "/payment" },
+      { id: 1, label: "Carrito", path: "/checkout/cart" },
+      { id: 2, label: "Entrega", path: "/checkout/shipping" },
+      { id: 3, label: "Pago", path: "/checkout/payment" },
   ]
 
   const currentStep = steps.find(step => pathname.includes(step.path))?.id || 1

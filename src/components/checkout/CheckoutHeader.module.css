@@ -14,7 +14,6 @@
 }
 .steps {
   display: flex;
-  gap: 4rem;
   align-items: center;
 }
 .step {
@@ -68,8 +67,8 @@
 @media (min-width: 1024px) {
   .top {
     flex-direction: row;
-    position: relative;
     gap: 0;
+    position: relative;
   }
   .steps {
     position: absolute;
