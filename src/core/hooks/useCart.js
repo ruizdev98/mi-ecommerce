@@ -167,35 +167,42 @@ export const useCart = () => {
   // -----------------------------
   // 3️⃣ Login: fusionar carrito invitado con backend
   // -----------------------------
-  const handleLogin = async (newUserId) => {
+  const handleLogin = async () => {
     setIsLoggingIn(true)
-    // Solo fusionar si hay productos en localStorage
-    const localCart = JSON.parse(localStorage.getItem("cart") || "[]")
-    if (localCart.length === 0) {
-      setUserId(newUserId)
-      return
+
+    try {
+      const localCart = JSON.parse(localStorage.getItem("cart") || "[]")
+
+      if (localCart.length === 0) return
+
+      // 🔥 obtener carrito actual del backend (con token)
+      const backendCart = await fetchCart()
+
+      const mergedCart = [...backendCart]
+
+      localCart.forEach(localItem => {
+        const existing = mergedCart.find(i => i.variantId === localItem.variantId)
+
+        if (existing) {
+          existing.quantity += localItem.quantity
+        } else {
+          mergedCart.push(localItem)
+        }
+      })
+
+      // 🔥 guardar SIN userId
+      await saveCart(mergedCart)
+
+      const updatedCart = await fetchCart()
+      setCartItems(updatedCart)
+
+      localStorage.removeItem("cart")
+
+    } catch (error) {
+      console.error("❌ Error fusionando carrito:", error)
+    } finally {
+      setIsLoggingIn(false)
     }
-
-    const backendCart = await fetchCart(newUserId)
-    const mergedCart = [...backendCart]
-
-    localCart.forEach(localItem => {
-      const existing = mergedCart.find(i => i.variantId === localItem.variantId)
-      if (existing) {
-        existing.quantity += localItem.quantity
-      } else {
-        mergedCart.push(localItem)
-      }
-    })
-
-    const savedCart = await saveCart(newUserId, mergedCart)
-    
-    // Actualizamos el hook y eliminamos localStorage
-    setCartItems(savedCart)
-    setUserId(newUserId)
-    localStorage.removeItem("cart")
-
-    setIsLoggingIn(false)
   }
 
   const subtotal = cartItems.reduce(
@@ -229,7 +236,6 @@ export const useCart = () => {
     totalDiscount,
     getItemTotalPrice,
     getItemOriginalTotal,
-    setUserId,
     clearCart,
     handleLogin,
   }

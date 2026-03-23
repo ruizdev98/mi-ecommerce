@@ -9,17 +9,17 @@ export const CartProvider = ({ children }) => {
   const { user } = useAuth(); // user puede ser null o { uid, ... }
   const cart = useCart();
  
-  // 🔹 Efecto para detectar cambios de sesión
+  // 🔥 Solo reaccionamos al login/logout
   useEffect(() => {
-    if (user?.uid) {
-      // Usuario inicia sesión → actualizar userId en useCart
-      cart.setUserId(user.uid)
-      // useCart se encargará de fusionar carrito local con backend
-    } else {
-      // Usuario cierra sesión → limpiar carrito
+    if (!user) {
+      // Usuario cerró sesión → limpiar carrito
       cart.clearCart()
+    } else {
+      // Usuario logueado → recargar carrito desde backend
+      // (opcional pero recomendado)
+      cart.checkPendingOrder()
     }
-  }, [user]);
+  }, [user])
 
   return (
     <CartContext.Provider value={cart}>

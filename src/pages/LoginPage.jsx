@@ -26,7 +26,7 @@ export default function LoginPage() {
     try {
       const user = await login(email, password)
       console.log('Usuario logueado:', user)
-      await handleLogin(user.uid)
+      await handleLogin()
       navigate("/")
     } catch (err) {
       console.error("Error login:", err)
@@ -50,7 +50,7 @@ export default function LoginPage() {
     try {
       const user = await loginWithFacebook()
       console.log("Usuario logueado con Facebook:", user)
-      await handleLogin(user.uid)
+      await handleLogin()
       navigate("/")
     } catch (err) {
       console.error("Error loginWithFacebook:", err)
@@ -65,13 +65,13 @@ export default function LoginPage() {
     try {
       const user = await loginWithGoogle()
       console.log("Usuario logueado con Google:", user)
-      await handleLogin(user.uid)
+      await handleLogin()
       navigate("/")
     } catch (err) {
       console.error("Error loginWithGoogle:", err)
       alert("Error iniciando sesión con Google. Intenta nuevamente.")
     } finally {
-      setLoadingFacebook(false)
+      setLoadingGoogle(false)
     }
   }
 
