@@ -67,6 +67,15 @@
 }
 
 @media (min-width: 768px) {
+  .label {
+    font-size: 1.3rem;
+  }
+  .dottedLine {
+    margin: 0 1rem;
+  }
+}
+
+@media (min-width: 768px) {
   .top {
     flex-direction: row;
     justify-content: flex-start;
@@ -82,12 +91,6 @@
   .stepWrapper {
     flex: 0 0 auto;
   }
-  .label {
-    font-size: 1.3rem;
-  }
-}
-
-@media (min-width: 768px) {
   .dottedLine {
     width: 60px;
     flex: none;
