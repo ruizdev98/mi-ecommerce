@@ -15,12 +15,16 @@ export default function CheckoutHeader() {
 
   const currentStep = steps.find(step => pathname.includes(step.path))?.id || 1
 
-  const canGoBack = (stepId) => {
-    return currentStep === 2 && stepId < currentStep
+  const canNavigate = (stepId) => {
+    // Avanzar SOLO al siguiente paso
+    if (stepId === currentStep + 1) return true
+    // Retroceder SOLO desde entrega → carrito
+    if (currentStep === 2 && stepId < currentStep) return true
+    return false
   }
 
   const handleClick = (step) => {
-    if (canGoBack(step.id)) {
+    if (canNavigate(step.id)) {
       navigate(step.path)
     }
   }
