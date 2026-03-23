@@ -113,16 +113,16 @@ export default function PaymentPage() {
               <h3 className={styles.cardTitle}>Dirección de Entrega</h3>
               <div className={styles.divider} />
               <p className={styles.userName}>{order.shipping?.name} {order.shipping?.lastname}</p>
-              <p className={styles.userAddress}>Dirección: {order.shipping?.address}</p>
-              <p className={styles.userReference}>Referencia: {order.shipping?.reference}</p>
+              <p className={styles.userAddress}><strong>Dirección:</strong> {order.shipping?.address}</p>
+              <p className={styles.userReference}><strong>Referencia:</strong> {order.shipping?.reference}</p>
               <p className={styles.userPhone}><FontAwesomeIcon icon={faPhone} />{order.shipping?.phone}</p>
             </section>
           ):(
             <section className={styles.card}>
               <h3 className={styles.cardTitle}>Retiro en tienda</h3>
               <div className={styles.divider} />
-              <p className={styles.userAddress}>Dirección: Av. Francisco Bolognesi 302, Barranco.</p>
-              <p className={styles.userReference}>Horario de atención: Lun a Vie 08:00 - 18:00hrs</p>
+              <p className={styles.userAddress}><strong>Dirección:</strong> Av. Francisco Bolognesi 302, Barranco.</p>
+              <p className={styles.userReference}><strong>Horario de atención:</strong> Lun a Vie 08:00 - 18:00hrs</p>
             </section>
           )}
           
