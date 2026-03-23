@@ -39,7 +39,7 @@ export default function CheckoutHeader() {
         <div className={styles.steps}>
           {steps.map((step, index) => {
             const isActive = step.id <= currentStep
-            const isClickable = canGoBack(step.id)
+            const isClickable = canNavigate(step.id)
 
             return (
               <div key={step.id} className={styles.stepWrapper}>
