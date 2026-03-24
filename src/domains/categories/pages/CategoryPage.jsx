@@ -1,5 +1,6 @@
-import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
+import api from "@/core/api/api"
 import ProductSection from "@/domains/products/section/ProductSection"
 import styles from "./CategoryPage.module.css"
 
