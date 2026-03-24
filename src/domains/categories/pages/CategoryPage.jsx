@@ -28,9 +28,7 @@ export default function CategoryPage() {
     <section className={`container ${styles.category}`}>
       
       {/* 🔥 TÍTULO */}
-      <h2 className={styles.title}>
-        {currentCategory?.name || "Categoría"}
-      </h2>
+      <h2 className={styles.title}>Categoría</h2>
         <ProductSection title="Productos" products={filteredProducts} />
     </section>
   )
