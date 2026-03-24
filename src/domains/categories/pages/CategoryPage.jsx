@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import { capitalizeFirstLetter } from "@/core/utils/textFormat"
 import api from "@/core/api/api"
 import ProductSection from "@/domains/products/section/ProductSection"
 import styles from "./CategoryPage.module.css"
@@ -26,11 +27,10 @@ export default function CategoryPage() {
   if (loading) return <p className={styles.loading}>Cargando...</p>
 
   // 🔥 obtener nombre dinámico
-  const categoryName = products[0]?.categoryName || "Categoría"
+  const categoryName = capitalizeFirstLetter(products[0]?.categoryName || "Categoría")
   
   return (
     <section className={`container ${styles.category}`}>
-      <h2 className={styles.title}>Categoría</h2>
       <ProductSection title={categoryName} products={products} />
     </section>
   )
