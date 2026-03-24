@@ -10,7 +10,7 @@ export default function CategoryPage() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const { data } = await api.get(`/products/category/${categoryId}`)
+        const { data } = await api.get(`/products/categories/${categoryId}`)
         setProducts(data)
       } catch (error) {
         console.error(error)
