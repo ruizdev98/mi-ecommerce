@@ -1,0 +1,21 @@
+.category {
+  padding: 2rem 0;
+}
+
+.title {
+  font-size: 2.4rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  text-transform: capitalize;
+}
+
+.loading {
+  text-align: center;
+  padding: 3rem;
+}
+
+.empty {
+  text-align: center;
+  color: #777;
+  font-size: 1.4rem;
+}
