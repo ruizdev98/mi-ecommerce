@@ -33,7 +33,7 @@ const router = createBrowserRouter([
       { path: "register", element: <RegisterPage /> },
 
       // Rutas dinámicas
-      { path: "categories/:categoryId", element: <CategoryPage /> },
+      { path: "category/:categoryId", element: <CategoryPage /> },
       { path: "products/:productId", element: <ProductDetailPage /> },
     ],
   },
