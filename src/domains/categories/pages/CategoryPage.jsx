@@ -25,12 +25,13 @@ export default function CategoryPage() {
 
   if (loading) return <p className={styles.loading}>Cargando...</p>
 
+  // 🔥 obtener nombre dinámico
+  const categoryName = products[0]?.categoryName || "Categoría"
+  
   return (
     <section className={`container ${styles.category}`}>
-      
-      {/* 🔥 TÍTULO */}
       <h2 className={styles.title}>Categoría</h2>
-        <ProductSection title="Productos" products={products} />
+      <ProductSection title={categoryName} products={products} />
     </section>
   )
 }
