@@ -19,7 +19,6 @@ export default function CategoryPage() {
         setLoading(false)
       }
     }
-
     fetchProducts()
   }, [categoryId])
 
