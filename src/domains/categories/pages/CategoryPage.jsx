@@ -29,7 +29,7 @@ export default function CategoryPage() {
       
       {/* 🔥 TÍTULO */}
       <h2 className={styles.title}>Categoría</h2>
-        <ProductSection title="Productos" products={filteredProducts} />
+        <ProductSection title="Productos" products={products} />
     </section>
   )
 }
