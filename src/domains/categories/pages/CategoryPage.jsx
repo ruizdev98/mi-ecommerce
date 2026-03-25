@@ -87,7 +87,6 @@ export default function CategoryPage() {
       max: priceRange.max
     })
   }
-
   // 🔥 limpiar filtros
   const clearFilters = () => {
     setSelectedBrands([])
