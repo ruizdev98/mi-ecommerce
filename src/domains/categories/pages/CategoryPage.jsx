@@ -11,27 +11,33 @@ export default function CategoryPage() {
   const [loading, setLoading] = useState(true)
   const [selectedBrands, setSelectedBrands] = useState([])
   const [priceRange, setPriceRange] = useState({ min: "", max: "" })
+  const [appliedFilters, setAppliedFilters] = useState({
+    brands: [],
+    min: "",
+    max: ""
+  })
 
+  // 🔥 fetch con filtros aplicados
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const params = new URLSearchParams()
 
-        // 🔥 categoría siempre
+        // categoría siempre
         params.append("category", categoryId)
 
-        // 🔥 marca (solo una por ahora)
-        if (selectedBrands.length > 0) {
-          params.append("brand", selectedBrands[0])
+        // marca
+        if (appliedFilters.brands.length > 0) {
+          params.append("brand", appliedFilters.brands[0])
         }
 
-        // 🔥 precios
-        if (priceRange.min) {
-          params.append("minPrice", priceRange.min)
+        // precio
+        if (appliedFilters.min) {
+          params.append("minPrice", appliedFilters.min)
         }
 
-        if (priceRange.max) {
-          params.append("maxPrice", priceRange.max)
+        if (appliedFilters.max) {
+          params.append("maxPrice", appliedFilters.max)
         }
 
         const { data } = await api.get(`/products?${params.toString()}`)
@@ -45,7 +51,7 @@ export default function CategoryPage() {
     }
 
     fetchProducts()
-  }, [categoryId, selectedBrands, priceRange])
+  }, [categoryId, appliedFilters])
 
   if (loading) return <p className={styles.loading}>Cargando...</p>
 
@@ -60,18 +66,40 @@ export default function CategoryPage() {
         : [brand] // 🔥 una sola marca por ahora
     )
   }
+
+  // 🔥 aplicar filtros
+  const applyFilters = () => {
+    setAppliedFilters({
+      brands: selectedBrands,
+      min: priceRange.min,
+      max: priceRange.max
+    })
+  }
+
+  // 🔥 limpiar filtros
+  const clearFilters = () => {
+    setSelectedBrands([])
+    setPriceRange({ min: "", max: "" })
+
+    setAppliedFilters({
+      brands: [],
+      min: "",
+      max: ""
+    })
+  }
   
   return (
-    <div>
+    <div className={`container ${styles.category}`}>
       {/* 🔥 SIDEBAR */}
       <aside className={styles.filters}>
         <h3>Filtros</h3>
 
         {/* MARCAS */}
-        <div>
-          <p>Marca</p>
+        <div className={styles.filterBlock}>
+          <p className={styles.filterTitle}>Marca</p>
+
           {brands.map(brand => (
-            <label key={brand}>
+            <label key={brand} className={styles.checkbox}>
               <input
                 type="checkbox"
                 checked={selectedBrands.includes(brand)}
@@ -83,8 +111,8 @@ export default function CategoryPage() {
         </div>
 
         {/* PRECIO */}
-        <div>
-          <p>Precio</p>
+        <div className={styles.filterBlock}>
+          <p className={styles.filterTitle}>Precio</p>
 
           <input
             type="number"
@@ -104,11 +132,24 @@ export default function CategoryPage() {
             }
           />
         </div>
+
+        {/* 🔥 BOTONES */}
+        <div className={styles.filterActions}>
+          <button onClick={applyFilters} className={styles.applyBtn}>
+            Aplicar filtros
+          </button>
+
+          <button onClick={clearFilters} className={styles.clearBtn}>
+            Limpiar
+          </button>
+        </div>
       </aside>
-      <div className={`container ${styles.category}`}>
+
+      {/* 🔥 PRODUCTOS */}
+      <div className={styles.products}>
         <ProductSection title={categoryName} products={products} />
       </div>
+
     </div>
-    
   )
 }
