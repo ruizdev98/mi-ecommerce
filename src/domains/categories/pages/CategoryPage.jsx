@@ -8,6 +8,7 @@ import styles from "./CategoryPage.module.css"
 export default function CategoryPage() {
   const { categoryId } = useParams()
   const [products, setProducts] = useState([])
+  const [brands, setBrands] = useState([])
   const [loading, setLoading] = useState(true)
   const [selectedBrands, setSelectedBrands] = useState([])
   const [priceRange, setPriceRange] = useState({ min: "", max: "" })
@@ -17,21 +18,33 @@ export default function CategoryPage() {
     max: ""
   })
 
-  // 🔥 fetch con filtros aplicados
+  // 🔥 1. TRAER FILTROS (MARCAS)
+  useEffect(() => {
+    const fetchFilters = async () => {
+      try {
+        const { data } = await api.get(`/products/filters?category=${categoryId}`)
+        setBrands(data.brands)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    fetchFilters()
+  }, [categoryId])
+
+  // 🔥 2. TRAER PRODUCTOS CON FILTROS
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const params = new URLSearchParams()
+        setLoading(true)
 
-        // categoría siempre
+        const params = new URLSearchParams()
         params.append("category", categoryId)
 
-        // marca
         if (appliedFilters.brands.length > 0) {
           params.append("brand", appliedFilters.brands[0])
         }
 
-        // precio
         if (appliedFilters.min) {
           params.append("minPrice", appliedFilters.min)
         }
@@ -57,7 +70,6 @@ export default function CategoryPage() {
 
   // 🔥 obtener nombre dinámico
   const categoryName = capitalizeFirstLetter(products[0]?.categoryName || "Categoría")
-  const brands = [...new Set(products.map(p => p.brandName))]
 
   const toggleBrand = (brand) => {
     setSelectedBrands(prev =>
