@@ -19,3 +19,18 @@
   color: #777;
   font-size: 1.4rem;
 }
+
+.layout {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 2rem;
+}
+
+.filters {
+  border-right: 1px solid #eee;
+  padding-right: 1rem;
+}
+
+.products {
+  width: 100%;
+}
