@@ -66,8 +66,6 @@ export default function CategoryPage() {
     fetchProducts()
   }, [categoryId, appliedFilters])
 
-  if (loading) return <p className={styles.loading}>Cargando...</p>
-
   // 🔥 obtener nombre dinámico
   const categoryName = capitalizeFirstLetter(products[0]?.categoryName || "Categoría")
 
@@ -156,9 +154,17 @@ export default function CategoryPage() {
         </div>
       </aside>
 
-      {/* 🔥 PRODUCTOS */}
+      {/* PRODUCTOS */}
       <div className={styles.products}>
-        <ProductSection title={categoryName} products={products} />
+        {loading ? (
+          <p className={styles.loading}>Cargando...</p>
+        ) : (
+          products.length === 0 ? (
+            <p className={styles.empty}>No hay productos</p>
+          ) : (
+            <ProductSection title={categoryName} products={products} />
+          )
+        )}
       </div>
 
     </div>
