@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import { capitalizeFirstLetter } from "@/core/utils/textFormat"
 import api from "@/core/api/api"
 import ProductCard from "@/domains/products/card/ProductCard"
+import GeneralButton from '@/shared/ui/GeneralButton'
 import styles from "./CategoryPage.module.css"
 
 export default function CategoryPage() {
@@ -99,10 +100,11 @@ export default function CategoryPage() {
   
   return (
     <div className={`container`}>
-      <h2 className={styles.categoryName}>{categoryName}</h2>
+      
       {/* 🔥 SIDEBAR */}
       <div className={styles.category}>
         <aside className={styles.filters}>
+          <h2 className={styles.categoryName}>{categoryName}</h2>
           <h3>Filtros</h3>
 
           {/* MARCAS */}
@@ -146,13 +148,22 @@ export default function CategoryPage() {
 
           {/* 🔥 BOTONES */}
           <div className={styles.filterActions}>
-            <button onClick={applyFilters} className={styles.applyBtn}>
+            <GeneralButton
+              size='medium'
+              className={styles.applyBtn}
+              onClick={applyFilters}
+            >
               Aplicar filtros
-            </button>
+            </GeneralButton>
 
-            <button onClick={clearFilters} className={styles.clearBtn}>
+            <GeneralButton
+              variant='secondary'
+              size='medium'
+              className={styles.clearBtn}
+              onClick={clearFilters}
+            >
               Limpiar
-            </button>
+            </GeneralButton>
           </div>
         </aside>
 

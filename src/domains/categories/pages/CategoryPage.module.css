@@ -27,22 +27,6 @@
   gap: 1rem;
 }
 
-.applyBtn {
-  background: #6c4ed9;
-  color: white;
-  border: none;
-  padding: 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-}
-.clearBtn {
-  background: transparent;
-  border: 1px solid #ccc;
-  padding: 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
 .loading {
   text-align: center;
   padding: 3rem;
