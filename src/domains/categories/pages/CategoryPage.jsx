@@ -98,81 +98,84 @@ export default function CategoryPage() {
   }
   
   return (
-    <div className={`container ${styles.category}`}>
-      <h2 className={styles.categoryName}></h2>
+    <div className={`container`}>
+      <h2 className={styles.categoryName}>{categoryName}</h2>
       {/* 🔥 SIDEBAR */}
-      <aside className={styles.filters}>
-        <h3>Filtros</h3>
+      <div className={styles.category}>
+        <aside className={styles.filters}>
+          <h3>Filtros</h3>
 
-        {/* MARCAS */}
-        <div className={styles.filterBlock}>
-          <p className={styles.filterTitle}>Marca</p>
+          {/* MARCAS */}
+          <div className={styles.filterBlock}>
+            <p className={styles.filterTitle}>Marca</p>
 
-          {brands.map(brand => (
-            <label key={brand} className={styles.checkbox}>
-              <input
-                type="checkbox"
-                checked={selectedBrands.includes(brand)}
-                onChange={() => toggleBrand(brand)}
-              />
-              {brand}
-            </label>
-          ))}
-        </div>
+            {brands.map(brand => (
+              <label key={brand} className={styles.checkbox}>
+                <input
+                  type="checkbox"
+                  checked={selectedBrands.includes(brand)}
+                  onChange={() => toggleBrand(brand)}
+                />
+                {brand}
+              </label>
+            ))}
+          </div>
 
-        {/* PRECIO */}
-        <div className={styles.filterBlock}>
-          <p className={styles.filterTitle}>Precio</p>
+          {/* PRECIO */}
+          <div className={styles.filterBlock}>
+            <p className={styles.filterTitle}>Precio</p>
 
-          <input
-            type="number"
-            placeholder="Min"
-            value={priceRange.min}
-            onChange={(e) =>
-              setPriceRange({ ...priceRange, min: e.target.value })
-            }
-          />
+            <input
+              type="number"
+              placeholder="Min"
+              value={priceRange.min}
+              onChange={(e) =>
+                setPriceRange({ ...priceRange, min: e.target.value })
+              }
+            />
 
-          <input
-            type="number"
-            placeholder="Max"
-            value={priceRange.max}
-            onChange={(e) =>
-              setPriceRange({ ...priceRange, max: e.target.value })
-            }
-          />
-        </div>
+            <input
+              type="number"
+              placeholder="Max"
+              value={priceRange.max}
+              onChange={(e) =>
+                setPriceRange({ ...priceRange, max: e.target.value })
+              }
+            />
+          </div>
 
-        {/* 🔥 BOTONES */}
-        <div className={styles.filterActions}>
-          <button onClick={applyFilters} className={styles.applyBtn}>
-            Aplicar filtros
-          </button>
+          {/* 🔥 BOTONES */}
+          <div className={styles.filterActions}>
+            <button onClick={applyFilters} className={styles.applyBtn}>
+              Aplicar filtros
+            </button>
 
-          <button onClick={clearFilters} className={styles.clearBtn}>
-            Limpiar
-          </button>
-        </div>
-      </aside>
+            <button onClick={clearFilters} className={styles.clearBtn}>
+              Limpiar
+            </button>
+          </div>
+        </aside>
 
-      {/* PRODUCTOS */}
-      <div className={styles.products}>
-        {loading ? (
-          <p className={styles.loading}>Cargando...</p>
-        ) : (
-          products.length === 0 ? (
-            <p className={styles.empty}>No hay productos</p>
-          ) : (
-            <div className={styles.productsContainer}>
-              <div className={styles.products}>
-                {products.map(product => (
-                    <ProductCard key={product.id} product={product}/>
-                ))}
-              </div>
-            </div>
-          )
-        )}
+          {/* PRODUCTOS */}
+          <div className={styles.products}>
+            {loading ? (
+              <p className={styles.loading}>Cargando...</p>
+            ) : (
+              products.length === 0 ? (
+                <p className={styles.empty}>No hay productos</p>
+              ) : (
+                <div className={styles.productsContainer}>
+                  <div className={styles.products}>
+                    {products.map(product => (
+                        <ProductCard key={product.id} product={product}/>
+                    ))}
+                  </div>
+                </div>
+              )
+            )}
+          </div>
       </div>
+      
 
     </div>
   )
