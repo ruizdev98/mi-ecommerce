@@ -157,19 +157,17 @@ export default function CategoryPage() {
         </aside>
 
           {/* PRODUCTOS */}
-          <div className={styles.products}>
+          <div className={styles.productsContainer}>
             {loading ? (
               <p className={styles.loading}>Cargando...</p>
             ) : (
               products.length === 0 ? (
                 <p className={styles.empty}>No hay productos</p>
               ) : (
-                <div className={styles.productsContainer}>
-                  <div className={styles.products}>
-                    {products.map(product => (
-                        <ProductCard key={product.id} product={product}/>
-                    ))}
-                  </div>
+                <div className={styles.products}>
+                  {products.map(product => (
+                      <ProductCard key={product.id} product={product}/>
+                  ))}
                 </div>
               )
             )}
