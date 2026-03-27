@@ -9,21 +9,17 @@
   border-right: 1px solid #eee;
   padding-right: 1rem;
 }
-
 .filterBlock {
   margin-bottom: 2rem;
 }
-
 .filterTitle {
   font-weight: 600;
   margin-bottom: 1rem;
 }
-
 .checkbox {
   display: block;
   margin-bottom: 0.5rem;
 }
-
 .filterActions {
   margin-top: 2rem;
   display: flex;
@@ -39,17 +35,12 @@
   border-radius: 6px;
   cursor: pointer;
 }
-
 .clearBtn {
   background: transparent;
   border: 1px solid #ccc;
   padding: 1rem;
   border-radius: 6px;
   cursor: pointer;
-}
-
-.products {
-  width: 100%;
 }
 
 .loading {
