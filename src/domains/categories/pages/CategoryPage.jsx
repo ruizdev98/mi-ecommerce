@@ -165,9 +165,11 @@ export default function CategoryPage() {
                 <p className={styles.empty}>No hay productos</p>
               ) : (
                 <div className={styles.products}>
-                  {products.map(product => (
-                      <ProductCard key={product.id} product={product}/>
-                  ))}
+                  <div className={styles.productCard}>
+                    {products.map(product => (
+                        <ProductCard key={product.id} product={product}/>
+                    ))}
+                  </div>
                 </div>
               )
             )}
