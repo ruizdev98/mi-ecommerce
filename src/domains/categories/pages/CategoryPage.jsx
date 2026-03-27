@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { capitalizeFirstLetter } from "@/core/utils/textFormat"
 import api from "@/core/api/api"
-import ProductSection from "@/domains/products/section/ProductSection"
+import ProductCard from "@/domains/products/card/ProductCard"
 import styles from "./CategoryPage.module.css"
 
 export default function CategoryPage() {
