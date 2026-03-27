@@ -99,6 +99,7 @@ export default function CategoryPage() {
   
   return (
     <div className={`container ${styles.category}`}>
+      <h2 className={styles.categoryName}></h2>
       {/* 🔥 SIDEBAR */}
       <aside className={styles.filters}>
         <h3>Filtros</h3>
@@ -162,7 +163,7 @@ export default function CategoryPage() {
           products.length === 0 ? (
             <p className={styles.empty}>No hay productos</p>
           ) : (
-            <ProductSection title={categoryName} products={products} />
+            <ProductCard product={products} />
           )
         )}
       </div>
