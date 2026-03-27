@@ -48,8 +48,9 @@
   padding: 3rem;
 }
 
-.productsContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.products {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding: 1.4rem 0;
 }
