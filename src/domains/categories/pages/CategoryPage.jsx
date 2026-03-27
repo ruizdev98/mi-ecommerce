@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { capitalizeFirstLetter } from "@/core/utils/textFormat"
 import api from "@/core/api/api"
-import ProductCard from "@/domains/products/card/ProductCard"
+import ProductSection from "@/domains/products/section/ProductSection"
 import styles from "./CategoryPage.module.css"
 
 export default function CategoryPage() {
@@ -163,7 +163,13 @@ export default function CategoryPage() {
           products.length === 0 ? (
             <p className={styles.empty}>No hay productos</p>
           ) : (
-            <ProductCard product={products} />
+            <div className={styles.productsContainer}>
+              <div className={styles.products}>
+                {products.map(product => (
+                    <ProductCard key={product.id} product={product}/>
+                ))}
+              </div>
+            </div>
           )
         )}
       </div>
