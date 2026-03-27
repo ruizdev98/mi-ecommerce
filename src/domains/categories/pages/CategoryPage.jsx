@@ -97,6 +97,11 @@ export default function CategoryPage() {
       max: ""
     })
   }
+
+  const hasFilters =
+    selectedBrands.length > 0 ||
+    priceRange.min !== "" ||
+    priceRange.max !== ""
   
   return (
     <div className={`container`}>
@@ -152,6 +157,7 @@ export default function CategoryPage() {
               size='medium'
               className={styles.applyBtn}
               onClick={applyFilters}
+              disabled={!hasFilters}
             >
               Aplicar filtros
             </GeneralButton>
@@ -161,6 +167,7 @@ export default function CategoryPage() {
               size='medium'
               className={styles.clearBtn}
               onClick={clearFilters}
+              disabled={!hasFilters}
             >
               Limpiar
             </GeneralButton>
