@@ -33,18 +33,18 @@
 }
 /* 🔥 checkbox visual */
 .customCheckbox {
-  width: 18px;
-  height: 18px;
-  border: 2px solid #ccc;
-  border-radius: 4px;
+  width: 1.8rem;
+  height: 1.8rem;
+  border: 1px solid #ccc;
+  border-radius: 0.4rem;
   display: inline-block;
   position: relative;
   transition: all 0.2s ease;
 }
 /* 🔥 cuando está activo */
 .checkbox input:checked + .customCheckbox {
-  background-color: #6c47ff; /* color tipo ripley */
-  border-color: #6c47ff;
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
 }
 /* 🔥 check interno */
 .checkbox input:checked + .customCheckbox::after {
@@ -58,7 +58,7 @@
 }
 /* 🔥 hover */
 .checkbox:hover .customCheckbox {
-  border-color: #6c47ff;
+  border-color: var(--color-primary);
 }
 
 .filterActions {
