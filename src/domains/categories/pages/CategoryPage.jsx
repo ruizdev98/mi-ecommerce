@@ -43,9 +43,9 @@ export default function CategoryPage() {
         const params = new URLSearchParams()
         params.append("category", categoryId)
 
-        if (appliedFilters.brands.length > 0) {
-          params.append("brand", appliedFilters.brands[0])
-        }
+        appliedFilters.brands.forEach(brand => {
+          params.append("brand", brand)
+        })
 
         if (appliedFilters.min) {
           params.append("minPrice", appliedFilters.min)
@@ -75,7 +75,7 @@ export default function CategoryPage() {
     setSelectedBrands(prev =>
       prev.includes(brand)
         ? prev.filter(b => b !== brand)
-        : [brand] // 🔥 una sola marca por ahora
+        : [...prev, brand]
     )
   }
 
