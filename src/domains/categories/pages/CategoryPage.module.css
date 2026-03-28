@@ -6,10 +6,8 @@
 }
 .categoryName {
   position: relative;
-  font-size: 2rem;
-  font-weight: 600;
   margin-bottom: 1.5rem;
-  padding-left: 1.2rem; /* espacio para la barra */
+  padding-left: 2rem; /* espacio para la barra */
 }
 .categoryName::before {
   content: "";
@@ -17,10 +15,9 @@
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  width: 4px;           /* grosor */
+  width: 1rem;           /* grosor */
   height: 70%;          /* alto relativo al texto */
   background-color: var(--color-primary-hover); /* morado */
-  border-radius: 2px;
 }
 .filters {
   border-right: 1px solid #eee;
