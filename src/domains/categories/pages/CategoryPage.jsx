@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import { capitalizeFirstLetter } from "@/core/utils/textFormat"
 import api from "@/core/api/api"
 import ProductCard from "@/domains/products/card/ProductCard"
+import InputField from "@/shared/ui/InputField"
 import GeneralButton from '@/shared/ui/GeneralButton'
 import styles from "./CategoryPage.module.css"
 
@@ -132,7 +133,7 @@ export default function CategoryPage() {
           <div className={styles.filterBlock}>
             <p className={styles.filterTitle}>Precio</p>
             <div className={styles.inputs}>
-              <input
+              <InputField
                 name='numberMin'
                 type="number"
                 placeholder="Min"
@@ -140,7 +141,7 @@ export default function CategoryPage() {
                 onChange={(e) => setPriceRange({ ...priceRange, min: e.target.value })}
               />
 
-              <input
+              <InputField
                 name='numberMax'
                 type="number"
                 placeholder="Max"
