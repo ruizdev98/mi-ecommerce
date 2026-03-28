@@ -16,6 +16,13 @@
   font-weight: 600;
   margin-bottom: 1rem;
 }
+.inputs {
+  display: flex;
+  min-height: 5.2rem;
+  padding: 1rem;
+  border-radius: 0.6rem;
+  border-color: #ccc;
+}
 .checkbox {
   display: block;
   margin-bottom: 0.5rem;

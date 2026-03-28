@@ -131,24 +131,26 @@ export default function CategoryPage() {
           {/* PRECIO */}
           <div className={styles.filterBlock}>
             <p className={styles.filterTitle}>Precio</p>
+            <div className={styles.inputs}>
+              <input
+                type="number"
+                placeholder="Min"
+                value={priceRange.min}
+                onChange={(e) =>
+                  setPriceRange({ ...priceRange, min: e.target.value })
+                }
+              />
 
-            <input
-              type="number"
-              placeholder="Min"
-              value={priceRange.min}
-              onChange={(e) =>
-                setPriceRange({ ...priceRange, min: e.target.value })
-              }
-            />
-
-            <input
-              type="number"
-              placeholder="Max"
-              value={priceRange.max}
-              onChange={(e) =>
-                setPriceRange({ ...priceRange, max: e.target.value })
-              }
-            />
+              <input
+                type="number"
+                placeholder="Max"
+                value={priceRange.max}
+                onChange={(e) =>
+                  setPriceRange({ ...priceRange, max: e.target.value })
+                }
+              />
+            </div>
+            
           </div>
 
           {/* 🔥 BOTONES */}
