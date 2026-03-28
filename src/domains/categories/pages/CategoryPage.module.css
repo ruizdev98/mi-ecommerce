@@ -8,7 +8,6 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  padding: 2rem;
 }
 .titleContainer {
   background-color: #f8f8f8;
@@ -30,6 +29,7 @@
 }
 .filters {
   background-color: #f8f8f8;
+  padding: 2rem;
 }
 .filterTitle {
   display: flex;
