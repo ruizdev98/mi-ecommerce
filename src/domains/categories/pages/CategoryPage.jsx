@@ -139,7 +139,6 @@ export default function CategoryPage() {
                 placeholder="Min"
                 value={priceRange.min}
                 onChange={(e) => setPriceRange({ ...priceRange, min: e.target.value })}
-                size="large"
               />
 
               <InputField
@@ -148,7 +147,6 @@ export default function CategoryPage() {
                 placeholder="Max"
                 value={priceRange.max}
                 onChange={(e) => setPriceRange({ ...priceRange, max: e.target.value })}
-                size="large"
               />
             </div>
             
