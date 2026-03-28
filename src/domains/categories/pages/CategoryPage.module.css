@@ -5,23 +5,23 @@
   padding: 2rem 0;
 }
 .filtersContainer {
-    background-color: #f8f8f8;
-    margin-right: 2rem;
+  background-color: #f8f8f8;
+  margin-right: 2rem;
 }
-.categoryName {
+.categoryTitle {
   position: relative;
   margin-bottom: 1.5rem;
   padding-left: 2rem; /* espacio para la barra */
 }
-.categoryName::before {
+.categoryTitle::before {
   content: "";
   position: absolute;
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  width: 1rem;           /* grosor */
-  height: 70%;          /* alto relativo al texto */
-  background-color: var(--color-primary-hover); /* morado */
+  width: 1rem;
+  height: 70%; 
+  background-color: var(--color-primary-hover);
 }
 .filterTitle {
   font-weight: 600;
