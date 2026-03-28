@@ -21,9 +21,46 @@
   gap: 1rem;
 }
 .checkbox {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
   margin-bottom: 0.5rem;
 }
+/* 🔥 ocultar checkbox real */
+.checkbox input {
+  display: none;
+}
+/* 🔥 checkbox visual */
+.customCheckbox {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  display: inline-block;
+  position: relative;
+  transition: all 0.2s ease;
+}
+/* 🔥 cuando está activo */
+.checkbox input:checked + .customCheckbox {
+  background-color: #6c47ff; /* color tipo ripley */
+  border-color: #6c47ff;
+}
+/* 🔥 check interno */
+.checkbox input:checked + .customCheckbox::after {
+  content: "✔";
+  color: white;
+  font-size: 12px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -55%);
+}
+/* 🔥 hover */
+.checkbox:hover .customCheckbox {
+  border-color: #6c47ff;
+}
+
 .filterActions {
   margin-top: 2rem;
   display: flex;

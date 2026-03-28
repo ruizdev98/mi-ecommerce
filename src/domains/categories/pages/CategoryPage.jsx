@@ -124,7 +124,8 @@ export default function CategoryPage() {
                   checked={selectedBrands.includes(brand)}
                   onChange={() => toggleBrand(brand)}
                 />
-                {brand}
+                <span className={styles.customCheckbox}></span>
+                <span>{brand}</span>
               </label>
             ))}
           </div>
