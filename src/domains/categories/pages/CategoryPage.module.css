@@ -3,7 +3,10 @@
   grid-template-columns: 1fr 4fr;
   gap: 2rem;
   padding: 2rem 0;
-  background-color: #f8f8f8;
+}
+.filtersContainer {
+    background-color: #f8f8f8;
+    margin-right: 2rem;
 }
 .categoryName {
   position: relative;
