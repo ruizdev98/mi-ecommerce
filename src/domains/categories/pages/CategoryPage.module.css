@@ -6,7 +6,7 @@
 }
 .filtersContainer {
   background-color: #f8f8f8;
-  margin-right: 2rem;
+  padding: 2rem;
 }
 .categoryTitle {
   position: relative;
@@ -24,6 +24,8 @@
   background-color: var(--color-primary-hover);
 }
 .filterTitle {
+  display: flex;
+  gap: 2rem;
   font-weight: 600;
   font-size: 1.6rem;
 }
