@@ -4,18 +4,14 @@
   gap: 2rem;
   padding: 2rem 0;
 }
-.filtersContainer {
-  display: flex;
-  gap: 2rem;
-}
-
 .titleContainer {
   background-color: #f8f8f8;
   padding: 0 2rem;
 }
 .categoryTitle {
   position: relative;
-  padding-left: 2rem; /* espacio para la barra */
+  padding-left: 2rem;
+  margin-bottom: 2rem;
 }
 .categoryTitle::before {
   content: "";
@@ -26,6 +22,9 @@
   width: 1rem;
   height: 70%; 
   background-color: var(--color-primary-hover);
+}
+.showFilters {
+  text-align: end;
 }
 .filters {
   background-color: #f8f8f8;
@@ -112,6 +111,7 @@
 
 @media (min-width: 992px) {
   .filtersContainer {
+    display: flex;
     flex-direction: column;
     gap: 2rem;
   }

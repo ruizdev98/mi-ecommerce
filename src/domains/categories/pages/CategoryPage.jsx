@@ -122,7 +122,7 @@ export default function CategoryPage() {
               size='medium'
               className={styles.showFilters}
             >
-              <FontAwesomeIcon icon={faSliders} /> Filtros
+              <FontAwesomeIcon icon={faSliders} />Filtrar
             </GeneralButton>
           ) : (
             <div className={styles.filters}>
