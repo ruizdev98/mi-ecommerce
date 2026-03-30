@@ -16,7 +16,6 @@
 .categoryTitle {
   position: relative;
   padding-left: 2rem;
-  margin-bottom: 2rem;
 }
 .categoryTitle::before {
   content: "";
