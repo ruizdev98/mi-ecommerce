@@ -4,6 +4,11 @@
   gap: 2rem;
   padding: 2rem 0;
 }
+.filtersContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
 .titleContainer {
   background-color: #f8f8f8;
   padding: 0 2rem;
@@ -24,7 +29,10 @@
   background-color: var(--color-primary-hover);
 }
 .showFilters {
-  text-align: end;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  max-width: 10rem;
 }
 .filters {
   background-color: #f8f8f8;
@@ -110,11 +118,6 @@
 }
 
 @media (min-width: 992px) {
-  .filtersContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
   .category {
     grid-template-columns: 1fr 4fr;
     gap: 2rem;
