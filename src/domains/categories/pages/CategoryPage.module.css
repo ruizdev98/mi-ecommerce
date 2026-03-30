@@ -6,7 +6,6 @@
 }
 .filtersContainer {
   display: flex;
-  flex-direction: column;
   gap: 2rem;
 }
 .titleContainer {
@@ -111,6 +110,10 @@
 }
 
 @media (min-width: 992px) {
+  .filtersContainer {
+    flex-direction: column;
+    gap: 2rem;
+  }
   .category {
     grid-template-columns: 1fr 4fr;
     gap: 2rem;
