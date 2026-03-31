@@ -22,18 +22,24 @@ export default function CategoryPage() {
     clearFilters,
     hasFilters
   } = useCategoryProducts()
-
   const isMobile = useIsMobile()
-
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-
-  // 🔥 obtener nombre dinámico
   const categoryName = capitalizeFirstLetter(products[0]?.categoryName || "Categoría")
+
+  const filtersProps = {
+    categoryName,
+    brands,
+    selectedBrands,
+    toggleBrand,
+    priceRange,
+    setPriceRange,
+    applyFilters,
+    clearFilters,
+    hasFilters
+  }
   
   return (
     <div className={`container`}>
-      
-      {/* 🔥 SIDEBAR */}
       <div className={styles.category}>
         {isMobile ? (
           <>
@@ -52,31 +58,11 @@ export default function CategoryPage() {
             />
             {/* Sidebar */}
             <div className={`${styles.mobileSidebar} ${isSidebarOpen ? styles.open : ''}`}>
-              <FiltersPanel
-                categoryName={categoryName}
-                brands={brands}
-                selectedBrands={selectedBrands}
-                toggleBrand={toggleBrand}
-                priceRange={priceRange}
-                setPriceRange={setPriceRange}
-                applyFilters={applyFilters}
-                clearFilters={clearFilters}
-                hasFilters={hasFilters}
-              />
+              <FiltersPanel {...filtersProps} />
             </div>
           </>
         ) : (
-          <FiltersPanel
-            categoryName={categoryName}
-            brands={brands}
-            selectedBrands={selectedBrands}
-            toggleBrand={toggleBrand}
-            priceRange={priceRange}
-            setPriceRange={setPriceRange}
-            applyFilters={applyFilters}
-            clearFilters={clearFilters}
-            hasFilters={hasFilters}
-          />
+          <FiltersPanel {...filtersProps} />
         )}
 
         {/* PRODUCTOS */}
