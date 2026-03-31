@@ -1,113 +1,34 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSliders } from '@fortawesome/free-solid-svg-icons'
-import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useState } from 'react'
 import { capitalizeFirstLetter } from '@/core/utils/textFormat'
-import api from '@/core/api/api'
+import useCategoryProducts from '@/domains/categories/hooks/useCategoryProducts'
 import useIsMobile from '@/core/hooks/useIsMobile'
 import ProductCard from '@/domains/products/card/ProductCard'
-import InputField from '@/shared/ui/InputField'
 import GeneralButton from '@/shared/ui/GeneralButton'
+import FiltersPanel from './FiltersPanel'
 import styles from "./CategoryPage.module.css"
 
 export default function CategoryPage() {
-  const { categoryId } = useParams()
+  const {
+    products,
+    brands,
+    loading,
+    selectedBrands,
+    priceRange,
+    setPriceRange,
+    toggleBrand,
+    applyFilters,
+    clearFilters,
+    hasFilters
+  } = useCategoryProducts()
+
   const isMobile = useIsMobile()
-  const [products, setProducts] = useState([])
-  const [brands, setBrands] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [selectedBrands, setSelectedBrands] = useState([])
-  const [priceRange, setPriceRange] = useState({ min: "", max: "" })
-  const [appliedFilters, setAppliedFilters] = useState({
-    brands: [],
-    min: "",
-    max: ""
-  })
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-
-  // 🔥 1. TRAER FILTROS (MARCAS)
-  useEffect(() => {
-    const fetchFilters = async () => {
-      try {
-        const { data } = await api.get(`/products/filters?category=${categoryId}`)
-        setBrands(data.brands)
-      } catch (error) {
-        console.error(error)
-      }
-    }
-
-    fetchFilters()
-  }, [categoryId])
-
-  // 🔥 2. TRAER PRODUCTOS CON FILTROS
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        setLoading(true)
-
-        const params = new URLSearchParams()
-        params.append("category", categoryId)
-
-        appliedFilters.brands.forEach(brand => {
-          params.append("brand", brand)
-        })
-
-        if (appliedFilters.min) {
-          params.append("minPrice", appliedFilters.min)
-        }
-
-        if (appliedFilters.max) {
-          params.append("maxPrice", appliedFilters.max)
-        }
-
-        const { data } = await api.get(`/products?${params.toString()}`)
-        setProducts(data)
-
-      } catch (error) {
-        console.error(error)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchProducts()
-  }, [categoryId, appliedFilters])
 
   // 🔥 obtener nombre dinámico
   const categoryName = capitalizeFirstLetter(products[0]?.categoryName || "Categoría")
-
-  const toggleBrand = (brand) => {
-    setSelectedBrands(prev =>
-      prev.includes(brand)
-        ? prev.filter(b => b !== brand)
-        : [...prev, brand]
-    )
-  }
-
-  // 🔥 aplicar filtros
-  const applyFilters = () => {
-    setAppliedFilters({
-      brands: selectedBrands,
-      min: priceRange.min,
-      max: priceRange.max
-    })
-  }
-  // 🔥 limpiar filtros
-  const clearFilters = () => {
-    setSelectedBrands([])
-    setPriceRange({ min: "", max: "" })
-
-    setAppliedFilters({
-      brands: [],
-      min: "",
-      max: ""
-    })
-  }
-
-  const hasFilters =
-    selectedBrands.length > 0 ||
-    priceRange.min !== "" ||
-    priceRange.max !== ""
   
   return (
     <div className={`container`}>
@@ -119,106 +40,51 @@ export default function CategoryPage() {
             <h2 className={styles.categoryTitle}>{categoryName}</h2>
           </div>
           {isMobile ? (
-            <GeneralButton
-              size='medium'
-              className={styles.showFilters}
-              onClick={() => setIsSidebarOpen(true)}
-            >
-              <FontAwesomeIcon icon={faSliders} />Filtrar
-            </GeneralButton>
-          ) : (
-            <div className={styles.filters}>
-              <h3 className={styles.filterTitle}><FontAwesomeIcon icon={faSliders} />Filtros</h3>
-              {/* MARCAS */}
-              <div className={styles.filterBlock}>
-                <p className={styles.filterTitle}>Marca</p>
+            <>
+              <GeneralButton
+                size='medium'
+                className={styles.showFilters}
+                onClick={() => setIsSidebarOpen(true)}
+              >
+                <FontAwesomeIcon icon={faSliders} />Filtrar
+              </GeneralButton>
 
-                {brands.map(brand => (
-                  <label key={brand} className={styles.checkbox}>
-                    <input
-                      type="checkbox"
-                      checked={selectedBrands.includes(brand)}
-                      onChange={() => toggleBrand(brand)}
-                    />
-                    <span className={styles.customCheckbox}></span>
-                    <span>{brand}</span>
-                  </label>
-                ))}
-              </div>
-
-              {/* PRECIO */}
-              <div className={styles.filterBlock}>
-                <p className={styles.filterTitle}>Precio</p>
-                <div className={styles.inputs}>
-                  <InputField
-                    name='numberMin'
-                    type="number"
-                    placeholder="Min"
-                    value={priceRange.min}
-                    onChange={(e) => setPriceRange({ ...priceRange, min: e.target.value })}
-                  />
-
-                  <InputField
-                    name='numberMax'
-                    type="number"
-                    placeholder="Max"
-                    value={priceRange.max}
-                    onChange={(e) => setPriceRange({ ...priceRange, max: e.target.value })}
-                  />
+              {/* Overlay */}
+              <div 
+                className={`${styles.overlay} ${isSidebarOpen ? styles.show : ''}`}
+                onClick={() => setIsSidebarOpen(false)}
+              />
+              {/* Sidebar */}
+              <div className={`${styles.mobileSidebar} ${isSidebarOpen ? styles.open : ''}`}>
+                <div className={styles.sidebarHeader}>
+                  <h3>Filtros</h3>
+                  <button onClick={() => setIsSidebarOpen(false)}>✕</button>
                 </div>
-                
+                <FiltersPanel
+                  brands={brands}
+                  selectedBrands={selectedBrands}
+                  toggleBrand={toggleBrand}
+                  priceRange={priceRange}
+                  setPriceRange={setPriceRange}
+                  applyFilters={applyFilters}
+                  clearFilters={clearFilters}
+                  hasFilters={hasFilters}
+                />
               </div>
-
-              {/* 🔥 BOTONES */}
-              <div className={styles.filterActions}>
-                <GeneralButton
-                  size='medium'
-                  className={styles.applyBtn}
-                  onClick={applyFilters}
-                  disabled={!hasFilters}
-                >
-                  Aplicar filtros
-                </GeneralButton>
-
-                <GeneralButton
-                  variant='secondary'
-                  size='medium'
-                  className={styles.clearBtn}
-                  onClick={clearFilters}
-                  disabled={!hasFilters}
-                >
-                  Limpiar
-                </GeneralButton>
-              </div>
-            </div>
-          )}
-          
-
-        </aside>
-
-        {isMobile && (
-          <>
-            {/* Overlay */}
-            <div 
-              className={`${styles.overlay} ${isSidebarOpen ? styles.show : ''}`}
-              onClick={() => setIsSidebarOpen(false)}
+            </>
+          ) : (
+            <FiltersPanel
+              brands={brands}
+              selectedBrands={selectedBrands}
+              toggleBrand={toggleBrand}
+              priceRange={priceRange}
+              setPriceRange={setPriceRange}
+              applyFilters={applyFilters}
+              clearFilters={clearFilters}
+              hasFilters={hasFilters}
             />
-
-            {/* Sidebar */}
-            <div className={`${styles.mobileSidebar} ${isSidebarOpen ? styles.open : ''}`}>
-              
-              <div className={styles.sidebarHeader}>
-                <h3>Filtros</h3>
-                <button onClick={() => setIsSidebarOpen(false)}>✕</button>
-              </div>
-
-              <div className={styles.filters}>
-                {/* 👇 reutilizas TODO tu contenido actual */}
-              </div>
-
-            </div>
-          </>
-        )}
+          )}
+        </aside>
 
         {/* PRODUCTOS */}
         <div className={styles.productsContainer}>
@@ -236,8 +102,8 @@ export default function CategoryPage() {
             )
           )}
         </div>
+
       </div>
-      
 
     </div>
   )
