@@ -17,6 +17,7 @@
 .categoryTitle {
   position: relative;
   padding-left: 2rem;
+  margin-top: 2rem;
 }
 .categoryTitle::before {
   content: "";
@@ -159,5 +160,8 @@
     grid-template-columns: 1fr 4fr;
     gap: 2rem;
     padding: 2rem 0;
+  }
+  .categoryTitle {
+    margin-top: 0;
   }
 }
