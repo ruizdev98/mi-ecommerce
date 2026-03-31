@@ -52,10 +52,6 @@ export default function CategoryPage() {
             />
             {/* Sidebar */}
             <div className={`${styles.mobileSidebar} ${isSidebarOpen ? styles.open : ''}`}>
-              <div className={styles.sidebarHeader}>
-                <h3>Filtros</h3>
-                <button onClick={() => setIsSidebarOpen(false)}>✕</button>
-              </div>
               <FiltersPanel
                 categoryName={categoryName}
                 brands={brands}
