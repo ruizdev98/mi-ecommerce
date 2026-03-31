@@ -23,6 +23,7 @@ export default function CategoryPage() {
     min: "",
     max: ""
   })
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
   // 🔥 1. TRAER FILTROS (MARCAS)
   useEffect(() => {
@@ -121,6 +122,7 @@ export default function CategoryPage() {
             <GeneralButton
               size='medium'
               className={styles.showFilters}
+              onClick={() => setIsSidebarOpen(true)}
             >
               <FontAwesomeIcon icon={faSliders} />Filtrar
             </GeneralButton>
@@ -193,6 +195,30 @@ export default function CategoryPage() {
           
 
         </aside>
+
+        {isMobile && (
+          <>
+            {/* Overlay */}
+            <div 
+              className={`${styles.overlay} ${isSidebarOpen ? styles.show : ''}`}
+              onClick={() => setIsSidebarOpen(false)}
+            />
+
+            {/* Sidebar */}
+            <div className={`${styles.mobileSidebar} ${isSidebarOpen ? styles.open : ''}`}>
+              
+              <div className={styles.sidebarHeader}>
+                <h3>Filtros</h3>
+                <button onClick={() => setIsSidebarOpen(false)}>✕</button>
+              </div>
+
+              <div className={styles.filters}>
+                {/* 👇 reutilizas TODO tu contenido actual */}
+              </div>
+
+            </div>
+          </>
+        )}
 
         {/* PRODUCTOS */}
         <div className={styles.productsContainer}>

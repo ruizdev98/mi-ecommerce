@@ -112,6 +112,53 @@
   padding: 1.4rem 0;
 }
 
+/* Overlay oscuro */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
+  z-index: 100;
+}
+
+.overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Sidebar */
+.mobileSidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 80%;
+  max-width: 320px;
+  height: 100%;
+  background: white;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 101;
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+.mobileSidebar.open {
+  transform: translateX(0);
+}
+
+/* Header */
+.sidebarHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
 @media (min-width: 576px) {
   .products {
     grid-template-columns: repeat(3, 1fr);
