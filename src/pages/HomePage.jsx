@@ -11,8 +11,8 @@ export default function HomePage() {
   const {
     categories,
     products,
-    bestSellers,
-    featured,
+    bestSellersLimit8,
+    featuredLimit8,
     brands,
     blogs,
     loading 
@@ -30,14 +30,14 @@ export default function HomePage() {
     <>
       <ImageCarousel images={banners}/>
       <Categories title='Categorías' categories={categories} />
-      <ProductSection title='Más Vendidos' products={bestSellers} />
+      <ProductSection title='Más Vendidos' products={bestSellersLimit8} />
       <ParallaxBanner 
         title='¡Estilo para todos. En un solo lugar!'
         buttonText='Ver más'
         logoSrc='/white_logo.png'
         backgroundUrl='https://res.cloudinary.com/dmvsu33ya/image/upload/v1754767045/parallax_banner_btq2yx.jpg'
       />
-      <ProductSection title='Destacados' products={featured} />
+      <ProductSection title='Destacados' products={featuredLimit8} />
       <BlogSection title='Blog' blogs={blogs} />
       <BrandsSection title='Marcas Destacadas' products={products} brands={brands}/>
       <FloatingCartButton />
