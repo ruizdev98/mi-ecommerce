@@ -35,56 +35,53 @@ export default function CategoryPage() {
       
       {/* 🔥 SIDEBAR */}
       <div className={styles.category}>
-        <aside className={styles.filtersContainer}>
-          <div className={styles.titleContainer}>
-            <h2 className={styles.categoryTitle}>{categoryName}</h2>
-          </div>
-          {isMobile ? (
-            <>
-              <GeneralButton
-                size='medium'
-                className={styles.showFilters}
-                onClick={() => setIsSidebarOpen(true)}
-              >
-                <FontAwesomeIcon icon={faSliders} />Filtrar
-              </GeneralButton>
+        {isMobile ? (
+          <>
+            <GeneralButton
+              size='medium'
+              className={styles.showFilters}
+              onClick={() => setIsSidebarOpen(true)}
+            >
+              <FontAwesomeIcon icon={faSliders} />Filtrar
+            </GeneralButton>
 
-              {/* Overlay */}
-              <div 
-                className={`${styles.overlay} ${isSidebarOpen ? styles.show : ''}`}
-                onClick={() => setIsSidebarOpen(false)}
-              />
-              {/* Sidebar */}
-              <div className={`${styles.mobileSidebar} ${isSidebarOpen ? styles.open : ''}`}>
-                <div className={styles.sidebarHeader}>
-                  <h3>Filtros</h3>
-                  <button onClick={() => setIsSidebarOpen(false)}>✕</button>
-                </div>
-                <FiltersPanel
-                  brands={brands}
-                  selectedBrands={selectedBrands}
-                  toggleBrand={toggleBrand}
-                  priceRange={priceRange}
-                  setPriceRange={setPriceRange}
-                  applyFilters={applyFilters}
-                  clearFilters={clearFilters}
-                  hasFilters={hasFilters}
-                />
-              </div>
-            </>
-          ) : (
-            <FiltersPanel
-              brands={brands}
-              selectedBrands={selectedBrands}
-              toggleBrand={toggleBrand}
-              priceRange={priceRange}
-              setPriceRange={setPriceRange}
-              applyFilters={applyFilters}
-              clearFilters={clearFilters}
-              hasFilters={hasFilters}
+            {/* Overlay */}
+            <div 
+              className={`${styles.overlay} ${isSidebarOpen ? styles.show : ''}`}
+              onClick={() => setIsSidebarOpen(false)}
             />
-          )}
-        </aside>
+            {/* Sidebar */}
+            <div className={`${styles.mobileSidebar} ${isSidebarOpen ? styles.open : ''}`}>
+              <div className={styles.sidebarHeader}>
+                <h3>Filtros</h3>
+                <button onClick={() => setIsSidebarOpen(false)}>✕</button>
+              </div>
+              <FiltersPanel
+                categoryName={categoryName}
+                brands={brands}
+                selectedBrands={selectedBrands}
+                toggleBrand={toggleBrand}
+                priceRange={priceRange}
+                setPriceRange={setPriceRange}
+                applyFilters={applyFilters}
+                clearFilters={clearFilters}
+                hasFilters={hasFilters}
+              />
+            </div>
+          </>
+        ) : (
+          <FiltersPanel
+            categoryName={categoryName}
+            brands={brands}
+            selectedBrands={selectedBrands}
+            toggleBrand={toggleBrand}
+            priceRange={priceRange}
+            setPriceRange={setPriceRange}
+            applyFilters={applyFilters}
+            clearFilters={clearFilters}
+            hasFilters={hasFilters}
+          />
+        )}
 
         {/* PRODUCTOS */}
         <div className={styles.productsContainer}>
