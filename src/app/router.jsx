@@ -35,6 +35,7 @@ const router = createBrowserRouter([
       // Rutas dinámicas
       { path: "category/:categoryId", element: <CategoryPage /> },
       { path: "products/:productId", element: <ProductDetailPage /> },
+      { path: "/products/bestSellers", element: <BestSellersPage />}
     ],
   },
 

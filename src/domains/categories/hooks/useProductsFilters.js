@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import api from "@/core/api/api"
 
-export default function useCategoryProducts() {
+export default function useProductsFilters({ type } = {}) {
   const { categoryId } = useParams()
   const [products, setProducts] = useState([])
   const [brands, setBrands] = useState([])
@@ -19,13 +19,13 @@ export default function useCategoryProducts() {
   useEffect(() => {
     const fetchFilters = async () => {
       try {
-        const { data } = await api.get(`/products/filters?category=${categoryId}`)
+        const query = categoryId ? `?category=${categoryId}` : ''
+        const { data } = await api.get(`/products/filters${query}`)
         setBrands(data.brands)
       } catch (error) {
         console.error(error)
       }
     }
-
     fetchFilters()
   }, [categoryId])
 
@@ -36,18 +36,23 @@ export default function useCategoryProducts() {
         setLoading(true)
 
         const params = new URLSearchParams()
-        params.append("category", categoryId)
 
+        if (categoryId) {
+          params.append('category', categoryId)
+        }
+        if (type === 'bestSellers') {
+          params.append('bestSeller', true)
+        }
         appliedFilters.brands.forEach(brand => {
-          params.append("brand", brand)
+          params.append('brand', brand)
         })
 
         if (appliedFilters.min) {
-          params.append("minPrice", appliedFilters.min)
+          params.append('minPrice', appliedFilters.min)
         }
 
         if (appliedFilters.max) {
-          params.append("maxPrice", appliedFilters.max)
+          params.append('maxPrice', appliedFilters.max)
         }
 
         const { data } = await api.get(`/products?${params.toString()}`)
@@ -61,7 +66,7 @@ export default function useCategoryProducts() {
     }
 
     fetchProducts()
-  }, [categoryId, appliedFilters])
+  }, [categoryId, appliedFilters, type])
 
   // 🔥 acciones
   const toggleBrand = (brand) => {
