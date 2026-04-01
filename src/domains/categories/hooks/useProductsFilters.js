@@ -40,8 +40,8 @@ export default function useProductsFilters({ type } = {}) {
         if (categoryId) {
           params.append('category', categoryId)
         }
-        if (type === 'bestSellers') {
-          params.append('bestSeller', true)
+        if (type === 'bestsellers') {
+          params.append('bestseller', true)
         }
         appliedFilters.brands.forEach(brand => {
           params.append('brand', brand)
