@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import useProductsFilters from '@/domains/products/hooks/useProductsFilters'
+import useProductsFilters from '@/domains/categories/hooks/useProductsFilters'
 import useIsMobile from '@/core/hooks/useIsMobile'
 import ProductCard from '@/domains/products/card/ProductCard'
 import FiltersPanel from '@/domains/categories/pages/FiltersPanel'
