@@ -34,30 +34,37 @@ export default function useProductsFilters({ type } = {}) {
     const fetchProducts = async () => {
       try {
         setLoading(true)
+        let data
 
-        const params = new URLSearchParams()
 
-        if (categoryId) {
-          params.append('category', categoryId)
-        }
+        // 🔥 CASO: BEST SELLERS
         if (type === 'bestsellers') {
-          params.append('bestseller', true)
-        }
-        appliedFilters.brands.forEach(brand => {
-          params.append('brand', brand)
-        })
+          const res = await api.get('/products/bestsellers')
+          data = res.data
+        } else {
 
-        if (appliedFilters.min) {
-          params.append('minPrice', appliedFilters.min)
-        }
+          const params = new URLSearchParams()
 
-        if (appliedFilters.max) {
-          params.append('maxPrice', appliedFilters.max)
-        }
+          if (categoryId) {
+            params.append('category', categoryId)
+          }
+          appliedFilters.brands.forEach(brand => {
+            params.append('brand', brand)
+          })
 
-        const { data } = await api.get(`/products?${params.toString()}`)
+          if (appliedFilters.min) {
+            params.append('minPrice', appliedFilters.min)
+          }
+
+          if (appliedFilters.max) {
+            params.append('maxPrice', appliedFilters.max)
+          }
+
+          const res = await api.get(`/products?${params.toString()}`)
+          data = res.data
+        }
         setProducts(data)
-
+        
       } catch (error) {
         console.error(error)
       } finally {

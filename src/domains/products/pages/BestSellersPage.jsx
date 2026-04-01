@@ -20,7 +20,7 @@ export default function BestSellersPage() {
         applyFilters,
         clearFilters,
         hasFilters
-    } = useProductsFilters({ type: "best-sellers" })
+    } = useProductsFilters({ type: 'bestsellers' })
 
     const isMobile = useIsMobile()
     const [isSidebarOpen, setIsSidebarOpen] = useState(false)
