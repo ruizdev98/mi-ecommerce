@@ -17,7 +17,7 @@ import PaymentPage from "@/domains/checkout/payment/PaymentPage"
 // Páginas por dominio
 import CategoryPage from "@/domains/categories/pages/CategoryPage"
 import ProductDetailPage from "@/domains/products/pages/ProductDetailPage"
-import BestSellerPage from '@/domains/products/pages/BestSellersPage'
+import BestSellersPage from '@/domains/products/pages/BestSellersPage'
 
 // Página no encontrada
 import NotFoundPage from "@/pages/NotFoundPage"
