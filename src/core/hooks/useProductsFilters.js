@@ -34,37 +34,45 @@ export default function useProductsFilters({ type } = {}) {
     const fetchProducts = async () => {
       try {
         setLoading(true)
-        let data
 
+        const params = new URLSearchParams()
 
-        // 🔥 CASO: BEST SELLERS
-        if (type === 'bestsellers') {
-          const res = await api.get('/products/bestsellers')
-          data = res.data
-        } else {
-
-          const params = new URLSearchParams()
-
-          if (categoryId) {
-            params.append('category', categoryId)
-          }
-          appliedFilters.brands.forEach(brand => {
-            params.append('brand', brand)
-          })
-
-          if (appliedFilters.min) {
-            params.append('minPrice', appliedFilters.min)
-          }
-
-          if (appliedFilters.max) {
-            params.append('maxPrice', appliedFilters.max)
-          }
-
-          const res = await api.get(`/products?${params.toString()}`)
-          data = res.data
+        // 🔥 CATEGORY
+        if (categoryId) {
+          params.append('category', categoryId)
         }
-        setProducts(data)
-        
+
+        // 🔥 TYPE (CLAVE 🔥)
+        if (type === 'bestsellers') {
+          params.append('bestSeller', true)
+        }
+
+        if (type === 'featured') {
+          params.append('featured', true)
+        }
+
+        if (type === 'offer') {
+          params.append('offer', true)
+        }
+
+        // 🔥 FILTERS
+        appliedFilters.brands.forEach(brand => {
+          params.append('brand', brand)
+        })
+
+        if (appliedFilters.min) {
+          params.append('minPrice', appliedFilters.min)
+        }
+
+        if (appliedFilters.max) {
+          params.append('maxPrice', appliedFilters.max)
+        }
+
+        // 🔥 UNA SOLA LLAMADA
+        const res = await api.get(`/products?${params.toString()}`)
+
+        setProducts(res.data)
+
       } catch (error) {
         console.error(error)
       } finally {
@@ -109,15 +117,15 @@ export default function useProductsFilters({ type } = {}) {
     priceRange.max !== ''
 
     return {
-        products,
-        brands,
-        loading,
-        selectedBrands,
-        priceRange,
-        setPriceRange,
-        toggleBrand,
-        applyFilters,
-        clearFilters,
-        hasFilters
+      products,
+      brands,
+      loading,
+      selectedBrands,
+      priceRange,
+      setPriceRange,
+      toggleBrand,
+      applyFilters,
+      clearFilters,
+      hasFilters
     }
 }

@@ -19,7 +19,7 @@ export default function ProductSection({title, products}) {
         <div className='product-section__view-all'>
           <GeneralButton 
             className='product-section__btn'
-            onClick={() => navigate('/products/bestsellers')}
+            onClick={() => navigate('/products?bestSeller=true')}
           >
             Ver todos los productos
           </GeneralButton>
