@@ -17,6 +17,8 @@ export default function ProductPage() {
   const isBestSeller = searchParams.get("bestSeller") === "true"
   const isFeatured = searchParams.get("featured") === "true"
   const isOffer = searchParams.get("offer") === "true"
+  const categoryParam = searchParams.get("category")
+  const categoryId = categoryParam ? Number(categoryParam) : undefined
 
   const {
     products,
@@ -36,7 +38,8 @@ export default function ProductPage() {
       ? "featured"
       : isOffer
       ? "offer"
-      : undefined
+      : undefined,
+    categoryId
   })
 
   const isMobile = useIsMobile()
@@ -51,10 +54,8 @@ export default function ProductPage() {
     categoryName = "Destacados"
   } else if (isOffer) {
     categoryName = "Ofertas"
-  } else {
-    categoryName = capitalizeFirstLetter(
-      products[0]?.categoryName || "Categoría"
-    )
+  } else if (categoryId && products.length > 0) {
+    categoryName = capitalizeFirstLetter(products[0].categoryName)
   }
 
   const filtersProps = {

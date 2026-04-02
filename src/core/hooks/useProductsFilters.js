@@ -2,8 +2,8 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import api from "@/core/api/api"
 
-export default function useProductsFilters({ type } = {}) {
-  const { categoryId } = useParams()
+export default function useProductsFilters({ type, categoryId } = {}) {
+
   const [products, setProducts] = useState([])
   const [brands, setBrands] = useState([])
   const [loading, setLoading] = useState(true)

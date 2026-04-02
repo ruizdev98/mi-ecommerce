@@ -7,7 +7,7 @@ export default function Categories({title, categories}) {
   const navigate = useNavigate()
 
   const handleClick = (cat) => {
-    navigate(`/category/${cat.id}`)
+    navigate(`/products?category=${cat.id}`)
   }
   return (
     <section className={`container ${styles.categories}`}>
