@@ -15,19 +15,43 @@ export default function useProductsFilters({ type } = {}) {
     max: ""
   })
 
-  // 🔥 TRAER FILTROS
   useEffect(() => {
     const fetchFilters = async () => {
       try {
-        const query = categoryId ? `?category=${categoryId}` : ''
-        const { data } = await api.get(`/products/filters${query}`)
-        setBrands(data.brands)
+        let brandsData = []
+
+        // 🔥 CASO: SIN CATEGORY (best sellers, featured, etc.)
+        if (!categoryId) {
+          const params = new URLSearchParams()
+
+          if (type === 'bestsellers') params.append('bestSeller', true)
+          if (type === 'featured') params.append('featured', true)
+          if (type === 'offer') params.append('offer', true)
+
+          const res = await api.get(`/products?${params.toString()}`)
+
+          // 🔥 extraer marcas únicas
+          const uniqueBrands = [
+            ...new Set(res.data.map(p => p.brandName))
+          ]
+
+          brandsData = uniqueBrands
+
+        } else {
+          // 🔥 CASO NORMAL (categoría)
+          const { data } = await api.get(`/products/filters?category=${categoryId}`)
+          brandsData = data.brands
+        }
+
+        setBrands(brandsData)
+
       } catch (error) {
         console.error(error)
       }
     }
+
     fetchFilters()
-  }, [categoryId])
+  }, [categoryId, type])
 
   // 🔥 TRAER PRODUCTOS
   useEffect(() => {
