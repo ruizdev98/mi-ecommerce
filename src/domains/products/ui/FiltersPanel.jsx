@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSliders } from '@fortawesome/free-solid-svg-icons'
 import InputField from '@/shared/ui/InputField'
 import GeneralButton from '@/shared/ui/GeneralButton'
-import styles from '/FiltersPanel.module.css'
+import styles from './FiltersPanel.module.css'
 
 export default function FiltersPanel({
     categoryName,
