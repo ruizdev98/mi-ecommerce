@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { validateProduct, cleanProductNumbers } from '../utils/validation'
+import api from '@/core/api/api'
 
 // Función que limpia y valida productos
 function cleanProducts(products) {
@@ -18,7 +19,9 @@ export function useData() {
     departmentCategories: [],
     products: [],
     bestSellers: [],
+    bestSellersLimit8: [],
     featured: [],
+    featuredLimit8: [],
     offers: [],
     brands: [],
     genders: [],
@@ -27,9 +30,6 @@ export function useData() {
   })
 
   useEffect(() => {
-    const controller = new AbortController() // Crea el controlador
-    const { signal } = controller            // Extrae la señal para fetch
-
     async function fetchData() {
       try {
         const endpoints = [
@@ -37,71 +37,58 @@ export function useData() {
           'categories',
           'department-categories',
           'products',
-          'products/bestsellers',
-          'products/bestsellersLimit8',
-          'products/featured',
-          'products/featuredLimit8',
-          'products/offers',
+          'products?bestSeller=true',
+          'products?bestSeller=true&limit=8',
+          'products?featured=true',
+          'products?featured=true&limit=8',
+          'products?offer=true',
           'brands',
           'genders',
           'blogs'
         ]
 
-        // Llamadas paralelas
+         // 🔥 llamadas paralelas con axios
         const responses = await Promise.all(
-          endpoints.map(endpoint =>
-            fetch(`https://ecommerce-api-he4w.onrender.com/api/${endpoint}`, { signal })
-              .then(res => res.json())
-          )
+          endpoints.map(endpoint => api.get(endpoint))
         )
 
         const [
-          departmentsData,
-          categoriesData,
-          departmentCategoriesData,
-          productsData,
-          bestSellersData,
-          bestSellersLimit8Data,
-          featuredData,
-          featuredLimit8Data,
-          offersData,
-          brandsData,
-          gendersData,
-          blogsData
+          departmentsRes,
+          categoriesRes,
+          departmentCategoriesRes,
+          productsRes,
+          bestSellersRes,
+          bestSellersLimit8Res,
+          featuredRes,
+          featuredLimit8Res,
+          offersRes,
+          brandsRes,
+          gendersRes,
+          blogsRes
         ] = responses
 
         setData({
-          departments: safeArray(departmentsData),
-          categories: safeArray(categoriesData),
-          departmentCategories: safeArray(departmentCategoriesData),
-          products: cleanProducts(productsData),
-          bestSellers: cleanProducts(bestSellersData),
-          bestSellersLimit8: cleanProducts(bestSellersLimit8Data),
-          featured: cleanProducts(featuredData),
-          featuredLimit8: cleanProducts(featuredLimit8Data),
-          offers: cleanProducts(offersData),
-          brands: safeArray(brandsData),
-          genders: safeArray(gendersData),
-          blogs: safeArray(blogsData),
+          departments: safeArray(departmentsRes.data),
+          categories: safeArray(categoriesRes.data),
+          departmentCategories: safeArray(departmentCategoriesRes.data),
+          products: cleanProducts(productsRes.data),
+          bestSellers: cleanProducts(bestSellersRes.data),
+          bestSellersLimit8: cleanProducts(bestSellersLimit8Res.data),
+          featured: cleanProducts(featuredRes.data),
+          featuredLimit8: cleanProducts(featuredLimit8Res.data),
+          offers: cleanProducts(offersRes.data),
+          brands: safeArray(brandsRes.data),
+          genders: safeArray(gendersRes.data),
+          blogs: safeArray(blogsRes.data),
           loading: false
         })
 
       } catch (error) {
-        if (error.name === 'AbortError') {
-          console.log('Fetch cancelado al desmontar el componente')
-          return
-        }
         console.error('Error cargando datos:', error)
         setData(prev => ({ ...prev, loading: false }))
       }
     }
-
     fetchData()
-    // Se ejecuta al desmontar el componente
-    return () => {
-      controller.abort() // Cancela todas las peticiones pendientes
-    }
-
   }, [])
 
   return data

@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSliders } from '@fortawesome/free-solid-svg-icons'
 import InputField from '@/shared/ui/InputField'
 import GeneralButton from '@/shared/ui/GeneralButton'
-import styles from './CategoryPage.module.css'
+import styles from '/FiltersPanel.module.css'
 
 export default function FiltersPanel({
     categoryName,
@@ -45,19 +45,19 @@ export default function FiltersPanel({
                 <p className={styles.filterTitle}>Precio</p>
                 <div className={styles.inputs}>
                     <InputField
-                    name='numberMin'
-                    type="number"
-                    placeholder="Min"
-                    value={priceRange.min}
-                    onChange={(e) => setPriceRange({ ...priceRange, min: e.target.value })}
+                        name='numberMin'
+                        type="number"
+                        placeholder="Min"
+                        value={priceRange.min}
+                        onChange={(e) => setPriceRange({ ...priceRange, min: e.target.value })}
                     />
 
                     <InputField
-                    name='numberMax'
-                    type="number"
-                    placeholder="Max"
-                    value={priceRange.max}
-                    onChange={(e) => setPriceRange({ ...priceRange, max: e.target.value })}
+                        name='numberMax'
+                        type="number"
+                        placeholder="Max"
+                        value={priceRange.max}
+                        onChange={(e) => setPriceRange({ ...priceRange, max: e.target.value })}
                     />
                 </div>
             </div>

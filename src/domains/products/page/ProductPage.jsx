@@ -6,8 +6,8 @@ import useProductsFilters from '@/domains/categories/hooks/useProductsFilters'
 import useIsMobile from '@/core/hooks/useIsMobile'
 import ProductCard from '@/domains/products/card/ProductCard'
 import GeneralButton from '@/shared/ui/GeneralButton'
-import FiltersPanel from './FiltersPanel'
-import styles from "./CategoryPage.module.css"
+import FiltersPanel from '../ui/FiltersPanel'
+import styles from './ProductPage.module.css'
 
 export default function ProductPage() {
   const {
