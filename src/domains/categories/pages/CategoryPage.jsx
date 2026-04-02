@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSliders } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 import { capitalizeFirstLetter } from '@/core/utils/textFormat'
-import useProductsFilters from '@/domains/categories/hooks/useProductsFilters'
+//import useProductsFilters from '@/domains/categories/hooks/useProductsFilters'
 import useIsMobile from '@/core/hooks/useIsMobile'
 import ProductCard from '@/domains/products/card/ProductCard'
 import GeneralButton from '@/shared/ui/GeneralButton'
@@ -10,18 +10,7 @@ import GeneralButton from '@/shared/ui/GeneralButton'
 import styles from "./CategoryPage.module.css"
 
 export default function CategoryPage() {
-  const {
-    products,
-    brands,
-    loading,
-    selectedBrands,
-    priceRange,
-    setPriceRange,
-    toggleBrand,
-    applyFilters,
-    clearFilters,
-    hasFilters
-  } = useProductsFilters()
+
   const isMobile = useIsMobile()
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const categoryName = capitalizeFirstLetter(products[0]?.categoryName || "Categoría")
