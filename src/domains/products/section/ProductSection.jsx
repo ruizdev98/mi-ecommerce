@@ -4,9 +4,16 @@ import ProductCard from '../card/ProductCard'
 import GeneralButton from '@/shared/ui/GeneralButton'
 import './ProductSection.css'
 
-export default function ProductSection({title, products}) {
+export default function ProductSection({title, products, type}) {
 
   const navigate = useNavigate()
+
+  // 🔥 definir query según tipo
+  const getQuery = () => {
+    if (type === "bestSeller") return "?bestSeller=true"
+    if (type === "featured") return "?featured=true"
+    return ""
+  }
 
   return (
     <section className='container product-section'>
@@ -19,7 +26,7 @@ export default function ProductSection({title, products}) {
         <div className='product-section__view-all'>
           <GeneralButton 
             className='product-section__btn'
-            onClick={() => navigate('/products?bestSeller=true')}
+            onClick={() => navigate(`/products${getQuery()}`)}
           >
             Ver todos los productos
           </GeneralButton>
