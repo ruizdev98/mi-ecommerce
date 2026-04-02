@@ -17,7 +17,7 @@ import PaymentPage from "@/domains/checkout/payment/PaymentPage"
 // Páginas por dominio
 import CategoryPage from "@/domains/categories/pages/CategoryPage"
 import ProductDetailPage from "@/domains/products/pages/ProductDetailPage"
-import BestSellersPage from '@/domains/products/pages/BestSellersPage'
+import ProductPage from '@/domains/products/pages/ProductPage'
 
 // Página no encontrada
 import NotFoundPage from "@/pages/NotFoundPage"
@@ -34,9 +34,9 @@ const router = createBrowserRouter([
       { path: "register", element: <RegisterPage /> },
 
       // Rutas dinámicas
+      { path: "products", element: <ProductPage />},
       { path: "category/:categoryId", element: <CategoryPage /> },
-      { path: "products/:productId", element: <ProductDetailPage /> },
-      { path: "/products/bestsellers", element: <BestSellersPage />}
+      { path: "products/:productId", element: <ProductDetailPage /> }
     ],
   },
 
