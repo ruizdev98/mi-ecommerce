@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom"
 import { capitalizeFirstLetter } from '@/core/utils/textFormat'
 import SectionTitle from '../../../shared/ui/SectionTitle'
-import styles from './Categories.module.css'
+import styles from './CategorySection.module.css'
 
-export default function Categories({title, categories}) {
+export default function CategorySection({title, categories}) {
   const navigate = useNavigate()
 
   const handleClick = (cat) => {

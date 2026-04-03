@@ -1,10 +1,10 @@
 import { useData } from '@/core/hooks/useData'
 import ImageCarousel from '@/shared/ui/ImageCarousel'
-import Categories from '@/domains/categories/ui/Categories'
+import CategorySection from '@/domains/categories/section/CategorySection'
 import ParallaxBanner from '@/shared/ui/ParallaxBanner'
 import ProductSection from '@/domains/products/section/ProductSection'
-import BlogSection from '@/domains/blogs/ui/BlogSection'
-import BrandsSection from '@/domains/brands/ui/BrandsSection'
+import BlogSection from '@/domains/blogs/section/BlogSection'
+import BrandsSection from '@/domains/brands/section/BrandsSection'
 import FloatingCartButton from '@/shared/ui/FloatingCartButton'
 
 export default function HomePage() {
@@ -29,7 +29,7 @@ export default function HomePage() {
   return (
     <>
       <ImageCarousel images={banners}/>
-      <Categories title='Categorías' categories={categories} />
+      <CategorySection title='Categorías' categories={categories} />
       <ProductSection title='Más Vendidos' products={bestSellersLimit8} type='bestSeller' />
       <ParallaxBanner 
         title='¡Estilo para todos. En un solo lugar!'
