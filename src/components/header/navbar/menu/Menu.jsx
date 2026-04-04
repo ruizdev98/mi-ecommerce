@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronRight, faSortDown } from '@fortawesome/free-solid-svg-icons'
 import { capitalizeFirstLetter } from '@/core/utils/textFormat'
+import { useNavigate } from 'react-router-dom'
 import Submenu from './Submenu'
 import styles from '../NavBar.module.css'
 
@@ -14,6 +15,8 @@ export default function Menu({
     activeMenuId,
     secondaryMenuActions
 }) {
+    const navigate = useNavigate()
+
     const { departments } = data
   
     // ✅ Creamos el arreglo del menú (departamentos + ofertas)
@@ -31,6 +34,12 @@ export default function Menu({
                     className={styles.menuLink}
                     onClick={(e) => {
                         e.preventDefault()
+                        
+                        if (item.id === "offers") {
+                            navigate("/products?offer=true")
+                            return
+                        }
+                        
                         if (isMobile && item.hasSubcategories) {
                             openSubmenu(item.id)
                         } else if (!isMobile && item.hasSubcategories) {
