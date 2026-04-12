@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import api from "@/core/api/api"
 
-export default function useProductsFilters({ type, categoryId, genderId } = {}) {
+export default function useProductsFilters({ type, categoryId, genderId, search } = {}) {
 
   const [products, setProducts] = useState([])
   const [brands, setBrands] = useState([])
@@ -23,6 +23,7 @@ export default function useProductsFilters({ type, categoryId, genderId } = {}) 
 
         if (categoryId) params.append("category", categoryId)
         if (genderId) params.append("gender", genderId)
+        if (search) params.append("search", search)
 
         if (type === "bestsellers") params.append("bestSeller", true)
         if (type === "featured") params.append("featured", true)
@@ -42,7 +43,7 @@ export default function useProductsFilters({ type, categoryId, genderId } = {}) 
     }
 
     fetchFilters()
-  }, [categoryId, type, genderId])
+  }, [categoryId, type, genderId, search])
 
   // PRODUCTOS
   useEffect(() => {
@@ -54,6 +55,7 @@ export default function useProductsFilters({ type, categoryId, genderId } = {}) 
 
         if (categoryId) params.append("category", categoryId)
         if (genderId) params.append("gender", genderId)
+        if (search) params.append("search", search)
 
         if (type === "bestsellers") params.append("bestSeller", true)
         if (type === "featured") params.append("featured", true)
@@ -76,7 +78,7 @@ export default function useProductsFilters({ type, categoryId, genderId } = {}) 
     }
 
     fetchProducts()
-  }, [categoryId, appliedFilters, type, genderId])
+  }, [categoryId, appliedFilters, type, genderId, search])
 
   const toggleBrand = (brand) => {
     setSelectedBrands(prev =>

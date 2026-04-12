@@ -27,6 +27,9 @@ export default function ProductPage() {
   const genderParam = searchParams.get("gender")
   const genderId = genderParam ? Number(genderParam) : undefined
 
+  // SEARCH
+  const search = searchParams.get("search")
+
   const {
     products,
     brands,
@@ -47,7 +50,8 @@ export default function ProductPage() {
       ? "offer"
       : undefined,
     categoryId,
-    genderId
+    genderId,
+    search
   })
 
   const isMobile = useIsMobile()
@@ -64,6 +68,8 @@ export default function ProductPage() {
     categoryName = "Ofertas"
   } else if (categoryId && products.length > 0) {
     categoryName = capitalizeFirstLetter(products[0].categoryName)
+  } else if (search) {
+    categoryName = `Resultados para "${search}"`
   }
 
   // AGREGAR GÉNERO AL TÍTULO
