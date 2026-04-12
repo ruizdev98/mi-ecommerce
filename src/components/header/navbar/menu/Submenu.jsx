@@ -36,7 +36,9 @@ export default function Submenu({
     const filteredCategories = categories.filter(cat => relatedCategoryIds.includes(cat.id))
 
     const handleCategoryClick = (id) => {
-        navigate(`/products?category=${id}`)
+        // 🔥 usar el departamento como gender
+        const genderId = activeMenuId
+        navigate(`/products?category=${categoryId}&gender=${genderId}`)
         if (isMobile && closeSidebar) closeSidebar()
     }
 
