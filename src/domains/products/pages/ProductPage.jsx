@@ -14,11 +14,18 @@ export default function ProductPage() {
 
   const [searchParams] = useSearchParams()
 
+  // FLAGS
   const isBestSeller = searchParams.get("bestSeller") === "true"
   const isFeatured = searchParams.get("featured") === "true"
   const isOffer = searchParams.get("offer") === "true"
+
+  // CATEGORY
   const categoryParam = searchParams.get("category")
   const categoryId = categoryParam ? Number(categoryParam) : undefined
+
+  // GENDER
+  const genderParam = searchParams.get("gender")
+  const genderId = genderParam ? Number(genderParam) : undefined
 
   const {
     products,
@@ -39,13 +46,14 @@ export default function ProductPage() {
       : isOffer
       ? "offer"
       : undefined,
-    categoryId
+    categoryId,
+    genderId
   })
 
   const isMobile = useIsMobile()
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
-  // 🔥 título dinámico
+  // Título dinámico
   let categoryName = "Productos"
 
   if (isBestSeller) {
@@ -56,6 +64,13 @@ export default function ProductPage() {
     categoryName = "Ofertas"
   } else if (categoryId && products.length > 0) {
     categoryName = capitalizeFirstLetter(products[0].categoryName)
+  }
+
+  // AGREGAR GÉNERO AL TÍTULO
+  if (genderId === 1) {
+    categoryName += ' - Mujer'
+  } else if (genderId === 2) {
+    categoryName += ' - Hombre'
   }
 
   const filtersProps = {

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import api from "@/core/api/api"
 
-export default function useProductsFilters({ type, categoryId } = {}) {
+export default function useProductsFilters({ type, categoryId, genderId } = {}) {
 
   const [products, setProducts] = useState([])
   const [brands, setBrands] = useState([])
@@ -15,35 +15,26 @@ export default function useProductsFilters({ type, categoryId } = {}) {
     max: ""
   })
 
+  // FILTROS
   useEffect(() => {
     const fetchFilters = async () => {
       try {
-        let brandsData = []
+        const params = new URLSearchParams()
 
-        // 🔥 CASO: SIN CATEGORY (best sellers, featured, etc.)
-        if (!categoryId) {
-          const params = new URLSearchParams()
+        if (categoryId) params.append("category", categoryId)
+        if (genderId) params.append("gender", genderId)
 
-          if (type === 'bestsellers') params.append('bestSeller', true)
-          if (type === 'featured') params.append('featured', true)
-          if (type === 'offer') params.append('offer', true)
+        if (type === "bestsellers") params.append("bestSeller", true)
+        if (type === "featured") params.append("featured", true)
+        if (type === "offer") params.append("offer", true)
 
-          const res = await api.get(`/products?${params.toString()}`)
+        const res = await api.get(`/products?${params.toString()}`)
 
-          // 🔥 extraer marcas únicas
-          const uniqueBrands = [
-            ...new Set(res.data.map(p => p.brandName))
-          ]
+        const uniqueBrands = [
+          ...new Set(res.data.map(p => p.brandName))
+        ]
 
-          brandsData = uniqueBrands
-
-        } else {
-          // 🔥 CASO NORMAL (categoría)
-          const { data } = await api.get(`/products/filters?category=${categoryId}`)
-          brandsData = data.brands
-        }
-
-        setBrands(brandsData)
+        setBrands(uniqueBrands)
 
       } catch (error) {
         console.error(error)
@@ -51,9 +42,9 @@ export default function useProductsFilters({ type, categoryId } = {}) {
     }
 
     fetchFilters()
-  }, [categoryId, type])
+  }, [categoryId, type, genderId])
 
-  // 🔥 TRAER PRODUCTOS
+  // PRODUCTOS
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -61,38 +52,18 @@ export default function useProductsFilters({ type, categoryId } = {}) {
 
         const params = new URLSearchParams()
 
-        // 🔥 CATEGORY
-        if (categoryId) {
-          params.append('category', categoryId)
-        }
+        if (categoryId) params.append("category", categoryId)
+        if (genderId) params.append("gender", genderId)
 
-        // 🔥 TYPE (CLAVE 🔥)
-        if (type === 'bestsellers') {
-          params.append('bestSeller', true)
-        }
+        if (type === "bestsellers") params.append("bestSeller", true)
+        if (type === "featured") params.append("featured", true)
+        if (type === "offer") params.append("offer", true)
 
-        if (type === 'featured') {
-          params.append('featured', true)
-        }
+        appliedFilters.brands.forEach(b => params.append("brand", b))
 
-        if (type === 'offer') {
-          params.append('offer', true)
-        }
+        if (appliedFilters.min) params.append("minPrice", appliedFilters.min)
+        if (appliedFilters.max) params.append("maxPrice", appliedFilters.max)
 
-        // 🔥 FILTERS
-        appliedFilters.brands.forEach(brand => {
-          params.append('brand', brand)
-        })
-
-        if (appliedFilters.min) {
-          params.append('minPrice', appliedFilters.min)
-        }
-
-        if (appliedFilters.max) {
-          params.append('maxPrice', appliedFilters.max)
-        }
-
-        // 🔥 UNA SOLA LLAMADA
         const res = await api.get(`/products?${params.toString()}`)
 
         setProducts(res.data)
@@ -105,9 +76,8 @@ export default function useProductsFilters({ type, categoryId } = {}) {
     }
 
     fetchProducts()
-  }, [categoryId, appliedFilters, type])
+  }, [categoryId, appliedFilters, type, genderId])
 
-  // 🔥 acciones
   const toggleBrand = (brand) => {
     setSelectedBrands(prev =>
       prev.includes(brand)
