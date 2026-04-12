@@ -68,9 +68,9 @@ export default function ProductPage() {
 
   // AGREGAR GÉNERO AL TÍTULO
   if (genderId === 1) {
-    categoryName += ' - Mujer'
-  } else if (genderId === 2) {
     categoryName += ' - Hombre'
+  } else if (genderId === 2) {
+    categoryName += ' - Mujer'
   }
 
   const filtersProps = {
