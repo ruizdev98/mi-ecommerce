@@ -1,4 +1,5 @@
 import { capitalizeFirstLetter } from '@/core/utils/textFormat'
+import { useNavigate } from 'react-router-dom'
 import AccountAction from '../actions/AccountAction'
 import styles from '../NavBar.module.css'
 
@@ -11,6 +12,8 @@ export default function Submenu({
     data,
     activeMenuId
 }) {
+
+    const navigate = useNavigate()
 
     const accountActions = {
         user, 
@@ -32,6 +35,11 @@ export default function Submenu({
     // Filtrar las categorías usando los IDs relacionados
     const filteredCategories = categories.filter(cat => relatedCategoryIds.includes(cat.id))
 
+    const handleCategoryClick = (id) => {
+        navigate(`/products?category=${id}`)
+        if (isMobile && closeSidebar) closeSidebar()
+    }
+
   return (
     <>
         { activeMenuId === 'account' ? (
@@ -47,7 +55,14 @@ export default function Submenu({
                 {filteredCategories.length > 0 ? (
                     filteredCategories.map(cat => (
                         <li key={cat.id} className={styles.submenuItem}>
-                            <a href="#" className={styles.submenuLink}>
+                            <a 
+                                href="#" 
+                                className={styles.submenuLink}
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                    handleCategoryClick(cat.id)
+                                }}
+                            >
                                 {capitalizeFirstLetter(cat.name)}
                             </a>
                         </li>
