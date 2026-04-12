@@ -4,13 +4,13 @@ import { useNavigate } from 'react-router-dom'
 import styles from './Header.module.css'
 
 export default function Search({ isMobile, isSearchOpen, openSearch, closeSearch }) {
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
     const handleSubmit = (e) => {
         e.preventDefault()
         const query = e.target.search.value.trim()
         if (!query) return
-        navigate(`/search?query=${encodeURIComponent(query)}`)
+        navigate(`/products?search=${encodeURIComponent(query)}`)
         e.target.reset()
         if (isMobile && closeSearch) closeSearch()
     }
