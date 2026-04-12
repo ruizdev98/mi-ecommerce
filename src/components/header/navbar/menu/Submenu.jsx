@@ -35,7 +35,7 @@ export default function Submenu({
     // Filtrar las categorías usando los IDs relacionados
     const filteredCategories = categories.filter(cat => relatedCategoryIds.includes(cat.id))
 
-    const handleCategoryClick = (id) => {
+    const handleCategoryClick = (categoryId) => {
         // 🔥 usar el departamento como gender
         const genderId = activeMenuId
         navigate(`/products?category=${categoryId}&gender=${genderId}`)
