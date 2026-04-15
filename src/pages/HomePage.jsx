@@ -5,7 +5,6 @@ import ParallaxBanner from '@/shared/ui/ParallaxBanner'
 import ProductSection from '@/domains/products/section/ProductSection'
 import BlogSection from '@/domains/blogs/section/BlogSection'
 import BrandsSection from '@/domains/brands/section/BrandsSection'
-import FloatingCartButton from '@/shared/ui/FloatingCartButton'
 
 export default function HomePage() {
   const {
@@ -40,7 +39,6 @@ export default function HomePage() {
       <ProductSection title='Destacados' products={featuredLimit8} type='featured' />
       <BlogSection title='Blog' blogs={blogs} />
       <BrandsSection title='Marcas Destacadas' products={products} brands={brands}/>
-      <FloatingCartButton />
     </>
   )
 }
