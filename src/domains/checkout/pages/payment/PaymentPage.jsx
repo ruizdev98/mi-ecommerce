@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useCartContext } from '@/core/context/CartContext'
 import { getAuth, onAuthStateChanged } from "firebase/auth"
-import OrderItemsList from '../ui/OrderItemsList'
-import OrderSummary from '../ui/OrderSummary'
+import OrderItemsList from '../../ui/OrderItemsList'
+import OrderSummary from '../../ui/OrderSummary'
 import api from '@/core/api/api'
 import styles from './PaymentPage.module.css'
 

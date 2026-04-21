@@ -1,4 +1,4 @@
-import './InputField.css';
+import styles from './InputField.module.css'
 
 export default function InputField({
   label,
@@ -15,10 +15,14 @@ export default function InputField({
 }) {
 
   return (
-    <div className={`input-group ${size}`}>
-      {label && <label className='input-label'>{label}</label>}
+    <div className={styles.group}>
+      {label && <label className={styles.label}>{label}</label>}
       <input
-        className={`input-field input-${size} ${className}`}
+        className={`
+          ${styles.input}
+          ${styles[size]}
+          ${className}
+        `}
         type={type}
         name={name}
         placeholder={placeholder}

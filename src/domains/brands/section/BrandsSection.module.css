@@ -1,10 +1,10 @@
-.brands-section__grid {
+.grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   justify-items: center;
   align-items: center;
 }
-.brands-section__item {
+.item {
   width: 100%;
   aspect-ratio: 1 / 1;
   display: flex;
@@ -14,7 +14,10 @@
   border-radius: 0.5rem;
   transition: background-color 0.3s ease;
 }
-.brands-section__link {
+.item:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.link {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,20 +25,12 @@
   height: 85%;
   transition: transform 0.3s ease;
 }
-.brands-section__logo {
+.logo {
   max-width: 70%;
   max-height: 70%;
   object-fit: contain;
   transition: transform 0.3s ease;
 }
-.brands-section__item:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-}
-.brands-section__item:hover .brands-section__logo {
+.item:hover .logo {
   transform: scale(1.1);
-}
-.brands-section__view-all {
-  display: flex;
-  justify-content: center;
-  padding: 2rem 0 4.9rem;
 }

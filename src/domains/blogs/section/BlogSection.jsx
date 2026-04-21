@@ -5,8 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/navigation'
-
-import './BlogSection.css'
+import styles from './BlogSection.module.css'
 
 export default function BlogSection({ title, blogs }) {
     const [mounted, setMounted] = useState(false)
@@ -40,50 +39,53 @@ export default function BlogSection({ title, blogs }) {
     }
 
     if (!mounted) return (
-        <section className="container blog-section">
+        <section className={`container ${styles.blogSection}`}>
             <SectionTitle title={title} />
         </section>
     );
 
   return (
-    <section className='container blog-section'>
+    <section className={`container ${styles.blogSection}`}>
         <SectionTitle title={title} />
-        <div className="blog-section__slider-wrapper">
-            <Swiper {...swiperParams} className="blog-section__slider">
-                {blogs.map(post => (
-                    <SwiperSlide key={post.id}>
-                        <div className='blog-section__card'>
-                            <div className='blog-section__image-wrapper'>
-                                <a href="#">
-                                    <img src={post.image} alt={post.title} className='blog-section__image' />
-                                </a>
-                            </div>
-                            <div className='blog-section__details'>
-                                <div className='blog-section__content'>
-                                    <a href="#">
-                                        <h4 className='blog-section__title'>{post.title}</h4>
-                                        <p className='blog-section__text'>{post.text}</p>
-                                    </a>
-                                </div>
-                                <GeneralButton
-                                    size="small" 
-                                    className="blog-section__btn"
-                                >
-                                Ver más
-                                </GeneralButton>
-                            </div>
-                        </div>
-                    </SwiperSlide>
-                ))}
+
+        <div className={styles.sliderWrapper}>
+            <Swiper {...swiperParams} className={styles.slider}>
+            {blogs.map(post => (
+                <SwiperSlide key={post.id}>
+                <div className={styles.card}>
+                    <div className={styles.imageWrapper}>
+                    <a href="#">
+                        <img src={post.image} alt={post.title} className={styles.image} />
+                    </a>
+                    </div>
+
+                    <div className={styles.details}>
+                    <div className={styles.content}>
+                        <a href="#">
+                        <h4 className={styles.title}>{post.title}</h4>
+                        <p className={styles.text}>{post.text}</p>
+                        </a>
+                    </div>
+
+                    <GeneralButton
+                        size="small"
+                        className={styles.btn}
+                    >
+                        Ver más
+                    </GeneralButton>
+                    </div>
+                </div>
+                </SwiperSlide>
+            ))}
             </Swiper>
 
-            {/* Flechas externas: siempre existen */}
             <div
                 className="swiper-button-prev-custom"
                 style={{ display: showNav ? 'flex' : 'none' }}
             >
                 &#8249;
             </div>
+
             <div
                 className="swiper-button-next-custom"
                 style={{ display: showNav ? 'flex' : 'none' }}

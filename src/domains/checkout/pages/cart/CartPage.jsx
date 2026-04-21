@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { useCartContext } from "@/core/context/CartContext"
-import OrderItemsList from '../ui/OrderItemsList'
-import OrderSummary from '../ui/OrderSummary'
+import OrderItemsList from '../../ui/OrderItemsList'
+import OrderSummary from '../../ui/OrderSummary'
 import styles from './CartPage.module.css'
 
 export default function CartPage() {

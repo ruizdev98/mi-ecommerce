@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useUbigeo } from "@/core/hooks/useUbigeo"
 import GeneralButton from "@/shared/ui/GeneralButton"
 import InputField from "@/shared/ui/InputField"
-import styles from "./ShippingPage.module.css"
+import styles from "./ShippingForm.module.css"
 
 export default function ShippingForm({onSubmit}) {
 

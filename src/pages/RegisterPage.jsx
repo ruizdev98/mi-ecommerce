@@ -3,27 +3,27 @@ import { useAuthContext } from '@/core/context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import InputField from '@/shared/ui/InputField'
 import GeneralButton from '@/shared/ui/GeneralButton'
-import './RegisterPage.css'
+import styles from './LoginPage.module.css'
 
 export default function RegisterPage() {
 
   const { register, error, loading } = useAuthContext()
   const [form, setForm] = useState({
-    name: "",
-    lastName: "",
-    cellphone: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    name: '',
+    lastName: '',
+    cellphone: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
   })
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     // Quitar espacios extra
     const cleanForm = {
@@ -36,7 +36,7 @@ export default function RegisterPage() {
 
     // Validación básica de contraseñas
     {form.password !== form.confirmPassword && (
-      <p className="auth__error">Las contraseñas no coinciden</p>
+      <p className={styles.error}>Las contraseñas no coinciden</p>
     )}
 
     try {
@@ -61,16 +61,16 @@ export default function RegisterPage() {
         alert('Ocurrió un error. Intenta nuevamente.')
       }
     }
-  };
+  }
 
   return (
-    <div className='container auth'>
-      <div className='auth__box'>
-        <h2 className='auth__title'>Regístrate</h2>
-        <p className='auth__footer'>
+    <div className={`container ${styles.auth}`}>
+      <div className={styles.box}>
+        <h2 className={styles.title}>Regístrate</h2>
+        <p className={styles.top}>
           ¿Ya tienes cuenta? <a href="/login">Inicia sesión</a>
         </p>
-        <form onSubmit={handleSubmit} className='auth__form'>
+        <form className={styles.form} onSubmit={handleSubmit}>
           <InputField
             label="Nombre"
             type="text"
@@ -133,7 +133,7 @@ export default function RegisterPage() {
           >
             {loading ? "Cargando..." : "Registrarse"}
           </GeneralButton>
-          {error && <p className='auth__error'>{error}</p>}
+          {error && <p className={styles.error}>{error}</p>}
         </form>
       </div>
     </div>

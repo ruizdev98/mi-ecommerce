@@ -1,59 +1,62 @@
 .auth,
-.auth__box,
-.auth__form,
-.auth__group {
+.box,
+.form,
+.group {
   display: flex;
   flex-direction: column;
 }
 .auth {
   align-items: center;
 }
-
-/* Mobile (celulares) */
-.auth__box {
+.box {
   gap: 1rem;
   width: 90%;
   padding: 2rem 0;
 }
-.auth__title {
+.title {
   text-align: center;
   font-size: 2rem;
 }
-.auth__top {
+.top {
   text-align: center;
 }
-.auth__form {
+.form {
   gap: 1.5rem;
   margin-top: 1.5rem;
 }
-.auth__button {
+.button {
   margin-top: 2rem;
   padding: 1rem;
   font-size: 1.4rem;
 }
-.auth__separator {
+.error {
+  color: red;
+  font-size: 1.3rem;
+  text-align: center;
+}
+.separator {
   display: flex;
   align-items: center;
   text-align: center;
   margin: 1.5rem 0;
 }
-.auth__separator::before,
-.auth__separator::after {
+.separator::before,
+.separator::after {
   content: '';
   flex: 1;
   border-bottom: 1px solid #ccc;
 }
-.auth__separator::before {
+.separator::before {
   margin-right: 0.75rem;
 }
-.auth__separator::after {
+.separator::after {
   margin-left: 0.75rem;
 }
-.auth__separator span {
+.separator span {
   color: var(--gray-600);
   font-size: 1.4rem;
 }
-.social-buttons {
+.socialButtons {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -61,54 +64,56 @@
 }
 
 @media (min-width: 768px) {
-  .auth__box {
+  .box {
     width: 60%;
     padding: 3rem 2rem;
     gap: 2rem;
   }
-  .auth__title {
+  .title {
     font-size: 2.4rem;
   }
-  .auth__form {
+  .form {
     gap: 2rem;
     margin-top: 2rem;
   }
-  .social-buttons {
+  .socialButtons {
     flex-direction: row;
     justify-content: center;
     gap: 2rem;
   }
 }
+
 @media (min-width: 1024px) {
-  .auth__box {
+  .box {
     width: 50%;
     padding: 5rem 0;
     gap: 3rem;
   }
-  .auth__title {
+  .title {
     font-size: 2.6rem;
   }
-  .auth__button {
+  .button {
     font-size: 1.6rem;
   }
 }
+
 @media (min-width: 1440px) {
-  .auth__box {
+  .box {
     width: 40%;
     padding: 8rem 0;
     gap: 3rem;
   }
-  .auth__form {
+  .form {
     gap: 3rem;
   }
-  .auth__button {
+  .button {
     margin-top: 4rem;
     padding: 1.3rem 1.2rem;
   }
-  .auth__separator span {
+  .separator span {
     font-size: 1.4rem;
   }
-  .social-buttons {
+  .socialButtons {
     gap: 4rem;
   }
 }

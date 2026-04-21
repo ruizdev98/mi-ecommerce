@@ -1,26 +1,26 @@
 import { Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import './ImageCarousel.css'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import styles from './ImageCarousel.module.css'
 
 export default function ImageCarousel({images}) {
   return (
-    <div className="image-carousel">
+    <div className={styles.carousel}>
       <Swiper
           modules={[Navigation, Pagination]}
           navigation
           pagination={{ clickable: true }}
           loop={true}
-          className='image-carousel__swiper'
+          className={styles.swiper}
       >
       {images.map((img, index) => (
-        <SwiperSlide key={index} className='image-carousel__slide'>
+        <SwiperSlide key={index} className={styles.slide}>
             <img 
               src={img.src} 
               alt={img.alt} 
-              className='image-carousel__image' />
+              className={styles.image} />
           </SwiperSlide>
       ))}
       </Swiper>

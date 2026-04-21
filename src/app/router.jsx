@@ -5,7 +5,6 @@ import CheckoutLayout from "./layout/CheckoutLayout"
 
 // Páginas principales
 import HomePage from "@/pages/HomePage"
-import BlogPage from "@/pages/BlogPage"
 import LoginPage from "@/pages/LoginPage"
 import RegisterPage from "@/pages/RegisterPage"
 
@@ -28,7 +27,6 @@ const router = createBrowserRouter([
     children: [
       // Home
       { index: true, element: <HomePage /> },
-      { path: "blog", element: <BlogPage /> },
       { path: "login", element: <LoginPage /> },
       { path: "register", element: <RegisterPage /> },
 

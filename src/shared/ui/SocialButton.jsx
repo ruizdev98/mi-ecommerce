@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebookF, faGoogle, faApple } from '@fortawesome/free-brands-svg-icons'
-import './SocialButton.css'
+import styles from './SocialButton.module.css'
 
 const ICONS = {
   facebook: faFacebookF,
@@ -17,13 +17,13 @@ const COLORS = {
 export default function SocialButton({ socialType, onClick, loading = false }) {
   return (
     <button
-      className="social-btn"
+      className={styles.button}
       onClick={onClick}
       disabled={loading}
       aria-label={`Login with ${socialType}`}
     >
       {loading ? (
-        <div className="social-btn__spinner"></div>
+        <div className={styles.spinner}></div>
       ) : (
         <FontAwesomeIcon icon={ICONS[socialType]} style={{ color: COLORS[socialType] }} />
       )}

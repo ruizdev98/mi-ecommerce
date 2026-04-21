@@ -1,9 +1,9 @@
-import './GeneralButton.css';
+import styles from './GeneralButton.module.css'
 
 export default function GeneralButton({
   children,
-  variant = "primary", // primary | secondary
-  size = "medium",     // small | medium | large
+  variant = "primary",
+  size = "medium",
   type = "button",
   onClick,
   disabled = false,
@@ -12,11 +12,16 @@ export default function GeneralButton({
   return (
     <button
         type={type}
-        className={`btn btn-${variant} btn-${size} ${className}`}
+        className={`
+          ${styles.btn}
+          ${styles[variant]}
+          ${styles[size]}
+          ${className}
+        `}
         onClick={onClick}
         disabled={disabled}
     >
-        {children}
+      {children}
     </button>
   )
 }

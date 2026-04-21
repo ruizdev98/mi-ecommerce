@@ -1,0 +1,39 @@
+.shippingForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.formRow {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.shippingForm input {
+  padding: 1rem;
+  font-size: 1.4rem;
+  border: 1px solid #ccc;
+}
+.shippingForm input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+.selectID, .selectUB {
+  min-height: 5.2rem;
+  padding: 1rem;
+  border-radius: 0.6rem;
+  border-color: #ccc;
+  outline: none;
+}
+.selectUB {
+  width: 100%;
+}
+.right {
+  position: sticky;
+  top: 10rem;
+}
+
+@media (min-width: 1024px) {
+  .formRow {
+    flex-direction: row;
+  }
+}

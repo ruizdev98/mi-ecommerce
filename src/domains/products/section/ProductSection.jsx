@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import SectionTitle from '@/shared/ui/SectionTitle'
 import ProductCard from '../card/ProductCard'
 import GeneralButton from '@/shared/ui/GeneralButton'
-import './ProductSection.css'
+import styles from './ProductSection.module.css'
 
 export default function ProductSection({title, products, type}) {
 
@@ -16,16 +16,16 @@ export default function ProductSection({title, products, type}) {
   }
 
   return (
-    <section className='container product-section'>
+    <section className={`container ${styles.productSection}`}>
         <SectionTitle title={title} />
-        <div className='product-section__grid'>
+        <div className={styles.grid}>
             {products.map(product => (
                 <ProductCard key={product.id} product={product}/>
             ))}
         </div>
-        <div className='product-section__view-all'>
+        <div className={styles.viewAll}>
           <GeneralButton 
-            className='product-section__btn'
+            className={styles.btn}
             onClick={() => navigate(`/products${getQuery()}`)}
           >
             Ver todos los productos

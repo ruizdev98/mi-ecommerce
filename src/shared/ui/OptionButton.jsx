@@ -1,8 +1,8 @@
 import styles from "./OptionButton.module.css"
 
 export default function OptionButton({
-    variant = "size",        // "color" | "size"
-    value,                // hex color o texto
+    variant = "size",
+    value,
     isActive = false,
     onClick,
     disabled = false,

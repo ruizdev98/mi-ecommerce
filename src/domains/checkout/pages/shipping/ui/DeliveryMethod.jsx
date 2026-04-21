@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStore, faTruckFast } from '@fortawesome/free-solid-svg-icons'
-import styles from "./ShippingPage.module.css"
+import styles from "./DeliveryMethod.module.css"
 
 export default function DeliveryMethod({ deliveryMethod, setDeliveryMethod }) {
 

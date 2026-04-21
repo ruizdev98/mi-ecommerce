@@ -1,15 +1,15 @@
 import GeneralButton from '@/shared/ui/GeneralButton'
-import './ParallaxBanner.css'
+import styles from './ParallaxBanner.module.css'
 
 export default function ParallaxBanner({ title, buttonText, logoSrc, backgroundUrl}) {
   return (
-    <section className='parallax-banner' style={{ backgroundImage: `url(${backgroundUrl})` }}>
-        <div className='parallax-banner__content'>
-            <img src={logoSrc} alt="Logo" className='parallax-banner__logo'/>
-            <h2 className='parallax-banner__title'>{title}</h2>
+    <section className={styles.banner} style={{ backgroundImage: `url(${backgroundUrl})` }}>
+        <div className={styles.content}>
+            <img src={logoSrc} alt="Logo" className={styles.logo}/>
+            <h2 className={styles.title}>{title}</h2>
             <GeneralButton 
               variant="secondary"
-              className="parallax-banner__btn"
+              className={styles.btn}
             >
               {buttonText}
             </GeneralButton>

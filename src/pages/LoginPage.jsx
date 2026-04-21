@@ -5,7 +5,7 @@ import { useCartContext } from '@/core/context/CartContext'
 import InputField from '@/shared/ui/InputField'
 import GeneralButton from '@/shared/ui/GeneralButton'
 import SocialButton from '@/shared/ui/SocialButton'
-import './LoginPage.css'
+import styles from './LoginPage.module.css'
 
 export default function LoginPage() {
  
@@ -14,9 +14,9 @@ export default function LoginPage() {
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [loadingEmail, setLoadingEmail] = useState(false);
-  const [loadingFacebook, setLoadingFacebook] = useState(false);
-  const [loadingGoogle, setLoadingGoogle] = useState(false);
+  const [loadingEmail, setLoadingEmail] = useState(false)
+  const [loadingFacebook, setLoadingFacebook] = useState(false)
+  const [loadingGoogle, setLoadingGoogle] = useState(false)
 
   const navigate = useNavigate()
 
@@ -41,7 +41,7 @@ export default function LoginPage() {
         alert('Ocurrió un error. Intenta nuevamente.')
       }
     } finally {
-      setLoadingEmail(false);
+      setLoadingEmail(false)
     }
   }
 
@@ -56,7 +56,7 @@ export default function LoginPage() {
       console.error("Error loginWithFacebook:", err)
       alert("Error iniciando sesión con Facebook. Intenta nuevamente.")
     } finally {
-      setLoadingFacebook(false);
+      setLoadingFacebook(false)
     }
   }
 
@@ -76,13 +76,14 @@ export default function LoginPage() {
   }
 
   return (
-    <div className='container auth'>
-      <div className='auth__box'>
-        <h2 className='auth__title'>Iniciar Sesión</h2>
-        <p className='auth__top'>
+    <div className={`container ${styles.auth}`}>
+      <div className={styles.box}>
+        <h2 className={styles.title}>Iniciar Sesión</h2>
+        <p className={styles.top}>
           ¿Es tu primera vez? <Link to='/register'>Regístrate</Link>
         </p>
-        <form action="" className='auth__form' onSubmit={handleSubmit}>
+
+        <form className={styles.form} onSubmit={handleSubmit}>
           <InputField
             label="Email"
             type="email"
@@ -109,13 +110,14 @@ export default function LoginPage() {
           >
             {loadingEmail ? "Cargando..." : "Iniciar Sesión"}
           </GeneralButton>
-          {error && <p className='auth__error'>{error}</p>}
+
+          {error && <p className={styles.error}>{error}</p>}
         </form>
-        <div className="auth__separator">
+        <div className={styles.separator}>
           <span>o conéctate con</span>
         </div>
         
-        <div className="social-buttons">
+        <div className={styles.socialButtons}>
           <SocialButton 
             socialType="facebook" 
             onClick={handleFacebookLogin} 
@@ -127,7 +129,7 @@ export default function LoginPage() {
             loading={loadingGoogle}
           />
           <SocialButton 
-            socialType="apple" 
+            socialType="apple"
             onClick={() => console.log("Apple login no disponible en este proyecto")}
             loading={false}
           />

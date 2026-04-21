@@ -1,0 +1,41 @@
+.title {
+  padding: 2rem 0;
+}
+.checkout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  padding-bottom: 4rem;
+  min-height: 70vh;
+}
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+/*********************** Delivery Method ***********************/
+
+/*********************** Form ***********************/
+
+
+@media (min-width: 768px) {
+  .checkout {
+    grid-template-columns: 2fr 1.5fr;
+    gap: 2rem;
+    min-height: 70vh;
+  }
+}
+
+@media (min-width: 1024px) {
+  .checkout {
+    grid-template-columns: 2fr 1fr;
+    min-height: 70vh;
+  }
+  .deliveryOptions {
+    flex-direction: row;
+  }
+  .formRow {
+    flex-direction: row;
+  }
+}

@@ -7,7 +7,7 @@ import useProductsFilters from '@/core/hooks/useProductsFilters'
 import useIsMobile from '@/core/hooks/useIsMobile'
 import ProductCard from '@/domains/products/card/ProductCard'
 import GeneralButton from '@/shared/ui/GeneralButton'
-import FiltersPanel from '../ui/FiltersPanel'
+import FiltersPanel from './ui/FiltersPanel'
 import styles from './ProductPage.module.css'
 
 export default function ProductPage() {

@@ -25,7 +25,6 @@ export default function Header() {
         toggleSubmenu,
         menuRef,
         submenuRef,
-
         isUserDropdownOpen, // si el menú de usuario está abierto.
         closeUserDropdown,  // cierra el dropdown
         toggleUserDropdown, // abre/cierra el dropdown.
@@ -36,7 +35,6 @@ export default function Header() {
         handleLogout,       // cierra sesión del usuario.
         userDropdownRef,    // referencia al menú de usuario, para detectar clics afuera.
         cartDropdownRef,
-
         isSearchOpen,       // si el buscador en mobile está abierto.
         openSearch,         // abre el buscador en mobile.
         closeSearch         // cierra el buscador en mobile.

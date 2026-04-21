@@ -1,4 +1,4 @@
-.product-section__grid {
+.grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
@@ -6,7 +6,7 @@
 }
 
 @media (min-width: 576px) {
-    .product-section__grid {
+    .grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 1.5rem;
         padding: 1.4rem 0;
@@ -14,7 +14,7 @@
 }
 
 @media (min-width: 992px) {
-    .product-section__grid {
+    .grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 2rem;

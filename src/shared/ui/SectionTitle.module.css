@@ -1,4 +1,4 @@
-.section-title {
+.title {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -6,8 +6,8 @@
     position: relative;
     text-align: center;
 }
-.section-title::before,
-.section-title::after {
+.title::before,
+.title::after {
     content: '';
     flex: 1;
     height: 0.1rem;

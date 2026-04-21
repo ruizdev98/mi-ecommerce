@@ -5,8 +5,8 @@ import { useProduct } from '@/core/hooks/useProduct'
 import { useProductSelection } from '@/core/hooks/useProductSelection'
 import GeneralButton from '@/shared/ui/GeneralButton'
 import styles from './ProductDetailPage.module.css'
-import OptionButton from '../../../shared/ui/OptionButton'
-import QuantitySelector from '../../../shared/ui/QuantitySelector'
+import OptionButton from '@/shared/ui/OptionButton'
+import QuantitySelector from '@/shared/ui/QuantitySelector'
 
 export default function ProductDetailPage() {
   const { productId } = useParams()
