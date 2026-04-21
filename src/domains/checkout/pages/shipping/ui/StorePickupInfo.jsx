@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faClock, faLocationDot } from "@fortawesome/free-solid-svg-icons"
 import GeneralButton from "@/shared/ui/GeneralButton"
-import styles from "./ShippingPage.module.css"
+import styles from "../ShippingPage.module.css"
 
 export default function StorePickupInfo({ onContinue }) {
 

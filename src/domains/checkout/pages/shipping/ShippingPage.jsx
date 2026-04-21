@@ -4,6 +4,7 @@ import { useCartContext } from "@/core/context/CartContext"
 import DeliveryMethod from "./ui/DeliveryMethod"
 import ShippingForm from "./ui/ShippingForm"
 import OrderSummary from "../../ui/OrderSummary"
+import styles from "./ShippingPage.module.css"
 import StorePickupInfo from "./ui/StorePickupInfo"
 
 export default function ShippingPage() {
