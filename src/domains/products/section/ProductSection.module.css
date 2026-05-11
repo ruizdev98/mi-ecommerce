@@ -1,7 +1,5 @@
 .productSection {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    text-align: center;
 }
 .grid {
     display: grid;
@@ -9,7 +7,9 @@
     gap: 1rem;
     padding: 1.4rem 0;
 }
-
+.viewAll {
+    padding-bottom: 2rem;
+}
 @media (min-width: 576px) {
     .grid {
         grid-template-columns: repeat(3, 1fr);
