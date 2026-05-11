@@ -1,3 +1,7 @@
+.productSection {
+    display: flex;
+    justify-content: center;
+}
 .grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -15,7 +19,6 @@
 
 @media (min-width: 992px) {
     .grid {
-        display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 2rem;
         padding: 1.4rem 0;
