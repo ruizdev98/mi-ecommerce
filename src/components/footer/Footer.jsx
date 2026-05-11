@@ -1,107 +1,107 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook, faInstagram, faTiktok, faXTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons'
 import { faClock, faEnvelope, faLocationDot, faPhone } from '@fortawesome/free-solid-svg-icons'
-import InputField from "@/shared/ui/InputField";
+import InputField from '@/shared/ui/InputField'
 import GeneralButton from '@/shared/ui/GeneralButton'
-import './Footer.css'
+import styles from './Footer.module.css'
 
 export default function Footer() {
   return (
-    <footer className='footer'>
-        <div className='container footer__container'>
-            <div className='footer__top'>
-                <img src="/logo.png" alt="Antonella Logo" className='footer__logo'/>
-                <div className='footer__socials'>
-                    <a href="#" className='footer__social-link'>
-                        <FontAwesomeIcon icon={faTiktok} className='footer__social-icon' />
+    <footer className={styles.footer}>
+        <div className={`container ${styles.footerContainer}`}>
+            <div className={styles.footerTop}>
+                <img src="/logo.png" alt="Antonella Logo" className={styles.footerLogo}/>
+                <div className={styles.footerSocials}>
+                    <a href="#" className={styles.footerSocialLink}>
+                        <FontAwesomeIcon icon={faTiktok} className={styles.footerSocialIcon} />
                     </a>
-                    <a href="#" className='footer__social-link'>
-                        <FontAwesomeIcon icon={faYoutube} className='footer__social-icon' />
+                    <a href="#" className={styles.footerSocialLink}>
+                        <FontAwesomeIcon icon={faYoutube} className={styles.footerSocialIcon} />
                     </a>
-                    <a href="#" className='footer__social-link'>
-                        <FontAwesomeIcon icon={faInstagram} className='footer__social-icon' />
+                    <a href="#" className={styles.footerSocialLink}>
+                        <FontAwesomeIcon icon={faInstagram} className={styles.footerSocialIcon} />
                     </a>
-                    <a href="#" className='footer__social-link'>
-                        <FontAwesomeIcon icon={faFacebook} className='footer__social-icon' />
+                    <a href="#" className={styles.footerSocialLink}>
+                        <FontAwesomeIcon icon={faFacebook} className={styles.footerSocialIcon} />
                     </a>
-                    <a href="#" className='footer__social-link'>
-                        <FontAwesomeIcon icon={faXTwitter} className='footer__social-icon' />
+                    <a href="#" className={styles.footerSocialLink}>
+                        <FontAwesomeIcon icon={faXTwitter} className={styles.footerSocialIcon} />
                     </a>
                 </div>
             </div>
-            <div className='footer__section'>
-                <h5 className='footer__section-title'>Información</h5>
-                <ul className='footer__list'>
-                    <li><a href="#" className='footer__link'>Quiénes somos</a></li>
-                    <li><a href="#" className='footer__link'>Contacto</a></li>
-                    <li><a href="#" className='footer__link'>Términos y Condiciones</a></li>
+            <div className={styles.footerSection}>
+                <h5 className={styles.footerSectionTitle}>Información</h5>
+                <ul className={styles.footerList}>
+                    <li><a href="#" className={styles.footerLink}>Quiénes somos</a></li>
+                    <li><a href="#" className={styles.footerLink}>Contacto</a></li>
+                    <li><a href="#" className={styles.footerLink}>Términos y Condiciones</a></li>
                 </ul>
             </div>
-            <div className='footer__section'>
-                <h5 className='footer__section-title'>Contacto</h5>
-                <ul className='footer__list'>
+            <div className={styles.footerSection}>
+                <h5 className={styles.footerSectionTitle}>Contacto</h5>
+                <ul className={styles.footerList}>
                     <li>
-                        <a href="#" className='footer__link'>
-                            <FontAwesomeIcon icon={faLocationDot} className='footer__icon'/>
+                        <a href="#" className={styles.footerLink}>
+                            <FontAwesomeIcon icon={faLocationDot} className={styles.footerIcon} />
                             Av. Francisco Bolognesi 302, Barranco
                         </a>
                     </li>
                     <li>
-                        <a href="#" className='footer__link'>
-                            <FontAwesomeIcon icon={faPhone} className='footer__icon'/>
+                        <a href="#" className={styles.footerLink}>
+                            <FontAwesomeIcon icon={faPhone} className={styles.footerIcon}/>
                             +51 966428394
                         </a>
                     </li>
                     <li>
-                        <a href="#" className='footer__link'>
-                            <FontAwesomeIcon icon={faEnvelope} className='footer__icon'/>
+                        <a href="#" className={styles.footerLink}>
+                            <FontAwesomeIcon icon={faEnvelope} className={styles.footerIcon}/>
                             developer.ruiz@gmail.com
                         </a>
                     </li>
                     <li>
-                        <a href="#" className='footer__link'>
-                            <FontAwesomeIcon icon={faClock} className='footer__icon'/>
+                        <a href="#" className={styles.footerLink}>
+                            <FontAwesomeIcon icon={faClock} className={styles.footerIcon}/>
                             Lun a Vie 08:00 a 18:00hrs
                         </a>
                     </li>
                 </ul>
             </div>
-            <div className='footer__section'>
-                <h5 className='footer__section-title'>Newsletter</h5>
-                <p className='footer__text'>
+            <div className={styles.footerSection}>
+                <h5 className={styles.footerSectionTitle}>Newsletter</h5>
+                <p className={styles.footerText}>
                     Sé el primero en enterarte de nuestras nuevas colecciones, 
                     ventas especiales y beneficios exclusivos.
                 </p>
-                <div className='footer__newsletter'>
+                <div className={styles.footerNewsletter}>
                     <InputField
                         type="email"
                         placeholder="Correo"
-                        className="footer__newsletter-input"
+                        className={styles.footerNewsletterInput}
                     />
-                    <GeneralButton Button className="footer__newsletter-button">
+                    <GeneralButton className={styles.footerNewsletterButton}>
                         Enviar
                     </GeneralButton>
                 </div>
             </div>
-            <div className='footer__payment'>
+            <div className={styles.footerPayment}>
                 <img 
                     src='https://res.cloudinary.com/dmvsu33ya/image/upload/v1754767046/paypal_ntrcbn.png' 
                     alt='Paypal' 
-                    className='footer__payment-icon' 
+                    className={styles.footerPaymentIcon} 
                 />
                 <img 
                     src='https://res.cloudinary.com/dmvsu33ya/image/upload/v1754767046/yape_jvpktf.png' 
                     alt='Yape' 
-                    className='footer__payment-icon' 
+                    className={styles.footerPaymentIcon}
                 />
                 <img 
                     src='https://res.cloudinary.com/dmvsu33ya/image/upload/v1754767046/plin_jvwf5n.png' 
                     alt='Plin' 
-                    className='footer__payment-icon' 
+                    className={styles.footerPaymentIcon}
                 />
             </div>
-            <div className='footer__bottom'>
-                <p className='footer__copy'>© 2025 ANTONELLA. Todos los derechos reservados.</p>
+            <div className={styles.footerBottom}>
+                <p className={styles.footerCopy}>© 2025 ANTONELLA. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
