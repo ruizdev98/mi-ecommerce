@@ -16,21 +16,24 @@ export default function ProductSection({title, products, type}) {
   }
 
   return (
-    <section className={`container ${styles.productSection}`}>
-        <SectionTitle title={title} />
-        <div className={styles.grid}>
-            {products.map(product => (
-                <ProductCard key={product.id} product={product}/>
-            ))}
+    <section className={`container`}>
+        <div className={styles.productSection}>
+          <SectionTitle title={title} />
+          <div className={styles.grid}>
+              {products.map(product => (
+                  <ProductCard key={product.id} product={product}/>
+              ))}
+          </div>
+          <div className={styles.viewAll}>
+            <GeneralButton 
+              className={styles.btn}
+              onClick={() => navigate(`/products${getQuery()}`)}
+            >
+              Ver todos los productos
+            </GeneralButton>
+          </div>
         </div>
-        <div className={styles.viewAll}>
-          <GeneralButton 
-            className={styles.btn}
-            onClick={() => navigate(`/products${getQuery()}`)}
-          >
-            Ver todos los productos
-          </GeneralButton>
-        </div>
+        
     </section>
   )
 }
